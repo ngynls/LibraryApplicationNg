@@ -9,9 +9,13 @@ app.use(cors());
 app.use(passport.initialize());
 
 const db=require('./config/keys').mongoURL;
+const authors=require('./api/authors');
+
 mongoose.connect(db)
   .then(()=> console.log('Connected!'))
   .catch(err => console.log(err));
+
+app.use('/authors', authors);
 
 const port= process.env.PORT || 5000;
 
