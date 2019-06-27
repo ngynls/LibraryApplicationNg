@@ -12,14 +12,17 @@ const db=require('./config/keys').mongoURL;
 const authors=require('./api/authors');
 const publishers=require('./api/publishers');
 const genres=require('./api/genres');
+const books=require('./api/book');
 
-mongoose.connect(db, {useNewUrlParser: true})
+
+mongoose.connect(db, {useNewUrlParser: true, useFindAndModify: false})
   .then(()=> console.log('Connected!'))
   .catch(err => console.log(err));
 
 app.use('/authors', authors);
 app.use('/publishers', publishers);
 app.use('/genres', genres);
+app.use('/books', books);
 
 const port= process.env.PORT || 5000;
 
