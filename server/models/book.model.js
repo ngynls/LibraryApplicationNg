@@ -31,6 +31,10 @@ const bookSchema=new mongoose.Schema({
     cover:{
         type:String
     },
+    locationInLibrary:{
+        type:String,
+        required: 'Location cannot be empty'
+    },
     publisher:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Publisher'
@@ -38,7 +42,11 @@ const bookSchema=new mongoose.Schema({
     genre:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Genre'
-    }
+    },
+    copies:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'BookCopy'
+    }]
 });
 
 module.exports=Book=mongoose.model('Book', bookSchema);
