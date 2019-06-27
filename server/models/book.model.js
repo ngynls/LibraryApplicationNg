@@ -35,10 +35,10 @@ const bookSchema=new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Publisher'
     },
-    genres:[{
+    genre:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Genre'
-    }]
+    }
 });
 
 module.exports=Book=mongoose.model('Book', bookSchema);
