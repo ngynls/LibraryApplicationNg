@@ -12,7 +12,7 @@ const db=require('./config/keys').mongoURL;
 const authors=require('./api/authors');
 const publishers=require('./api/publishers');
 
-mongoose.connect(db)
+mongoose.connect(db, {useNewUrlParser: true})
   .then(()=> console.log('Connected!'))
   .catch(err => console.log(err));
 
