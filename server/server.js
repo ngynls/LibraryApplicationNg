@@ -11,6 +11,7 @@ app.use(passport.initialize());
 const db=require('./config/keys').mongoURL;
 const authors=require('./api/authors');
 const publishers=require('./api/publishers');
+const genres=require('./api/genres');
 
 mongoose.connect(db, {useNewUrlParser: true})
   .then(()=> console.log('Connected!'))
@@ -18,6 +19,7 @@ mongoose.connect(db, {useNewUrlParser: true})
 
 app.use('/authors', authors);
 app.use('/publishers', publishers);
+app.use('/genres', genres);
 
 const port= process.env.PORT || 5000;
 
