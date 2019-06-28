@@ -19,6 +19,7 @@ router.get('/:id', (req,res)=>{
     .populate('authors')
     .populate('genre')
     .populate('publisher')
+    .populate('copies','copyName status')
     .then(book => {
         if (!book)
             res.status(404).send('Book was not found');
