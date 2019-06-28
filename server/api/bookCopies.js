@@ -36,7 +36,12 @@ router.post('/', (req,res)=>{
     newCopy.save()
     .then(copy=> res.json(copy))
     .catch(err => res.json({error: err.message}));
-    //TODO: push it to the copy array for the corresponding book
+    //push the new copy to the copy array for the corresponding book
+    Book.findByIdAndUpdate(req.body.bookId, {
+        $push:{
+            copies: newCopy._id
+        }
+    }).catch(err=> console.log(err.message));
 });
 
 //PUT: updating a book copy
