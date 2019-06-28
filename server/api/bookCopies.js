@@ -56,7 +56,13 @@ router.delete('/:id', (req,res)=>{
     BookCopy.findByIdAndDelete(req.params.id)
     .catch(err=> res.status(404).json({error:err.message}));
     res.status(200).json({message: 'Book copy is successfully deleted from db'});
-    //TODO: pull it from the copy array for the corresponding book
+    //delete it from the copy array for the corresponding book
+    //must send the book id in the request body
+    Book.findByIdAndUpdate(req.body.bookId,{
+        $pull:{
+            copies: req.params.id
+        }
+    }).catch(err=> console.log(err.message));
 });
 
 module.exports=router;
