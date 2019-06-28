@@ -5,7 +5,7 @@ const Book=require('../models/book.model');
 
 //GET: All books copies
 router.get('/', (req,res)=>{
-    BookCopy.find().populate('bookId').then(copies => {
+    BookCopy.find().populate('bookId', 'title').then(copies => {
         res.status(200).json(copies);    
     }).catch(err => {
         res.status(500).json({
@@ -17,7 +17,7 @@ router.get('/', (req,res)=>{
 //GET: a particular book copy
 router.get('/:id', (req,res)=>{
     BookCopy.findById(req.params.id)
-    .populate('bookId')
+    .populate('bookId', 'title')
     .then(copy => {
         if (!copy)
             res.status(404).send('Book copy was not found');
