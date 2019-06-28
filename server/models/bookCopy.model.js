@@ -1,6 +1,10 @@
 const mongoose=require('mongoose');
 
 const bookCopySchema=new mongoose.Schema({
+    copyName:{
+        type:String,
+        required:true
+    },
     bookId:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Book'
