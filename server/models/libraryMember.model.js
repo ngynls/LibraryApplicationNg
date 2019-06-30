@@ -26,7 +26,7 @@ const memberSchema=new mongoose.Schema({
     }]
 });
 
-memberSchema.path('telephone').validation(function(phone){
+memberSchema.path('telephone').validate(function(phone){
     const phoneRegex=/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
     return phoneRegex.test(phone.text);
 }, `Your phone input doesn't have a valid format`);
