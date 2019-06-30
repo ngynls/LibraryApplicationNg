@@ -15,9 +15,16 @@ const memberSchema=new mongoose.Schema({
     address:String,
     postalCode:String,
     telephone:String,
-    email:String
+    email:String,
+    loans:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref: 'BookOnLoan'
+    }],
+    reservations:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref: 'Reservation'
+    }]
 });
-//TODO: Add loans & reservation fields later...
 
 memberSchema.path('telephone').validation(function(phone){
     const phoneRegex=/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
