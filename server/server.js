@@ -14,6 +14,7 @@ const publishers=require('./api/publishers');
 const genres=require('./api/genres');
 const books=require('./api/book');
 const bookCopies=require('./api/bookCopies');
+const members=require('./api/members');
 
 
 mongoose.connect(db, {useNewUrlParser: true, useFindAndModify: false})
@@ -25,6 +26,7 @@ app.use('/publishers', publishers);
 app.use('/genres', genres);
 app.use('/books', books);
 app.use('/bookCopies', bookCopies);
+app.use('/members', members);
 
 const port= process.env.PORT || 5000;
 
