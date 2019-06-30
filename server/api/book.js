@@ -43,7 +43,7 @@ router.post('/', (req,res)=>{
         locationInLibrary: req.body.locationInLibrary,
         publisher: req.body.publisher,
         genre: req.body.genre,
-        copies: req.body.copies
+        copies: []
     });
     newBook.save()
     .then(book=> res.json(book))
