@@ -17,7 +17,7 @@ const bookCopies=require('./api/bookCopies');
 const members=require('./api/members');
 const loanedBooks=require('./api/bookOnLoans');
 const reservations=require('./api/reservations');
-
+const register=require('./api/register');
 
 mongoose.connect(db, {useNewUrlParser: true, useFindAndModify: false})
   .then(()=> console.log('Connected!'))
@@ -31,6 +31,7 @@ app.use('/bookCopies', bookCopies);
 app.use('/members', members);
 app.use('/loanedBooks', loanedBooks);
 app.use('/reservations', reservations);
+app.use('/register', register);
 
 const port= process.env.PORT || 5000;
 
