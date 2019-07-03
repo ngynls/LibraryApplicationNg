@@ -1,5 +1,5 @@
 const mongoose=require('mongoose');
-const bcrypt=require('bcryptjs');
+const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 const jwt_secret=require('../config/keys').JWT_SECRET;
 
