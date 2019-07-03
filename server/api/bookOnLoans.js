@@ -37,6 +37,11 @@ router.post('/', (req,res)=>{
     .then(loanedBook=> res.json(loanedBook))
     .catch(err => res.json({error: err.message}));
     //TODO: add to member's loans array
+    User.findByIdAndUpdate(req.body.memberId, {
+        $push:{
+            loans: newLoanedBook._id
+        }
+    }).catch(err=> console.log(err.message));
 });
 
 // PUT: Update a loaned book
@@ -52,6 +57,11 @@ router.delete('/:id', (req,res)=>{
     .catch(err=> res.status(404).json({error:err.message}));
     res.status(200).json({message: 'Loaned book is successfully deleted from db'});
     // TODO: remove from the book from member's loans array
+    User.findByIdAndUpdate(req.body.memberId, {
+        $pull:{
+            loans: req.params.id
+        }
+    }).catch(err=> console.log(err.message));
 });
 
 module.exports=router;
