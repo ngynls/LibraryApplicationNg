@@ -19,7 +19,7 @@ const loanedBooks=require('./api/bookOnLoans');
 const reservations=require('./api/reservations');
 const register=require('./api/register');
 
-mongoose.connect(db, {useNewUrlParser: true, useFindAndModify: false})
+mongoose.connect(db, {useNewUrlParser: true, useFindAndModify: false, useCreateIndex:true})
   .then(()=> console.log('Connected!'))
   .catch(err => console.log(err));
 
