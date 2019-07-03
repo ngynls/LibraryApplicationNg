@@ -28,12 +28,12 @@ const memberSchema=new mongoose.Schema({
 
 memberSchema.path('telephone').validate(function(phone){
     const phoneRegex=/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
-    return phoneRegex.test(phone.text);
+    return phoneRegex.test(phone);
 }, `Your phone input doesn't have a valid format`);
 
 memberSchema.path('email').validate(function (email) {
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return emailRegex.test(email.text); 
+    return emailRegex.test(email); 
  }, `Your email input doesn't have a valid format`);
 
 module.exports=Member=mongoose.model('Member', memberSchema);
