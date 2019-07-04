@@ -1,28 +1,6 @@
-const mongoose=require('mongoose')
+require('./settings');
 const assert=require('assert');
 const Genre=require('../models/genre.model');
-const testDbUrl=require('../config/keys').mongoTest;
-
-before(function(done){
-
-    function clearDb(){
-        for(var i in mongoose.connection.collections){
-            mongoose.connection.collections[i].deleteOne(function(){});
-        }
-        done();
-    }
-
-    if(mongoose.connection.readyState === 0){
-        mongoose.connect(testDbUrl, {useNewUrlParser: true, useFindAndModify: false, useCreateIndex:true}, function(err){
-            if(err){
-                throw err;
-            }
-            return clearDb();
-        });
-    }
-    else
-        return clearDb();
-});
 
 describe('Create new genres for testing', function(){
     it('saves a genre to db', function(){
@@ -89,11 +67,4 @@ describe('Delete a record from the db', function(){
         })
     });
 })
-
-after(function(done){
-    mongoose.connection.db.dropDatabase(function(){
-        mongoose.connection.close();
-    });
-    done();
-});
 
