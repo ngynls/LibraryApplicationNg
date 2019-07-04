@@ -1,6 +1,8 @@
 const express=require('express');
 const router=express.Router();
 const Reservation=require('../models/reservation.model');
+const Member=require('../models/libraryMember.model');
+const BookCopy=require('../models/bookCopy.model');
 
 // GET : All reservations
 router.get('/', (req,res)=>{
@@ -33,7 +35,14 @@ router.post('/', (req,res)=>{
     newReservation.save()
     .then(reservation=> res.json(reservation))
     .catch(err => res.json({error: err.message}));
-    //TODO: add to member's reservations array
+    //add to member's reservations array & update book copy to reserved
+    Member.findByIdAndUpdate(req.body.memberId, {
+        $push:{
+            reservations: newReservation._id
+        }
+    }).catch(err=> console.log(err.message));
+    BookCopy.findByIdAndUpdate(req.body.copyId, {$set:{status: 'Reserved'}})
+        .catch(err=> console.log(err.message));
 });
 
 // PUT: Update a reservation
@@ -48,7 +57,13 @@ router.delete('/:id', (req,res)=>{
     Reservation.findByIdAndDelete(req.params.id)
     .catch(err=> res.status(404).json({error:err.message}));
     res.status(200).json({message: 'Reservation is successfully deleted from db'});
-    // TODO: remove from the book from member's reservations array
+    // remove from the book from member's reservations array & update the book copy status to available
+    Member.findByIdAndUpdate(req.body.memberId, {
+        $pull:{
+            reservations: req.params.id
+        }
+    }).catch(err=> console.log(err.message));
+    BookCopy.findByIdAndUpdate(req.body.copyId, {$set:{status: 'Available'}}).catch(err=> console.log(err.message));
 });
 
 module.exports=router;
