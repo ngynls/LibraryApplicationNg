@@ -1,6 +1,8 @@
 const express=require('express');
 const router=express.Router();
 const BookOnLoan=require('../models/bookOnLoan.model');
+const Member=require('../models/libraryMember.model');
+const BookCopy=require('../models/bookCopy.model');
 
 // GET : All loaned books
 router.get('/', (req,res)=>{
@@ -36,12 +38,14 @@ router.post('/', (req,res)=>{
     newLoanedBook.save()
     .then(loanedBook=> res.json(loanedBook))
     .catch(err => res.json({error: err.message}));
-    //TODO: add to member's loans array
-    User.findByIdAndUpdate(req.body.memberId, {
+    //add to member's loans array & update bookcopy with the status on loan
+    Member.findByIdAndUpdate(req.body.memberId, {
         $push:{
             loans: newLoanedBook._id
         }
     }).catch(err=> console.log(err.message));
+    BookCopy.findByIdAndUpdate(req.body.copyId, {$set:{status: 'On loan'}})
+        .catch(err=> console.log(err.message));
 });
 
 // PUT: Update a loaned book
@@ -56,12 +60,13 @@ router.delete('/:id', (req,res)=>{
     BookOnLoan.findByIdAndDelete(req.params.id)
     .catch(err=> res.status(404).json({error:err.message}));
     res.status(200).json({message: 'Loaned book is successfully deleted from db'});
-    // TODO: remove from the book from member's loans array
-    User.findByIdAndUpdate(req.body.memberId, {
+    //remove from the book from member's loans array & change status of copy to available
+    Member.findByIdAndUpdate(req.body.memberId, {
         $pull:{
             loans: req.params.id
         }
     }).catch(err=> console.log(err.message));
+    BookCopy.findByIdAndUpdate(req.body.copyId, {$set:{status: 'Available'}}).catch(err=> console.log(err.message));
 });
 
 module.exports=router;
