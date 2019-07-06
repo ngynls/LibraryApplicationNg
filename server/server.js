@@ -1,3 +1,4 @@
+require('./config/passportConfig');
 const express=require('express');
 const mongoose=require('mongoose');
 const cors=require('cors');
@@ -18,6 +19,7 @@ const members=require('./api/members');
 const loanedBooks=require('./api/bookOnLoans');
 const reservations=require('./api/reservations');
 const register=require('./api/register');
+const authenticate=require('./api/authenticate');
 
 mongoose.connect(db, {useNewUrlParser: true, useFindAndModify: false, useCreateIndex:true})
   .then(()=> console.log('Connected!'))
@@ -32,6 +34,7 @@ app.use('/members', members);
 app.use('/loanedBooks', loanedBooks);
 app.use('/reservations', reservations);
 app.use('/register', register);
+app.use('/authenticate',authenticate);
 
 const port= process.env.PORT || 5000;
 
