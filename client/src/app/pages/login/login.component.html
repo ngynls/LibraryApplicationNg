@@ -1,3 +1,10 @@
-<p>
-  login works!
-</p>
+<p>Login works!</p>
+<div class="container">
+<form #loginForm="ngForm">
+  <input matInput type="text" class="form-control"
+  required name="username" placeholder="Enter your admin username" #username="ngModel" [(ngModel)]="adminCredentials.username">
+  <input matInput class="form-control"
+  required type="password" name="password" placeholder="Enter your password" #password="ngModel" [(ngModel)]="adminCredentials.password">
+  <button mat-raised-button color="primary" type="submit">Login</button>
+</form>
+</div>
