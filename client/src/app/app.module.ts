@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
+import { AppMaterialModule } from './app-material/app-material.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 
@@ -20,7 +21,8 @@ import { LoginComponent } from './pages/login/login.component';
     HttpClientModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    AppMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
