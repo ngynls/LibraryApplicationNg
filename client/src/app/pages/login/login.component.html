@@ -1,5 +1,5 @@
 <p>Login</p>
-<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+<form #loginForm="ngForm" fxLayout="column" (ngSubmit)="onSubmit(loginForm)">
     <input type="text"
      name="username" placeholder="Enter your admin username" #email="ngModel" [(ngModel)]="adminCredentials.username">
     <input
