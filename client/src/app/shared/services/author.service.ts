@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { NgForm } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorService {
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+  };
 
   constructor(private http: HttpClient) { }
 
@@ -19,11 +24,11 @@ export class AuthorService {
   }
 
   addAuthor(author){
-    return this.http.post(environment.apiUrl + '/authors', author);
+    return this.http.post(environment.apiUrl + '/authors', author, this.httpOptions);
   }
 
   editAuthor(id:string, author){
-    return this.http.put(environment.apiUrl + '/authors/' + id, author);
+    return this.http.put(environment.apiUrl + '/authors/' + id, author, this.httpOptions);
   }
 
   deleteAuthor(id:string){
