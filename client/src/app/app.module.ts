@@ -10,11 +10,13 @@ import { AppMaterialModule } from './app-material/app-material.module';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
+import { BooksComponent } from './pages/books/books.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    BooksComponent,
   ],
   imports: [
     BrowserModule,
