@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Author } from '../../shared/models/author.model';
 import { AuthorService } from '../../shared/services/author.service';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-authors',
@@ -19,7 +20,7 @@ export class AuthorsComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private authorService: AuthorService) { }
+  constructor(private authorService: AuthorService, private router:Router) { }
 
   ngOnInit() {
     this.authorService.getAuthors().subscribe((data: Author[])=>{
@@ -37,5 +38,9 @@ export class AuthorsComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  redirectToAddAuthor(){
+    this.router.navigateByUrl('/addAuthor');
   }
 }
