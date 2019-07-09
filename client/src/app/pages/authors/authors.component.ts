@@ -43,4 +43,18 @@ export class AuthorsComponent implements OnInit {
   redirectToAddAuthor(){
     this.router.navigateByUrl('/addAuthor');
   }
+
+  deleteAuthor(id, author){
+    if(window.confirm(`Are you sure you want to delete this author? [${author.firstName} ${author.lastName}]`)){
+      this.authorService.deleteAuthor(id).subscribe(
+        res=>{
+          console.log('Author is deleted!');
+        }
+      );
+      const index=this.dataSource.data.indexOf(id);
+      this.dataSource.data.splice(index,1);
+      this.dataSource._updateChangeSubscription();
+    }
+  }
+
 }

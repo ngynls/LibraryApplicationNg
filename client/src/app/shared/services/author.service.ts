@@ -26,4 +26,8 @@ export class AuthorService {
     return this.http.put(environment.apiUrl + '/authors/' + id, author);
   }
 
+  deleteAuthor(id:string){
+    return this.http.delete(environment.apiUrl + '/authors/' + id);
+  }
+
 }
