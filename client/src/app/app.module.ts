@@ -11,12 +11,16 @@ import { AppMaterialModule } from './app-material/app-material.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { BooksComponent } from './pages/books/books.component';
+import { AuthorsComponent } from './pages/authors/authors.component';
+
+import { AuthorService } from './shared/services/author.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     BooksComponent,
+    AuthorsComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +31,7 @@ import { BooksComponent } from './pages/books/books.component';
     BrowserAnimationsModule,
     AppMaterialModule,
   ],
-  providers: [],
+  providers: [AuthorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
