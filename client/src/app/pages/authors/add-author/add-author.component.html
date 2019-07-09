@@ -1,0 +1,20 @@
+<div class="container">
+  <mat-card class="custom-cardwidth">
+      <mat-card-header>
+        <mat-card-title>Create an author</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <form #addAuthorForm="ngForm" fxLayout="column" (ngSubmit)="onSubmit(addAuthorForm)">
+              <mat-form-field class="mb-5">
+                <input matInput type="text" class="form-control"
+                required name="firstName" placeholder="Enter the author's first name" #firstName="ngModel" [(ngModel)]="authorToAdd.firstName">
+              </mat-form-field>
+              <mat-form-field class="mb-5">
+                <input matInput class="form-control"
+                required type="text" name="lastName" placeholder="Enter the author's last name" #lastName="ngModel" [(ngModel)]="authorToAdd.lastName">
+              </mat-form-field>
+              <button mat-raised-button color="primary" type="submit">Add</button>
+              </form>
+      </mat-card-content>
+    </mat-card>
+</div>
