@@ -15,6 +15,7 @@ import { AuthorsComponent } from './pages/authors/authors.component';
 
 import { AuthorService } from './shared/services/author.service';
 import { AddAuthorComponent } from './pages/authors/add-author/add-author.component';
+import { EditAuthorComponent } from './pages/authors/edit-author/edit-author.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AddAuthorComponent } from './pages/authors/add-author/add-author.compon
     BooksComponent,
     AuthorsComponent,
     AddAuthorComponent,
+    EditAuthorComponent,
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,10 @@ export class AuthorService {
     return this.http.get(environment.apiUrl + '/authors');
   }
 
+  getAuthor(id:string){
+    return this.http.get(environment.apiUrl + '/authors/' + id);
+  }
+
   addAuthor(author){
     return this.http.post(environment.apiUrl + '/authors', author);
   }
