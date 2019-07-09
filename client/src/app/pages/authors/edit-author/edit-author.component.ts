@@ -35,10 +35,10 @@ export class EditAuthorComponent implements OnInit {
     this.authorService.editAuthor(this.route.snapshot.params['id'], form.value).subscribe((res)=>{
       //TODO: fix httperrorresponse (json parsing at index 0. possibly _id related)
       console.log(res);
-      this.router.navigateByUrl('/authors');
-      this.snackbar.open("Author was edited successfully", "Close", {
-        duration: 2000,
-      });
+    });
+    this.router.navigateByUrl('/authors');
+    this.snackbar.open("Author was edited successfully", "Close", {
+      duration: 2000,
     });
   }
 
