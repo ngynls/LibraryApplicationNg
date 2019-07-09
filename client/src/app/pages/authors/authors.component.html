@@ -1,7 +1,7 @@
 <div class="content">
-    <p>Authors</p>
+    <mat-card>Authors</mat-card>
 
-    <button mat-raised-button color="primary" (click)="redirectToAddAuthor()">Add Author</button>
+    <button mat-raised-button color="primary" class="mt-20" (click)="redirectToAddAuthor()">Add Author</button>
 
     <mat-form-field fxLayout="row wrap" fxLayoutAlign="flex-end">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
