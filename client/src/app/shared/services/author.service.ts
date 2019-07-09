@@ -22,4 +22,8 @@ export class AuthorService {
     return this.http.post(environment.apiUrl + '/authors', author);
   }
 
+  editAuthor(id:string, author){
+    return this.http.put(environment.apiUrl + '/authors/' + id, author);
+  }
+
 }

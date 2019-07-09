@@ -4,7 +4,9 @@
           <mat-card-title>Edit an author</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <form #editAuthorForm="ngForm" fxLayout="column" (ngSubmit)="onSubmit(addAuthorForm)">
+            <form #editAuthorForm="ngForm" fxLayout="column" (ngSubmit)="onSubmit(editAuthorForm)">
+                <input type="hidden"
+                name="_id" #id="ngModel" [(ngModel)]="authorToEdit._id">
                 <mat-form-field class="mb-5">
                   <input matInput type="text" class="form-control"
                   required name="firstName" placeholder="Enter the author's first name" #firstName="ngModel" [(ngModel)]="authorToEdit.firstName">
