@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class AuthorsComponent implements OnInit {
 
   authors: Author[];
-  displayedColumns: string[] = ['firstName', 'lastName'];
+  displayedColumns: string[] = ['firstName', 'lastName', 'actions'];
   dataSource: MatTableDataSource<Author>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
