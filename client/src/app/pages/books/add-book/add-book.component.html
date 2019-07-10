@@ -1,0 +1,51 @@
+<div class="container">
+  <mat-card class="custom-cardwidth">
+      <mat-card-header>
+        <mat-card-title>Add a book</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <form #addBookForm="ngForm" fxLayout="column" (ngSubmit)="onSubmit(addBookForm)">
+              <mat-form-field class="mb-5">
+                <input matInput type="text" class="form-control"
+                required name="title" placeholder="Enter the book title" #title="ngModel" [(ngModel)]="bookToAdd.title">
+              </mat-form-field>
+              <mat-form-field class="mb-5">
+                <input matInput class="form-control"
+                required type="text" name="isbn" placeholder="Enter the book's ISBN" #isbn="ngModel" [(ngModel)]="bookToAdd.isbn">
+              </mat-form-field>
+              <!--Add multiple authors-->
+              <mat-form-field class="mb-5">
+                <input matInput class="form-control"
+                required type="text" name="publishedYear" placeholder="Enter the published year" #publishedYear="ngModel" [(ngModel)]="bookToAdd.publishedYear">
+              </mat-form-field>
+              <mat-form-field class="mb-5">
+                <input matInput class="form-control"
+                required type="number" name="nbOfPages" placeholder="Enter the number of pages" #nbOfPages="ngModel" [(ngModel)]="bookToAdd.nbOfPages">
+              </mat-form-field>
+              <mat-form-field class="mb-5">
+                <input matInput class="form-control"
+                required type="text" name="language" placeholder="Enter the book's language" #language="ngModel" [(ngModel)]="bookToAdd.language">
+              </mat-form-field>
+              <mat-form-field class="mb-5">
+                <input matInput class="form-control"
+                required type="text" name="edition" placeholder="Enter the book's edition" #edition="ngModel" [(ngModel)]="bookToAdd.edition">
+              </mat-form-field>
+              <mat-form-field class="mb-5">
+                <input matInput class="form-control"
+                required type="text" name="summary" placeholder="Enter the book's summary" #summary="ngModel" [(ngModel)]="bookToAdd.summary">
+              </mat-form-field>
+              <mat-form-field class="mb-5">
+                <input matInput class="form-control"
+                required type="text" name="cover" placeholder="Enter the url of the book's cover" #cover="ngModel" [(ngModel)]="bookToAdd.cover">
+              </mat-form-field>
+              <mat-form-field class="mb-5">
+                <input matInput class="form-control"
+                required type="text" name="locationInLibrary" placeholder="Enter its location in library" #locationInLibrary="ngModel" [(ngModel)]="bookToAdd.locationInLibrary">
+              </mat-form-field>
+              <!--Publisher autocomplete-->
+              <!--Genre autocomplete-->
+              <button mat-raised-button color="primary" type="submit" [disabled]="!addBookForm.form.valid">Add</button>
+              </form>
+      </mat-card-content>
+    </mat-card>
+</div>

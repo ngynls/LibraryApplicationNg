@@ -11,12 +11,14 @@ import { EditGenreComponent } from './pages/genres/edit-genre/edit-genre.compone
 import { PublishersComponent } from './pages/publishers/publishers.component';
 import { AddPublisherComponent } from './pages/publishers/add-publisher/add-publisher.component';
 import { EditPublisherComponent } from './pages/publishers/edit-publisher/edit-publisher.component';
+import { AddBookComponent } from './pages/books/add-book/add-book.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'books', component: BooksComponent},
+  {path: 'addBook', component: AddBookComponent},
   {path: 'authors', component: AuthorsComponent},
   {path: 'addAuthor', component: AddAuthorComponent},
   {path: 'editAuthor/:id', component: EditAuthorComponent},
