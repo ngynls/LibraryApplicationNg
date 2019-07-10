@@ -7,7 +7,9 @@ import { AddAuthorComponent } from './pages/authors/add-author/add-author.compon
 import { EditAuthorComponent } from './pages/authors/edit-author/edit-author.component';
 import { GenresComponent } from './pages/genres/genres.component';
 import { AddGenreComponent } from './pages/genres/add-genre/add-genre.component';
+import { EditGenreComponent } from './pages/genres/edit-genre/edit-genre.component';
 import { PublishersComponent } from './pages/publishers/publishers.component';
+
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -18,6 +20,7 @@ const routes: Routes = [
   {path: 'editAuthor/:id', component: EditAuthorComponent},
   {path: 'genres', component: GenresComponent},
   {path: 'addGenre', component: AddGenreComponent},
+  {path: 'editGenre/:id', component: EditGenreComponent},
   {path: 'publishers', component: PublishersComponent}
 ];
 
