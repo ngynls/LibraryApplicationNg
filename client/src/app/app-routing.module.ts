@@ -9,6 +9,7 @@ import { GenresComponent } from './pages/genres/genres.component';
 import { AddGenreComponent } from './pages/genres/add-genre/add-genre.component';
 import { EditGenreComponent } from './pages/genres/edit-genre/edit-genre.component';
 import { PublishersComponent } from './pages/publishers/publishers.component';
+import { AddPublisherComponent } from './pages/publishers/add-publisher/add-publisher.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path: 'genres', component: GenresComponent},
   {path: 'addGenre', component: AddGenreComponent},
   {path: 'editGenre/:id', component: EditGenreComponent},
-  {path: 'publishers', component: PublishersComponent}
+  {path: 'publishers', component: PublishersComponent},
+  {path: 'addPublisher', component: AddPublisherComponent}
 ];
 
 @NgModule({

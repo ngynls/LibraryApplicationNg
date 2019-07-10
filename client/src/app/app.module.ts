@@ -20,6 +20,7 @@ import { GenresComponent } from './pages/genres/genres.component';
 import { PublishersComponent } from './pages/publishers/publishers.component';
 import { AddGenreComponent } from './pages/genres/add-genre/add-genre.component';
 import { EditGenreComponent } from './pages/genres/edit-genre/edit-genre.component';
+import { AddPublisherComponent } from './pages/publishers/add-publisher/add-publisher.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { EditGenreComponent } from './pages/genres/edit-genre/edit-genre.compone
     PublishersComponent,
     AddGenreComponent,
     EditGenreComponent,
+    AddPublisherComponent,
   ],
   imports: [
     BrowserModule,

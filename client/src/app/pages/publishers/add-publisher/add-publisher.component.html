@@ -1,0 +1,20 @@
+<div class="container">
+  <mat-card class="custom-cardwidth">
+      <mat-card-header>
+        <mat-card-title>Add a publisher</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <form #addPublisherForm="ngForm" fxLayout="column" (ngSubmit)="onSubmit(addPublisherForm)">
+              <mat-form-field class="mb-5">
+                <input matInput type="text" class="form-control"
+                required name="publisherName" placeholder="Enter the publisher's name" #publisherName="ngModel" [(ngModel)]="publisherToAdd.publisherName">
+              </mat-form-field>
+              <mat-form-field class="mb-5">
+                <input matInput class="form-control"
+                required type="text" name="location" placeholder="Enter the publisher's location" #location="ngModel" [(ngModel)]="publisherToAdd.location">
+              </mat-form-field>
+              <button mat-raised-button color="primary" type="submit" [disabled]="!addPublisherForm.form.valid">Add</button>
+              </form>
+      </mat-card-content>
+    </mat-card>
+</div>
