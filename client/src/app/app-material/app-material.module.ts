@@ -9,6 +9,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material';
 import { MatSortModule } from '@angular/material/sort';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [],
@@ -22,7 +23,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatAutocompleteModule
   ],
   exports:[
     MatInputModule,
@@ -33,7 +35,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatAutocompleteModule
   ]
 })
 export class AppMaterialModule { }
