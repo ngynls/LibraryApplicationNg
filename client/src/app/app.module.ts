@@ -21,6 +21,7 @@ import { PublishersComponent } from './pages/publishers/publishers.component';
 import { AddGenreComponent } from './pages/genres/add-genre/add-genre.component';
 import { EditGenreComponent } from './pages/genres/edit-genre/edit-genre.component';
 import { AddPublisherComponent } from './pages/publishers/add-publisher/add-publisher.component';
+import { EditPublisherComponent } from './pages/publishers/edit-publisher/edit-publisher.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AddPublisherComponent } from './pages/publishers/add-publisher/add-publ
     AddGenreComponent,
     EditGenreComponent,
     AddPublisherComponent,
+    EditPublisherComponent,
   ],
   imports: [
     BrowserModule,

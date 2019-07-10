@@ -1,0 +1,20 @@
+<div class="container">
+  <mat-card class="custom-cardwidth">
+      <mat-card-header>
+        <mat-card-title>Edit a publisher</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <form #editPublisherForm="ngForm" fxLayout="column" (ngSubmit)="onSubmit(editPublisherForm)">
+              <mat-form-field class="mb-5">
+                <input matInput type="text" class="form-control"
+                required name="publisherName" placeholder="Enter the publisher's name" #publisherName="ngModel" [(ngModel)]="publisherToEdit.publisherName">
+              </mat-form-field>
+              <mat-form-field class="mb-5">
+                <input matInput class="form-control"
+                required type="text" name="location" placeholder="Enter the publisher's location" #location="ngModel" [(ngModel)]="publisherToEdit.location">
+              </mat-form-field>
+              <button mat-raised-button color="primary" type="submit" [disabled]="!editPublisherForm.form.valid">Edit</button>
+              </form>
+      </mat-card-content>
+    </mat-card>
+</div>
