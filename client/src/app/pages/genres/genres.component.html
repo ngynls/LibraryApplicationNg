@@ -1,1 +1,36 @@
-<p>genres works!</p>
+<div class="content">
+  <mat-card>Genre</mat-card>
+
+  <button mat-raised-button color="primary" class="mt-20" (click)="redirectToAddGenre()">Add Genre</button>
+
+  <mat-form-field fxLayout="row wrap" fxLayoutAlign="flex-end">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- Genre Name Column -->
+        <ng-container matColumnDef="genreName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Genre Name </th>
+          <td mat-cell *matCellDef="let row"> {{row.genreName}} </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+            <td mat-cell *matCellDef="let element; let i = index;">
+                <button mat-raised-button color="primary" class="push-right"
+                  [routerLink]="['/editGenre/', element._id]">Edit</button>
+                <button mat-raised-button color="warn" class="ml-10" (click)="deleteGenre(element._id, element)">Delete</button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+</div>
