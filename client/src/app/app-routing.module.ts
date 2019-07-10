@@ -6,6 +6,7 @@ import { AuthorsComponent } from './pages/authors/authors.component';
 import { AddAuthorComponent } from './pages/authors/add-author/add-author.component';
 import { EditAuthorComponent } from './pages/authors/edit-author/edit-author.component';
 import { GenresComponent } from './pages/genres/genres.component';
+import { PublishersComponent } from './pages/publishers/publishers.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'authors', component: AuthorsComponent},
   {path: 'addAuthor', component: AddAuthorComponent},
   {path: 'editAuthor/:id', component: EditAuthorComponent},
-  {path: 'genres', component: GenresComponent}
+  {path: 'genres', component: GenresComponent},
+  {path: 'publishers', component: PublishersComponent}
 ];
 
 @NgModule({

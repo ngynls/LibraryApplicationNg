@@ -17,6 +17,7 @@ import { AuthorService } from './shared/services/author.service';
 import { AddAuthorComponent } from './pages/authors/add-author/add-author.component';
 import { EditAuthorComponent } from './pages/authors/edit-author/edit-author.component';
 import { GenresComponent } from './pages/genres/genres.component';
+import { PublishersComponent } from './pages/publishers/publishers.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { GenresComponent } from './pages/genres/genres.component';
     AddAuthorComponent,
     EditAuthorComponent,
     GenresComponent,
+    PublishersComponent,
   ],
   imports: [
     BrowserModule,
