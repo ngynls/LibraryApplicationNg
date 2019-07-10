@@ -18,6 +18,7 @@ import { AddAuthorComponent } from './pages/authors/add-author/add-author.compon
 import { EditAuthorComponent } from './pages/authors/edit-author/edit-author.component';
 import { GenresComponent } from './pages/genres/genres.component';
 import { PublishersComponent } from './pages/publishers/publishers.component';
+import { AddGenreComponent } from './pages/genres/add-genre/add-genre.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { PublishersComponent } from './pages/publishers/publishers.component';
     EditAuthorComponent,
     GenresComponent,
     PublishersComponent,
+    AddGenreComponent,
   ],
   imports: [
     BrowserModule,

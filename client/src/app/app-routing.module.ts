@@ -6,6 +6,7 @@ import { AuthorsComponent } from './pages/authors/authors.component';
 import { AddAuthorComponent } from './pages/authors/add-author/add-author.component';
 import { EditAuthorComponent } from './pages/authors/edit-author/edit-author.component';
 import { GenresComponent } from './pages/genres/genres.component';
+import { AddGenreComponent } from './pages/genres/add-genre/add-genre.component';
 import { PublishersComponent } from './pages/publishers/publishers.component';
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'addAuthor', component: AddAuthorComponent},
   {path: 'editAuthor/:id', component: EditAuthorComponent},
   {path: 'genres', component: GenresComponent},
+  {path: 'addGenre', component: AddGenreComponent},
   {path: 'publishers', component: PublishersComponent}
 ];
 
