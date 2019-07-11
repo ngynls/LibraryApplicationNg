@@ -32,6 +32,7 @@ export class AddBookComponent implements OnInit {
     genre: '',
     copies: []
   }
+  authorToAdd='';
   genreControl = new FormControl();
   publisherControl = new FormControl();
   publishers: Publisher[];
@@ -82,6 +83,16 @@ export class AddBookComponent implements OnInit {
 
   displayPublisherId(publisher?: Publisher): string | undefined {
     return publisher ? publisher._id : undefined;
+  }
+
+  addAuthor(){
+    this.bookToAdd.authors.push(this.authorToAdd);
+    this.authorToAdd='';
+  }
+
+  deleteAuthor(id:string){
+    const authorToDelete=this.bookToAdd.authors.indexOf(id);
+    this.bookToAdd.authors.splice(authorToDelete, 1);
   }
 
   onSubmit(){
