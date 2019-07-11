@@ -9,6 +9,8 @@ import { Genre } from 'src/app/shared/models/genre.model';
 import { GenreService } from 'src/app/shared/services/genre.service';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { Author } from 'src/app/shared/models/author.model';
+import { AuthorService } from 'src/app/shared/services/author.service';
 
 @Component({
   selector: 'app-add-book',
@@ -35,16 +37,29 @@ export class AddBookComponent implements OnInit {
   authorToAdd='';
   genreControl = new FormControl();
   publisherControl = new FormControl();
+  authorControl= new FormControl();
   publishers: Publisher[];
   filteredPublishers: Observable<any[]>;
   genres: Genre[];
   filteredGenres: Observable<any[]>;
+  authors: Author[];
+  filteredAuthors: Observable<any[]>;
 
-  constructor(private bookService:BookService, private genreService:GenreService, private publisherService:PublisherService,
+  constructor(private bookService:BookService, private genreService:GenreService, private publisherService:PublisherService, private authorService:AuthorService,
    private router:Router, private snackbar: MatSnackBar) { }
 
   ngOnInit() {
-    //get all the genre & publisher data for autocomplete fields
+    //get all the authors, genres & publishers data for autocomplete fields
+    this.authorService.getAuthors().subscribe((data:Author[])=>{
+      this.authors=data;
+      console.log(this.authors);
+      this.filteredAuthors = this.authorControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.firstName),
+        map(firstName => firstName ? this.filterAuthor(firstName) : this.authors.slice())
+      );
+    })
     this.genreService.getGenres().subscribe((data:Genre[])=>{
       this.genres=data;
       console.log(this.genres);
@@ -67,6 +82,11 @@ export class AddBookComponent implements OnInit {
     });
   }
 
+  private filterAuthor(value: string): Author[] {
+    const filterValue = value.toLowerCase();
+    return this.authors.filter(option => option.firstName.toLowerCase().indexOf(filterValue) === 0);
+  }
+
   private filterGenre(value: string): Genre[] {
     const filterValue = value.toLowerCase();
     return this.genres.filter(option => option.genreName.toLowerCase().indexOf(filterValue) === 0);
@@ -75,6 +95,10 @@ export class AddBookComponent implements OnInit {
   private filterPublisher(name: string): Publisher[] {
     const filterValue = name.toLowerCase();
     return this.publishers.filter(option => option.publisherName.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  displayAuthorId(author?: Author): string | undefined {
+    return author ? author._id : undefined;
   }
 
   displayGenreId(genre?: Genre): string | undefined {
@@ -86,8 +110,7 @@ export class AddBookComponent implements OnInit {
   }
 
   addAuthor(){
-    this.bookToAdd.authors.push(this.authorToAdd);
-    this.authorToAdd='';
+    this.bookToAdd.authors.push(this.authorControl.value);
   }
 
   deleteAuthor(id:string){
@@ -96,24 +119,37 @@ export class AddBookComponent implements OnInit {
   }
 
   onSubmit(){
+    this.addAuthor();
     this.bookToAdd.publisher=this.publisherControl.value;
     this.bookToAdd.genre=this.genreControl.value;
     console.log(this.bookToAdd);
-    this.bookToAdd={
-      title: '',
-      isbn: '',
-      authors: [],
-      publishedYear: 0,
-      nbOfPages: 0,
-      language: '',
-      edition: '',
-      summary: '',
-      cover: '',
-      locationInLibrary: '',
-      publisher: '',
-      genre: '',
-      copies: []
-    }
+    this.bookService.addBook(this.bookToAdd).subscribe(
+      res=>{
+       this.router.navigateByUrl('/books');
+       this.snackbar.open("Book was added successfully", "Close", {
+         duration: 2000,
+       });
+       this.bookToAdd={
+        title: '',
+        isbn: '',
+        authors: [],
+        publishedYear: 0,
+        nbOfPages: 0,
+        language: '',
+        edition: '',
+        summary: '',
+        cover: '',
+        locationInLibrary: '',
+        publisher: '',
+        genre: '',
+        copies: []}
+      },
+      err=>{
+       this.snackbar.open("Unable to add book", "Close", {
+         duration: 2000,
+       });
+      }
+     );
   }
 
 }
