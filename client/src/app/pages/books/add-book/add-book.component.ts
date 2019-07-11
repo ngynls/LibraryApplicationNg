@@ -68,7 +68,7 @@ export class AddBookComponent implements OnInit {
 
   private filterGenre(value: string): Genre[] {
     const filterValue = value.toLowerCase();
-    return this.genres.filter(option => option.genreName.toLowerCase().includes(filterValue));
+    return this.genres.filter(option => option.genreName.toLowerCase().indexOf(filterValue) === 0);
   }
 
   private filterPublisher(name: string): Publisher[] {
@@ -84,20 +84,10 @@ export class AddBookComponent implements OnInit {
     return publisher ? publisher._id : undefined;
   }
 
-  onSubmit(form:NgForm){
-    this.bookService.addBook(form.value).subscribe(
-     res=>{
-      this.router.navigateByUrl('/books');
-      this.snackbar.open("Book was added successfully", "Close", {
-        duration: 2000,
-      });
-     },
-     err=>{
-      this.snackbar.open("Unable to add book", "Close", {
-        duration: 2000,
-      });
-     }
-    );
+  onSubmit(){
+    this.bookToAdd.publisher=this.publisherControl.value;
+    this.bookToAdd.genre=this.genreControl.value;
+    console.log(this.bookToAdd);
   }
 
 }

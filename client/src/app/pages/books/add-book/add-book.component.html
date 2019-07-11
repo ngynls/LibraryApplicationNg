@@ -4,7 +4,7 @@
         <mat-card-title>Add a book</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-          <form #addBookForm="ngForm" fxLayout="column" (ngSubmit)="onSubmit(addBookForm)">
+          <form #addBookForm="ngForm" fxLayout="column" (ngSubmit)="onSubmit()">
               <mat-form-field class="mb-5">
                 <input matInput type="text" class="form-control"
                 required name="title" placeholder="Enter the book title" #title="ngModel" [(ngModel)]="bookToAdd.title">
@@ -52,6 +52,14 @@
                 </mat-autocomplete>
               </mat-form-field>
               <!--Genre autocomplete-->
+              <mat-form-field class="example-full-width">
+                <input type="text" placeholder="Genre" aria-label="Genre" matInput [formControl]="genreControl" [matAutocomplete]="auto2">
+                <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayGenreId">
+                  <mat-option *ngFor="let genres of filteredGenres | async" [value]="genres">
+                    {{genres.genreName}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
               <button mat-raised-button color="primary" type="submit" [disabled]="!addBookForm.form.valid">Add</button>
               </form>
       </mat-card-content>
