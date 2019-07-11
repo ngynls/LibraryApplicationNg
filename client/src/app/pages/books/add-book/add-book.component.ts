@@ -88,6 +88,21 @@ export class AddBookComponent implements OnInit {
     this.bookToAdd.publisher=this.publisherControl.value;
     this.bookToAdd.genre=this.genreControl.value;
     console.log(this.bookToAdd);
+    this.bookToAdd={
+      title: '',
+      isbn: '',
+      authors: [],
+      publishedYear: 0,
+      nbOfPages: 0,
+      language: '',
+      edition: '',
+      summary: '',
+      cover: '',
+      locationInLibrary: '',
+      publisher: '',
+      genre: '',
+      copies: []
+    }
   }
 
 }
