@@ -43,6 +43,14 @@
                 required type="text" name="locationInLibrary" placeholder="Enter its location in library" #locationInLibrary="ngModel" [(ngModel)]="bookToAdd.locationInLibrary">
               </mat-form-field>
               <!--Publisher autocomplete-->
+              <mat-form-field class="example-full-width">
+                <input type="text" placeholder="Publisher" aria-label="Publisher" matInput [formControl]="publisherControl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayPublisherId">
+                  <mat-option *ngFor="let publishers of filteredPublishers | async" [value]="publishers">
+                    {{publishers.publisherName}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
               <!--Genre autocomplete-->
               <button mat-raised-button color="primary" type="submit" [disabled]="!addBookForm.form.valid">Add</button>
               </form>
