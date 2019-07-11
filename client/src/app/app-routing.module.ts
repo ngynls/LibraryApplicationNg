@@ -12,6 +12,7 @@ import { PublishersComponent } from './pages/publishers/publishers.component';
 import { AddPublisherComponent } from './pages/publishers/add-publisher/add-publisher.component';
 import { EditPublisherComponent } from './pages/publishers/edit-publisher/edit-publisher.component';
 import { AddBookComponent } from './pages/books/add-book/add-book.component';
+import { MembersComponent } from './pages/members/members.component';
 
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
   {path: 'editGenre/:id', component: EditGenreComponent},
   {path: 'publishers', component: PublishersComponent},
   {path: 'addPublisher', component: AddPublisherComponent},
-  {path: 'editPublisher/:id', component: EditPublisherComponent}
+  {path: 'editPublisher/:id', component: EditPublisherComponent},
+  {path: 'members', component: MembersComponent}
 ];
 
 @NgModule({
