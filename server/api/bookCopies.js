@@ -26,6 +26,17 @@ router.get('/:id', (req,res)=>{
     });
 });
 
+//GET: all copies for a particular book
+router.get('/findByBook/:id', (req,res)=>{
+    BookCopy.find({bookId: req.params.id})
+    .then(copies=>{
+        if(!copies)
+            res.status(404).send('Book copies for that book were not found');
+        else
+            res.status(400).json(copies);
+    });
+});
+
 //POST: a new book copy
 router.post('/', (req,res)=>{
     const newCopy=new BookCopy({
