@@ -33,7 +33,7 @@ router.get('/findByBook/:id', (req,res)=>{
         if(!copies)
             res.status(404).send('Book copies for that book were not found');
         else
-            res.status(400).json(copies);
+            res.status(200).json(copies);
     });
 });
 
