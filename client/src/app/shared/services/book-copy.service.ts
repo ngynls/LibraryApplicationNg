@@ -19,8 +19,8 @@ export class BookCopyService {
     return this.http.get(environment.apiUrl + '/bookCopies');
   }
 
-  getCopiesForBook(bookId:string){
-    return this.http.get(environment.apiUrl + '/bookCopies/findByBook/'+bookId);
+  getCopiesForBook(id:string){
+    return this.http.get(environment.apiUrl + '/bookCopies/findByBook/' + id);
   }
 
   getBookCopy(id:string){
