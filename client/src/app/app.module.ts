@@ -25,6 +25,7 @@ import { EditPublisherComponent } from './pages/publishers/edit-publisher/edit-p
 import { AddBookComponent } from './pages/books/add-book/add-book.component';
 import { MembersComponent } from './pages/members/members.component';
 import { AddMemberComponent } from './pages/members/add-member/add-member.component';
+import { ViewBookComponent } from './pages/books/view-book/view-book.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { AddMemberComponent } from './pages/members/add-member/add-member.compon
     AddBookComponent,
     MembersComponent,
     AddMemberComponent,
+    ViewBookComponent,
   ],
   imports: [
     BrowserModule,

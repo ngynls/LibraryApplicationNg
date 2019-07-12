@@ -27,7 +27,7 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
             <td mat-cell *matCellDef="let element; let i = index;">
                 <button mat-raised-button color="primary" class="push-right"
-                  [routerLink]="['/editBook/', element._id]">Edit</button>
+                  [routerLink]="['/viewBook/', element._id]">View</button>
                 <button mat-raised-button color="warn" class="ml-10" (click)="deleteBook(element._id, element)">Delete</button>
             </td>
         </ng-container>
