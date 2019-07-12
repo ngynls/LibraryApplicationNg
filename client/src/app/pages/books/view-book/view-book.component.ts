@@ -17,6 +17,7 @@ export class ViewBookComponent implements OnInit {
   ngOnInit() {
     this.bookService.getBook(this.route.snapshot.params['id']).subscribe((data:Book)=>{
       this.currentBook=data;
+      console.log(this.currentBook);
     });
   }
 

@@ -1,1 +1,24 @@
-<p *ngIf="currentBook?.title">{{currentBook?.title}}</p>
+<mat-card>Book Details</mat-card>
+<div class="mt-25" gdAreas="side content | footer footer" gdGap="35px" gdRows="auto" gdColumns="230px">
+  <div *ngIf="currentBook?.cover" gdArea="side"><img class="imgView" src="{{currentBook?.cover}}"></div>
+  <div gdArea="content">
+    <p *ngIf="currentBook?.title">{{currentBook?.title}}</p>
+    <p *ngIf="currentBook?.authors"><b>Authors: </b>
+      <span *ngFor="let author of currentBook?.authors">
+        <span>{{author.firstName}} {{author.lastName}}</span>
+      </span>
+    </p>
+    <p *ngIf="currentBook?.isbn"><b>Isbn: </b>{{currentBook?.isbn}}</p>
+    <p *ngIf="currentBook?.genre"><b>Genre: </b>{{currentBook?.genre.genreName}}</p>
+    <p *ngIf="currentBook?.language"><b>Language: </b>{{currentBook?.language}}</p>
+    <p *ngIf="currentBook?.publishedYear"><b>Published in: </b>{{currentBook?.publishedYear}}</p>
+    <p *ngIf="currentBook?.publisher"> <b>Publisher: </b>{{currentBook?.publisher.publisherName}}</p>
+    <p *ngIf="currentBook?.edition"><b>Edition: </b>{{currentBook?.edition}}</p>
+    <p *ngIf="currentBook?.nbOfPages"><b># of pages: </b>{{currentBook?.nbOfPages}}</p>
+    <p *ngIf="currentBook?.summary"><b>Summary: </b>{{currentBook?.summary}}</p>
+    <p *ngIf="currentBook?.locationInLibrary"><b>Location in library: </b>{{currentBook?.locationInLibrary}}</p>
+  </div>
+  <div gdArea="footer">
+      <mat-card>Copies</mat-card>
+  </div>
+</div>
