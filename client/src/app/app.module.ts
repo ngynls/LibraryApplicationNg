@@ -24,6 +24,7 @@ import { AddPublisherComponent } from './pages/publishers/add-publisher/add-publ
 import { EditPublisherComponent } from './pages/publishers/edit-publisher/edit-publisher.component';
 import { AddBookComponent } from './pages/books/add-book/add-book.component';
 import { MembersComponent } from './pages/members/members.component';
+import { AddMemberComponent } from './pages/members/add-member/add-member.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { MembersComponent } from './pages/members/members.component';
     EditPublisherComponent,
     AddBookComponent,
     MembersComponent,
+    AddMemberComponent,
   ],
   imports: [
     BrowserModule,

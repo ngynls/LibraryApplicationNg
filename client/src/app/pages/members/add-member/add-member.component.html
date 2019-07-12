@@ -1,0 +1,42 @@
+<div class="container">
+  <mat-card class="custom-cardwidth">
+      <mat-card-header>
+        <mat-card-title>Add a member</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <form #addMemberForm="ngForm" fxLayout="column" (ngSubmit)="onSubmit(addMemberForm)">
+              <mat-form-field class="mb-5">
+                <input matInput type="text" class="form-control"
+                required name="firstName" placeholder="Enter the member's first name" #firstName="ngModel" [(ngModel)]="memberToAdd.firstName">
+              </mat-form-field>
+              <mat-form-field class="mb-5">
+                <input matInput class="form-control"
+                required type="text" name="lastName" placeholder="Enter the member's last name" #lastName="ngModel" [(ngModel)]="memberToAdd.lastName">
+              </mat-form-field>
+              <mat-form-field class="mb-5">
+                <input matInput [matDatepicker]="picker" placeholder="Enter the member's date of birth" name="dob" #dob="ngModel" [(ngModel)]="memberToAdd.dob">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-hint>Format: MM/DD/YYYY</mat-hint>
+              </mat-form-field>
+              <mat-form-field class="mb-5">
+                <input matInput class="form-control"
+                required type="text" name="address" placeholder="Enter the member's address" #address="ngModel" [(ngModel)]="memberToAdd.address">
+              </mat-form-field>
+              <mat-form-field class="mb-5">
+                <input matInput class="form-control"
+                required type="text" name="postalCode" placeholder="Enter the member's postal code" #postalCode="ngModel" [(ngModel)]="memberToAdd.postalCode">
+              </mat-form-field>
+              <mat-form-field class="mb-5">
+                <input matInput class="form-control"
+                required type="text" name="telephone" placeholder="Enter the member's telephone" #telephone="ngModel" [(ngModel)]="memberToAdd.telephone">
+              </mat-form-field>
+              <mat-form-field class="mb-5">
+                <input matInput class="form-control"
+                required type="text" name="email" placeholder="Enter the member's email" #email="ngModel" [(ngModel)]="memberToAdd.email">
+              </mat-form-field>
+              <button mat-raised-button color="primary" type="submit" [disabled]="!addMemberForm.form.valid">Add</button>
+              </form>
+      </mat-card-content>
+    </mat-card>
+</div>
