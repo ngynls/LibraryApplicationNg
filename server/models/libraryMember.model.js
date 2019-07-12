@@ -10,7 +10,7 @@ const memberSchema=new mongoose.Schema({
         required: 'Last name cannot be empty',
     },
     dob:{
-        type:Date,  
+        type:String,  
     },
     address:String,
     postalCode:String,
