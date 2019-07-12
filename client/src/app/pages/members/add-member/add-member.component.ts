@@ -28,7 +28,20 @@ export class AddMemberComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.memberToAdd);
+    //console.log(this.memberToAdd);
+    this.memberService.addMember(this.memberToAdd).subscribe(
+      res=>{
+       this.router.navigateByUrl('/members');
+       this.snackbar.open("Member was added successfully", "Close", {
+         duration: 2000,
+       });
+      },
+      err=>{
+       this.snackbar.open("Unable to add member", "Close", {
+         duration: 2000,
+       });
+      }
+     );
   }
 
 }
