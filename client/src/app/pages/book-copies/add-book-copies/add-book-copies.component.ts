@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormControl } from '@angular/forms';
 import { BookCopyService } from 'src/app/shared/services/book-copy.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -24,7 +25,8 @@ export class AddBookCopiesComponent implements OnInit {
   books:Book[];
   filteredBooks:Observable<any[]>;
 
-  constructor(private copyService: BookCopyService, private bookService:BookService, private snackbar:MatSnackBar, private route:ActivatedRoute) { }
+  constructor(private copyService: BookCopyService, private bookService:BookService, private snackbar:MatSnackBar,
+    private route:ActivatedRoute, private location: Location) { }
 
   ngOnInit() {
     this.bookService.getBooks().subscribe((data:Book[])=>{
@@ -48,6 +50,7 @@ export class AddBookCopiesComponent implements OnInit {
        this.snackbar.open("Copy was added successfully", "Close", {
          duration: 2000,
        });
+       this.location.back();
       },
       err=>{
        this.snackbar.open("Unable to add copy", "Close", {
