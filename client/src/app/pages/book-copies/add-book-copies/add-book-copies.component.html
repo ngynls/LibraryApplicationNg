@@ -9,7 +9,7 @@
                   <input matInput type="text" class="form-control"
                   required name="copyName" placeholder="Enter the book copy identifier" #copyName="ngModel" [(ngModel)]="copyToAdd.copyName">
                 </mat-form-field>
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="example-full-width" *ngIf="copyToAdd.bookId === ''">
                     <input type="text" placeholder="Book Id" aria-label="Book Id" matInput [formControl]="bookControl" [matAutocomplete]="auto">
                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayBookId">
                       <mat-option *ngFor="let books of filteredBooks | async" [value]="books">
