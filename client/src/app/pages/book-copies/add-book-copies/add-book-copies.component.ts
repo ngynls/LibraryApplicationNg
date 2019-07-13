@@ -1,0 +1,57 @@
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { BookCopyService } from 'src/app/shared/services/book-copy.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+import { Book } from 'src/app/shared/models/book.model';
+import { BookService } from 'src/app/shared/services/book.service';
+
+@Component({
+  selector: 'app-add-book-copies',
+  templateUrl: './add-book-copies.component.html',
+  styleUrls: ['./add-book-copies.component.scss']
+})
+export class AddBookCopiesComponent implements OnInit {
+
+  copyToAdd={
+    copyName: '',
+    bookId: '',
+    status: 'Available'
+  }
+  bookControl=new FormControl();
+  books:Book[];
+  filteredBooks:Observable<any[]>;
+
+  constructor(private copyService: BookCopyService, private bookService:BookService, private snackbar:MatSnackBar, private route:ActivatedRoute) { }
+
+  ngOnInit() {
+    this.bookService.getBooks().subscribe((data:Book[])=>{
+      this.books=data;
+      this.filteredBooks = this.bookControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.title),
+        map(title => title ? this.filterBook(title) : this.books.slice())
+      );
+    });
+    if(this.route.snapshot.queryParams['bookId']){
+      this.copyToAdd.bookId=this.route.snapshot.queryParams['bookId'];
+    }
+  }
+
+  onSubmit(){
+    console.log(this.copyToAdd);
+  }
+
+  private filterBook(value: string): Book[] {
+    const filterValue = value.toLowerCase();
+    return this.books.filter(option => option.title.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  displayBookId(book?: Book): string | undefined {
+    return book ? book._id : undefined;
+  }
+
+}

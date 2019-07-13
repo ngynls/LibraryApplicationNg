@@ -15,6 +15,7 @@ import { AddBookComponent } from './pages/books/add-book/add-book.component';
 import { MembersComponent } from './pages/members/members.component';
 import { AddMemberComponent } from './pages/members/add-member/add-member.component';
 import { ViewBookComponent } from './pages/books/view-book/view-book.component';
+import { AddBookCopiesComponent } from './pages/book-copies/add-book-copies/add-book-copies.component';
 
 
 const routes: Routes = [
@@ -33,7 +34,8 @@ const routes: Routes = [
   {path: 'addPublisher', component: AddPublisherComponent},
   {path: 'editPublisher/:id', component: EditPublisherComponent},
   {path: 'members', component: MembersComponent},
-  {path: 'addMember', component: AddMemberComponent}
+  {path: 'addMember', component: AddMemberComponent},
+  {path: 'addBookCopy', component: AddBookCopiesComponent}
 ];
 
 @NgModule({
