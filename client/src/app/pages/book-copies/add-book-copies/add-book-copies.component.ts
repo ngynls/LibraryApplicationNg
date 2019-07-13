@@ -43,6 +43,18 @@ export class AddBookCopiesComponent implements OnInit {
 
   onSubmit(){
     console.log(this.copyToAdd);
+    this.copyService.addBookCopy(this.copyToAdd).subscribe(
+      res=>{
+       this.snackbar.open("Copy was added successfully", "Close", {
+         duration: 2000,
+       });
+      },
+      err=>{
+       this.snackbar.open("Unable to add copy", "Close", {
+         duration: 2000,
+       });
+      }
+     );
   }
 
   private filterBook(value: string): Book[] {
