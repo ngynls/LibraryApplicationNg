@@ -1,0 +1,24 @@
+<div class="container">
+  <mat-card class="custom-cardwidth">
+      <mat-card-header>
+        <mat-card-title>Edit a book copy</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <form #editCopyForm="ngForm" fxLayout="column" (ngSubmit)="onSubmit()">
+              <mat-form-field class="mb-5">
+                <input matInput type="text" class="form-control"
+                required name="copyName" placeholder="Enter the book copy identifier" #copyName="ngModel" [(ngModel)]="copyToEdit.copyName">
+              </mat-form-field>
+              <mat-form-field class="example-full-width" *ngIf="copyToEdit.bookId === ''">
+                  <input type="text" placeholder="Book Id" aria-label="Book Id" matInput [formControl]="bookControl" [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayBookId">
+                    <mat-option *ngFor="let books of filteredBooks | async" [value]="books">
+                      {{books.title}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              <button mat-raised-button color="primary" type="submit">Edit</button>
+              </form>
+      </mat-card-content>
+    </mat-card>
+</div>

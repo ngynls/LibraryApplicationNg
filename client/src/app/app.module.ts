@@ -28,6 +28,7 @@ import { AddMemberComponent } from './pages/members/add-member/add-member.compon
 import { ViewBookComponent } from './pages/books/view-book/view-book.component';
 import { BookCopiesComponent } from './pages/book-copies/book-copies.component';
 import { AddBookCopiesComponent } from './pages/book-copies/add-book-copies/add-book-copies.component';
+import { EditBookCopyComponent } from './pages/book-copies/edit-book-copy/edit-book-copy.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { AddBookCopiesComponent } from './pages/book-copies/add-book-copies/add-
     ViewBookComponent,
     BookCopiesComponent,
     AddBookCopiesComponent,
+    EditBookCopyComponent,
   ],
   imports: [
     BrowserModule,
