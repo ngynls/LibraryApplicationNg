@@ -7,6 +7,7 @@ import { BookCopyService } from 'src/app/shared/services/book-copy.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-view-book',
@@ -23,7 +24,8 @@ export class ViewBookComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private bookService: BookService, private copyService:BookCopyService, private router:Router,private route:ActivatedRoute) { }
+  constructor(private bookService: BookService, private copyService:BookCopyService, private router:Router,private route:ActivatedRoute,
+    private snackbar: MatSnackBar) { }
 
   ngOnInit() {
     this.bookService.getBook(this.route.snapshot.params['id']).subscribe((data:Book)=>{
@@ -46,4 +48,18 @@ export class ViewBookComponent implements OnInit {
     }
   }
 
+  deleteCopy(id, copy){
+    if(window.confirm(`Are you sure you want to delete this copy? [${copy.copyName}]`)){
+      this.copyService.deleteBookCopy(id).subscribe(
+        res=>{
+          this.snackbar.open("Genre was deleted successfully", "Close", {
+            duration: 2000,
+          });
+        }
+      );
+      const index=this.dataSource.data.indexOf(id);
+      this.dataSource.data.splice(index,1);
+      this.dataSource._updateChangeSubscription();
+    }
+  }
 }
