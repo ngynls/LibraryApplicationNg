@@ -20,6 +20,7 @@ import { EditBookCopyComponent } from './pages/book-copies/edit-book-copy/edit-b
 import { ViewMemberComponent } from './pages/members/view-member/view-member.component';
 import { EditMemberComponent } from './pages/members/edit-member/edit-member.component';
 import { LoanedBooksComponent } from './pages/loaned-books/loaned-books.component';
+import { AddLoanedBookComponent } from './pages/loaned-books/add-loaned-book/add-loaned-book.component';
 
 
 const routes: Routes = [
@@ -43,7 +44,8 @@ const routes: Routes = [
   {path: 'viewMember/:id', component: ViewMemberComponent},
   {path: 'addBookCopy', component: AddBookCopiesComponent},
   {path: 'editCopy/:id', component: EditBookCopyComponent},
-  {path: 'loanedBooks', component: LoanedBooksComponent}
+  {path: 'loanedBooks', component: LoanedBooksComponent},
+  {path: 'addLoanedBook', component: AddLoanedBookComponent},
 ];
 
 @NgModule({
