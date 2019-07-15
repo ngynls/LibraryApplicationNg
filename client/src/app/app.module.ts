@@ -30,6 +30,7 @@ import { BookCopiesComponent } from './pages/book-copies/book-copies.component';
 import { AddBookCopiesComponent } from './pages/book-copies/add-book-copies/add-book-copies.component';
 import { EditBookCopyComponent } from './pages/book-copies/edit-book-copy/edit-book-copy.component';
 import { ViewMemberComponent } from './pages/members/view-member/view-member.component';
+import { EditMemberComponent } from './pages/members/edit-member/edit-member.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { ViewMemberComponent } from './pages/members/view-member/view-member.com
     AddBookCopiesComponent,
     EditBookCopyComponent,
     ViewMemberComponent,
+    EditMemberComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,6 +18,7 @@ import { ViewBookComponent } from './pages/books/view-book/view-book.component';
 import { AddBookCopiesComponent } from './pages/book-copies/add-book-copies/add-book-copies.component';
 import { EditBookCopyComponent } from './pages/book-copies/edit-book-copy/edit-book-copy.component';
 import { ViewMemberComponent } from './pages/members/view-member/view-member.component';
+import { EditMemberComponent } from './pages/members/edit-member/edit-member.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
   {path: 'editPublisher/:id', component: EditPublisherComponent},
   {path: 'members', component: MembersComponent},
   {path: 'addMember', component: AddMemberComponent},
+  {path: 'editMember/:id', component: EditMemberComponent},
   {path: 'viewMember/:id', component: ViewMemberComponent},
   {path: 'addBookCopy', component: AddBookCopiesComponent},
   {path: 'editCopy/:id', component: EditBookCopyComponent}
