@@ -21,7 +21,7 @@ export class LoanedBooksComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private loanedBookService:LoanedBookService, private snackbar:MatSnackBar) { }
+  constructor(private loanedBookService:LoanedBookService, private router:Router, private snackbar:MatSnackBar) { }
 
   ngOnInit() {
     this.loanedBookService.getLoanedBooks().subscribe((data:BookOnLoan[])=>{
@@ -38,6 +38,10 @@ export class LoanedBooksComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  redirectToAddLoanedBooks(){
+    this.router.navigateByUrl('/addLoanedBook');
   }
 
   deleteLoanedBook(id, loanedBook){
