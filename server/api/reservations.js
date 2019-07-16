@@ -6,7 +6,10 @@ const BookCopy=require('../models/bookCopy.model');
 
 // GET : All reservations
 router.get('/', (req,res)=>{
-    Reservation.find().then(reservations=>{
+    Reservation.find()
+    .populate('copyId', 'copyName')
+    .populate('memberId', 'firstName lastName')
+    .then(reservations=>{
         res.status(200).json(reservations);
     }).catch(err=>{
         res.status(500).json({message: err.message});
@@ -15,7 +18,9 @@ router.get('/', (req,res)=>{
 
 // GET: A particular reservation
 router.get('/:id', (req,res)=>{
-    Reservation.findById(req.params.id)
+    Reservation
+    .populate('copyId', 'copyName')
+    .findById(req.params.id)
     .then(reservation => {
         if (!reservation)
             res.status(404).send('Reservation was not found');
@@ -26,6 +31,7 @@ router.get('/:id', (req,res)=>{
 
 router.get('/findByUser/:id', (req,res)=>{
     Reservation.find({memberId: req.params.id})
+        .populate('copyId', 'copyName')
         .then(reservations=>{
             if(!reservations)
                 res.status(404).send('Reservation was not found for user');
