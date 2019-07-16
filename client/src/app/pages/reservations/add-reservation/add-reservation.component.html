@@ -1,0 +1,30 @@
+<div class="container">
+  <mat-card class="custom-cardwidth">
+      <mat-card-header>
+        <mat-card-title>Add a reservation</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <form #addReservationForm="ngForm" fxLayout="column" (ngSubmit)="onSubmit()">
+              <!--Copy Id autocomplete-->
+              <mat-form-field class="example-full-width">
+                <input type="text" placeholder="Copy Id" aria-label="Copy Id" matInput [formControl]="copyIdControl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCopyId">
+                  <mat-option *ngFor="let bookCopies of filteredCopies | async" [value]="bookCopies">
+                    [{{bookCopies._id}}] {{bookCopies.copyName}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <!--Member Id autocomplete-->
+              <mat-form-field class="example-full-width">
+                <input type="text" placeholder="Member Id" aria-label="Member Id" matInput [formControl]="memberIdControl" [matAutocomplete]="auto2">
+                <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayMemberId">
+                  <mat-option *ngFor="let members of filteredMembers | async" [value]="members">
+                    [{{members._id}}] {{members.firstName}} {{members.lastName}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <button mat-raised-button color="primary" type="submit">Add</button>
+              </form>
+      </mat-card-content>
+    </mat-card>
+</div>

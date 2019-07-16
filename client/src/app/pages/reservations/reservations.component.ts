@@ -40,7 +40,7 @@ export class ReservationsComponent implements OnInit {
     }
   }
 
-  redirectToReservation(){
+  redirectToAddReservation(){
     this.router.navigateByUrl('/addReservation');
   }
 
