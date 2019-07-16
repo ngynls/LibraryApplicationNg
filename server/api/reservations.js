@@ -19,8 +19,8 @@ router.get('/', (req,res)=>{
 // GET: A particular reservation
 router.get('/:id', (req,res)=>{
     Reservation
-    .populate('copyId', 'copyName')
     .findById(req.params.id)
+    .populate('copyId', 'copyName')
     .then(reservation => {
         if (!reservation)
             res.status(404).send('Reservation was not found');
