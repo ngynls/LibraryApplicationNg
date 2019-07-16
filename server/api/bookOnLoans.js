@@ -6,7 +6,10 @@ const BookCopy=require('../models/bookCopy.model');
 
 // GET : All loaned books
 router.get('/', (req,res)=>{
-    BookOnLoan.find().then(loanedBooks=>{
+    BookOnLoan.find()
+    .populate('copyId', 'copyName')
+    .populate('memberId', 'firstName lastName')
+    .then(loanedBooks=>{
         res.status(200).json(loanedBooks);
     }).catch(err=>{
         res.status(500).json({message: err.message});
@@ -16,6 +19,7 @@ router.get('/', (req,res)=>{
 // GET: A particular loaned book
 router.get('/:id', (req,res)=>{
     BookOnLoan.findById(req.params.id)
+    .populate('copyId', 'copyName')
     .then(loanedBook => {
         if (!loanedBook)
             res.status(404).send('Loaned book was not found');
@@ -27,6 +31,7 @@ router.get('/:id', (req,res)=>{
 // GET: All loaned books of a particular user
 router.get('/findByUser/:id',(req,res)=>{
     BookOnLoan.find({memberId:req.params.id})
+    .populate('copyId', 'copyName')
     .then(loanedBooks=>{
         if(!loanedBooks)
             res.status(404).send('Could not retrieve loaned books for this user');
