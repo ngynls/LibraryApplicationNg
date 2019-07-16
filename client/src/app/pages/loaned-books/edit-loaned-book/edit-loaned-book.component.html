@@ -1,0 +1,36 @@
+<div class="container">
+    <mat-card class="custom-cardwidth">
+        <mat-card-header>
+          <mat-card-title>Edit a loaned book</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form #editLoanedBookForm="ngForm" fxLayout="column" (ngSubmit)="onSubmit()">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Old Copy Id (disabled)" disabled [value]="copyToEdit.copyId._id">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Old Member Id (disabled)" disabled [value]="copyToEdit.memberId">
+                </mat-form-field>
+                <!--Copy Id autocomplete-->
+                <mat-form-field class="example-full-width">
+                  <input type="text" placeholder="Copy Id" aria-label="Copy Id" matInput [formControl]="copyIdControl" [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCopyId">
+                    <mat-option *ngFor="let bookCopies of filteredCopies | async" [value]="bookCopies">
+                      [{{bookCopies._id}}] {{bookCopies.copyName}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <!--Member Id autocomplete-->
+                <mat-form-field class="example-full-width">
+                  <input type="text" placeholder="Member Id" aria-label="Member Id" matInput [formControl]="memberIdControl" [matAutocomplete]="auto2">
+                  <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayMemberId">
+                    <mat-option *ngFor="let members of filteredMembers | async" [value]="members">
+                      [{{members._id}}] {{members.firstName}} {{members.lastName}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <button mat-raised-button color="primary" type="submit">Edit</button>
+                </form>
+        </mat-card-content>
+      </mat-card>
+  </div>
