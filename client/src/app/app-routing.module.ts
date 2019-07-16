@@ -24,6 +24,7 @@ import { AddLoanedBookComponent } from './pages/loaned-books/add-loaned-book/add
 import { EditLoanedBookComponent } from './pages/loaned-books/edit-loaned-book/edit-loaned-book.component';
 import { ReservationsComponent } from './pages/reservations/reservations.component';
 import { AddReservationComponent } from './pages/reservations/add-reservation/add-reservation.component';
+import { EditReservationComponent } from './pages/reservations/edit-reservation/edit-reservation.component';
 
 
 const routes: Routes = [
@@ -52,6 +53,7 @@ const routes: Routes = [
   {path: 'editLoanedBook/:id', component: EditLoanedBookComponent},
   {path: 'reservations', component: ReservationsComponent},
   {path: 'addReservation', component: AddReservationComponent},
+  {path: 'editReservation/:id', component: EditReservationComponent},
 ];
 
 @NgModule({

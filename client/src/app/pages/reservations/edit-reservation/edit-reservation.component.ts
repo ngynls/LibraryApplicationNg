@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { BookCopy } from 'src/app/shared/models/book-copy.model';
@@ -6,21 +7,19 @@ import { LibraryMember } from 'src/app/shared/models/library-member.model';
 import { FormControl } from '@angular/forms';
 import { BookCopyService } from 'src/app/shared/services/book-copy.service';
 import { MemberService } from 'src/app/shared/services/member.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Reservation } from 'src/app/shared/models/reservation.model';
 import { ReservationService } from 'src/app/shared/services/reservation.service';
 
 @Component({
-  selector: 'app-add-reservation',
-  templateUrl: './add-reservation.component.html',
-  styleUrls: ['./add-reservation.component.scss']
+  selector: 'app-edit-reservation',
+  templateUrl: './edit-reservation.component.html',
+  styleUrls: ['./edit-reservation.component.scss']
 })
-export class AddReservationComponent implements OnInit {
+export class EditReservationComponent implements OnInit {
 
-  reservationToAdd={
-    copyId:'',
-    memberId:''
-  }
+  reservationToEdit:Reservation;
   bookCopies:BookCopy[];
   filteredCopies:Observable<any[]>;
   members: LibraryMember[];
@@ -29,9 +28,13 @@ export class AddReservationComponent implements OnInit {
   memberIdControl=new FormControl();
 
   constructor(private reservationService:ReservationService, private copyService:BookCopyService, private memberService:MemberService,
-    private router:Router, private snackbar:MatSnackBar ) { }
+  private router:Router, private route:ActivatedRoute, private snackbar:MatSnackBar, private location:Location) { }
 
   ngOnInit() {
+    this.reservationService.getReservation(this.route.snapshot.params['id']).subscribe((data:Reservation)=>{
+      this.reservationToEdit=data;
+      console.log(this.reservationToEdit);
+    });
     this.copyService.getBookCopies().subscribe((data:BookCopy[])=>{
       this.bookCopies=data;
       console.log(this.bookCopies);
@@ -73,24 +76,15 @@ export class AddReservationComponent implements OnInit {
   }
 
   onSubmit(){
-    this.reservationToAdd.copyId=this.copyIdControl.value;
-    this.reservationToAdd.memberId=this.memberIdControl.value;
-    //console.log(this.reservationToAdd);
-    this.reservationService.addReservation(this.reservationToAdd).subscribe(
-      res=>{
-       this.router.navigateByUrl('/reservations');
-       this.snackbar.open("Book was reserved successfully", "Close", {
-         duration: 2000,
-       });
-       this.reservationToAdd={
-        copyId:'',
-        memberId:'' }
-      },
-      err=>{
-       this.snackbar.open("Unable to reserve book", "Close", {
-         duration: 2000,
-       });
-      }
-     );
+    this.reservationToEdit.copyId=this.copyIdControl.value;
+    this.reservationToEdit.memberId=this.memberIdControl.value;
+    this.reservationService.updateReservation(this.route.snapshot.params['id'], this.reservationToEdit).subscribe((res)=>{
+      console.log(res);
+    });
+    this.location.back();
+    this.snackbar.open("Reservation was edited successfully", "Close", {
+      duration: 2000,
+    });
   }
+
 }
