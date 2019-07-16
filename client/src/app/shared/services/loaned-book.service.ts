@@ -22,6 +22,10 @@ export class LoanedBookService {
     return this.http.get(environment.apiUrl + '/loanedBooks/' + id);
   }
 
+  getLoanedBooksForUser(id:string){
+    return this.http.get(environment.apiUrl + '/loanedBooks/findByUser/' + id);
+  }
+
   addLoanedBook(loanedBook){
     return this.http.post(environment.apiUrl + '/loanedBooks', loanedBook, this.httpOptions);
   }

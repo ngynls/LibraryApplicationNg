@@ -1,5 +1,5 @@
 <mat-card>Member Details</mat-card>
-<div class="mt-25" gdAreas=" content | footer" gdGap="35px" gdRows="auto" gdColumns="230px">
+<div class="mt-25" gdAreas=" content | footer" gdGap="35px" gdRows="auto" gdColumns="auto">
   <div gdArea="content">
     <button *ngIf="currentMember?._id" mat-raised-button color="primary" [routerLink]="['/editMember/', currentMember?._id]">Edit</button>
     <p *ngIf="currentMember?.firstName && currentMember?.lastName">Full Name: {{currentMember?.firstName}} {{currentMember?.lastName}}</p>
@@ -8,5 +8,36 @@
     <p *ngIf="currentMember?.postalCode">Postal Code: {{currentMember?.postalCode}}</p>
     <p *ngIf="currentMember?.telephone">Telephone: {{currentMember?.telephone}}</p>
     <p *ngIf="currentMember?.email">Email: {{currentMember?.email}}</p>
+  </div>
+  <div gdArea="footer">
+      <mat-card>Loans</mat-card>
+      <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Copy Id Column -->
+            <ng-container matColumnDef="copyId">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Copy Id </th>
+              <td mat-cell *matCellDef="let row"> {{row.copyId}} </td>
+            </ng-container>
+
+            <!-- Date issued Column -->
+            <ng-container matColumnDef="dateIssued">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Date issued </th>
+              <td mat-cell *matCellDef="let row"> {{row.dateIssued}} </td>
+            </ng-container>
+
+            <!-- Due Date Column -->
+            <ng-container matColumnDef="dueDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Due Date </th>
+                <td mat-cell *matCellDef="let row"> {{row.dueDate}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
   </div>
 </div>
