@@ -24,6 +24,17 @@ router.get('/:id', (req,res)=>{
     });
 });
 
+// GET: All loaned books of a particular user
+router.get('/findByUser/:id',(req,res)=>{
+    BookOnLoan.find({memberId:req.params.id})
+    .then(loanedBooks=>{
+        if(!loanedBooks)
+            res.status(404).send('Could not retrieve loaned books for this user');
+        else
+            res.status(200).json(loanedBooks);
+    });
+});
+
 // POST: A new loaned book
 router.post('/', (req,res)=>{
     const currentDate=new Date(Date.now());
