@@ -19,6 +19,10 @@ export class ReservationService {
     return this.http.get(environment.apiUrl + '/reservations');
   }
 
+  getReservationsForUser(id:string){
+    return this.http.get(environment.apiUrl + '/reservations/findByUser/' + id);
+  }
+
   getReservation(id:string){
     return this.http.get(environment.apiUrl + '/reservations/' + id);
   }

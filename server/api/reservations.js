@@ -24,6 +24,16 @@ router.get('/:id', (req,res)=>{
     });
 });
 
+router.get('/findByUser/:id', (req,res)=>{
+    Reservation.find({memberId: req.params.id})
+        .then(reservations=>{
+            if(!reservations)
+                res.status(404).send('Reservation was not found for user');
+            else
+                res.status(200).json(reservations);
+        });
+});
+
 // POST: A new reservation
 router.post('/', (req,res)=>{
     const currentDate=new Date(Date.now());
