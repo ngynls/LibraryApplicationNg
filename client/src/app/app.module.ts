@@ -37,6 +37,7 @@ import { EditLoanedBookComponent } from './pages/loaned-books/edit-loaned-book/e
 import { ReservationsComponent } from './pages/reservations/reservations.component';
 import { AddReservationComponent } from './pages/reservations/add-reservation/add-reservation.component';
 import { EditReservationComponent } from './pages/reservations/edit-reservation/edit-reservation.component';
+import { EditBookComponent } from './pages/books/edit-book/edit-book.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { EditReservationComponent } from './pages/reservations/edit-reservation/
     ReservationsComponent,
     AddReservationComponent,
     EditReservationComponent,
+    EditBookComponent,
   ],
   imports: [
     BrowserModule,

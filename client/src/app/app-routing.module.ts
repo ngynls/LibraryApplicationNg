@@ -25,6 +25,7 @@ import { EditLoanedBookComponent } from './pages/loaned-books/edit-loaned-book/e
 import { ReservationsComponent } from './pages/reservations/reservations.component';
 import { AddReservationComponent } from './pages/reservations/add-reservation/add-reservation.component';
 import { EditReservationComponent } from './pages/reservations/edit-reservation/edit-reservation.component';
+import { EditBookComponent } from './pages/books/edit-book/edit-book.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path: 'books', component: BooksComponent},
   {path: 'addBook', component: AddBookComponent},
   {path: 'viewBook/:id', component: ViewBookComponent},
+  {path: 'editBook/:id', component: EditBookComponent},
   {path: 'authors', component: AuthorsComponent},
   {path: 'addAuthor', component: AddAuthorComponent},
   {path: 'editAuthor/:id', component: EditAuthorComponent},

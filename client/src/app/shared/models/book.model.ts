@@ -3,8 +3,8 @@ export class Book {
   title: string;
   isbn: string;
   authors: string[];
-  publishedYear: string;
-  nbOfPages: string;
+  publishedYear: number;
+  nbOfPages: number;
   language: string;
   edition: string;
   summary: string;

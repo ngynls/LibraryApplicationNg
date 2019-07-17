@@ -1,0 +1,72 @@
+<div class="container">
+    <mat-card class="custom-cardwidth">
+        <mat-card-header>
+          <mat-card-title>Edit a book</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form #editBookForm="ngForm" fxLayout="column" (ngSubmit)="onSubmit()">
+                <mat-form-field class="mb-5">
+                  <input matInput type="text" class="form-control"
+                  required name="title" placeholder="Enter the book title" #title="ngModel" [(ngModel)]="bookToEdit.title">
+                </mat-form-field>
+                <mat-form-field class="mb-5">
+                  <input matInput class="form-control"
+                  required type="text" name="isbn" placeholder="Enter the book's ISBN" #isbn="ngModel" [(ngModel)]="bookToEdit.isbn">
+                </mat-form-field>
+                <mat-form-field class="mb-5">
+                  <input matInput class="form-control"
+                  required type="text" name="publishedYear" placeholder="Enter the published year" #publishedYear="ngModel" [(ngModel)]="bookToEdit.publishedYear">
+                </mat-form-field>
+                <mat-form-field class="mb-5">
+                  <input matInput class="form-control"
+                  required type="number" name="nbOfPages" placeholder="Enter the number of pages" #nbOfPages="ngModel" [(ngModel)]="bookToEdit.nbOfPages">
+                </mat-form-field>
+                <mat-form-field class="mb-5">
+                  <input matInput class="form-control"
+                  required type="text" name="language" placeholder="Enter the book's language" #language="ngModel" [(ngModel)]="bookToEdit.language">
+                </mat-form-field>
+                <mat-form-field class="mb-5">
+                  <input matInput class="form-control"
+                  required type="text" name="edition" placeholder="Enter the book's edition" #edition="ngModel" [(ngModel)]="bookToEdit.edition">
+                </mat-form-field>
+                <mat-form-field class="mb-5">
+                  <input matInput class="form-control"
+                  required type="text" name="summary" placeholder="Enter the book's summary" #summary="ngModel" [(ngModel)]="bookToEdit.summary">
+                </mat-form-field>
+                <mat-form-field class="mb-5">
+                  <input matInput class="form-control"
+                  required type="text" name="cover" placeholder="Enter the url of the book's cover" #cover="ngModel" [(ngModel)]="bookToEdit.cover">
+                </mat-form-field>
+                <mat-form-field class="mb-5">
+                  <input matInput class="form-control"
+                  required type="text" name="locationInLibrary" placeholder="Enter its location in library" #locationInLibrary="ngModel" [(ngModel)]="bookToEdit.locationInLibrary">
+                </mat-form-field>
+                <!--Publisher autocomplete-->
+                <mat-form-field class="example-full-width" *ngIf="bookToEdit?.publisher">
+                    <input matInput placeholder="Old Publisher Id (disabled)" disabled [value]="bookToEdit?.publisher._id">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                  <input type="text" placeholder="Publisher" aria-label="Publisher" matInput [formControl]="publisherControl" [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayPublisherId">
+                    <mat-option *ngFor="let publishers of filteredPublishers | async" [value]="publishers">
+                      {{publishers.publisherName}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <!--Genre autocomplete-->
+                <mat-form-field class="example-full-width" *ngIf="bookToEdit?.genre">
+                    <input matInput placeholder="Old Genre Id (disabled)" disabled [value]="bookToEdit?.genre._id">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                  <input type="text" placeholder="Genre" aria-label="Genre" matInput [formControl]="genreControl" [matAutocomplete]="auto2">
+                  <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayGenreId">
+                    <mat-option *ngFor="let genres of filteredGenres | async" [value]="genres">
+                      {{genres.genreName}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <button mat-raised-button color="primary" type="submit" [disabled]="!editBookForm.form.valid">Edit</button>
+                </form>
+        </mat-card-content>
+      </mat-card>
+  </div>
