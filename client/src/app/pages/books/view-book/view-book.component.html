@@ -1,8 +1,12 @@
 <mat-card>Book Details</mat-card>
 <div class="mt-25" gdAreas="side content | footer footer" gdGap="35px" gdRows="auto" gdColumns="230px">
-  <div *ngIf="currentBook?.cover" gdArea="side"><img class="imgView" src="{{currentBook?.cover}}"></div>
+  <div *ngIf="currentBook?.cover" gdArea="side">
+    <img class="imgView" src="{{currentBook?.cover}}">
+    <button class="editBookBtn" mat-raised-button color="primary"
+      [routerLink]="['/editBook/', currentBook?._id]">Edit Book</button>
+  </div>
   <div gdArea="content">
-    <p *ngIf="currentBook?.title">{{currentBook?.title}}</p>
+    <p class="titleStyle" *ngIf="currentBook?.title">{{currentBook?.title}}</p>
     <p *ngIf="currentBook?.authors"><b>Authors: </b>
       <span *ngFor="let author of currentBook?.authors">
         <span>{{author.firstName}} {{author.lastName}}</span>
