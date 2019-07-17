@@ -13,6 +13,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [],
@@ -30,7 +31,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSortModule,
     MatAutocompleteModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatIconModule
   ],
   exports:[
     MatInputModule,
@@ -45,7 +47,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSortModule,
     MatAutocompleteModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatIconModule
   ]
 })
 export class AppMaterialModule { }
