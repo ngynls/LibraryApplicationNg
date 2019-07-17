@@ -19,7 +19,10 @@ import { ReservationService } from 'src/app/shared/services/reservation.service'
 })
 export class EditReservationComponent implements OnInit {
 
-  reservationToEdit:Reservation;
+  reservationToEdit={
+    copyId: '',
+    memberId: ''
+  };
   bookCopies:BookCopy[];
   filteredCopies:Observable<any[]>;
   members: LibraryMember[];

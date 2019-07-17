@@ -19,7 +19,10 @@ import { BookOnLoan } from 'src/app/shared/models/book-on-loan.model';
 })
 export class EditLoanedBookComponent implements OnInit {
 
-  copyToEdit:BookOnLoan;
+  copyToEdit={
+    copyId: '',
+    memberId: ''
+  };
   bookCopies:BookCopy[];
   filteredCopies:Observable<any[]>;
   members: LibraryMember[];
