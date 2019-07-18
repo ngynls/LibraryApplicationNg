@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppMaterialModule } from './app-material/app-material.module';
+import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -80,7 +81,8 @@ import { NavbarComponent } from './shared/ux-components/navbar/navbar.component'
     FlexLayoutModule,
     BrowserAnimationsModule,
     AppMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [AuthorService],
   bootstrap: [AppComponent]
