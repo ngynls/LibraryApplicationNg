@@ -52,7 +52,7 @@ export class ViewBookComponent implements OnInit {
     if(window.confirm(`Are you sure you want to delete this copy? [${copy.copyName}]`)){
       this.copyService.deleteBookCopy(id).subscribe(
         res=>{
-          this.snackbar.open("Genre was deleted successfully", "Close", {
+          this.snackbar.open("Copy was deleted successfully", "Close", {
             duration: 2000,
           });
         }

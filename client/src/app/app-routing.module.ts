@@ -15,6 +15,7 @@ import { AddBookComponent } from './pages/books/add-book/add-book.component';
 import { MembersComponent } from './pages/members/members.component';
 import { AddMemberComponent } from './pages/members/add-member/add-member.component';
 import { ViewBookComponent } from './pages/books/view-book/view-book.component';
+import { BookCopiesComponent } from './pages/book-copies/book-copies.component';
 import { AddBookCopiesComponent } from './pages/book-copies/add-book-copies/add-book-copies.component';
 import { EditBookCopyComponent } from './pages/book-copies/edit-book-copy/edit-book-copy.component';
 import { ViewMemberComponent } from './pages/members/view-member/view-member.component';
@@ -26,7 +27,6 @@ import { ReservationsComponent } from './pages/reservations/reservations.compone
 import { AddReservationComponent } from './pages/reservations/add-reservation/add-reservation.component';
 import { EditReservationComponent } from './pages/reservations/edit-reservation/edit-reservation.component';
 import { EditBookComponent } from './pages/books/edit-book/edit-book.component';
-
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -48,6 +48,7 @@ const routes: Routes = [
   {path: 'addMember', component: AddMemberComponent},
   {path: 'editMember/:id', component: EditMemberComponent},
   {path: 'viewMember/:id', component: ViewMemberComponent},
+  {path: 'bookCopies', component: BookCopiesComponent},
   {path: 'addBookCopy', component: AddBookCopiesComponent},
   {path: 'editCopy/:id', component: EditBookCopyComponent},
   {path: 'loanedBooks', component: LoanedBooksComponent},
