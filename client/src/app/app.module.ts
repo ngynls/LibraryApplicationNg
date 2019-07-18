@@ -38,6 +38,7 @@ import { ReservationsComponent } from './pages/reservations/reservations.compone
 import { AddReservationComponent } from './pages/reservations/add-reservation/add-reservation.component';
 import { EditReservationComponent } from './pages/reservations/edit-reservation/edit-reservation.component';
 import { EditBookComponent } from './pages/books/edit-book/edit-book.component';
+import { NavbarComponent } from './shared/ux-components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { EditBookComponent } from './pages/books/edit-book/edit-book.component';
     AddReservationComponent,
     EditReservationComponent,
     EditBookComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
