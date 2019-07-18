@@ -1,20 +1,20 @@
 <mat-toolbar class="nav-toolbar" color="primary">
   <mat-toolbar-row>
       <button type="button" aria-label="Toggle sidenav" mat-button (click)="drawer.toggle()" color="primary">
-          <mat-icon>menu</mat-icon>
+          <mat-icon class="toggleBtn">menu</mat-icon>
       </button>
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-sidenav-container class="example-container">
     <mat-sidenav #drawer mode="side" opened role="navigation">
       <mat-nav-list>
-        <a mat-list-item routerLink='/members'>Members</a>
-        <a mat-list-item routerLink='/books'>Books</a>
-        <a mat-list-item routerLink='/authors'>Authors</a>
-        <a mat-list-item routerLink='/publishers'>Publishers</a>
-        <a mat-list-item routerLink='/genres'>Genres</a>
-        <a mat-list-item routerLink='/loanedBooks'>Loaned Books</a>
-        <a mat-list-item routerLink='/reservations'>Reservations</a>
+        <a mat-list-item routerLink='/members'><mat-icon class="mr-10">person</mat-icon>Members</a>
+        <a mat-list-item routerLink='/books'><mat-icon class="mr-10">library_books</mat-icon>Books</a>
+        <a mat-list-item routerLink='/authors'><mat-icon class="mr-10">person</mat-icon>Authors</a>
+        <a mat-list-item routerLink='/publishers'><mat-icon class="mr-10">domain</mat-icon>Publishers</a>
+        <a mat-list-item routerLink='/genres'><mat-icon class="mr-10">category</mat-icon>Genres</a>
+        <a mat-list-item routerLink='/loanedBooks'><mat-icon class="mr-10">library_books</mat-icon>Loaned Books</a>
+        <a mat-list-item routerLink='/reservations'><mat-icon class="mr-10">bookmarks</mat-icon>Reservations</a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
