@@ -40,6 +40,7 @@ import { AddReservationComponent } from './pages/reservations/add-reservation/ad
 import { EditReservationComponent } from './pages/reservations/edit-reservation/edit-reservation.component';
 import { EditBookComponent } from './pages/books/edit-book/edit-book.component';
 import { NavbarComponent } from './shared/ux-components/navbar/navbar.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { NavbarComponent } from './shared/ux-components/navbar/navbar.component'
     EditReservationComponent,
     EditBookComponent,
     NavbarComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

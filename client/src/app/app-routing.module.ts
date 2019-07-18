@@ -27,10 +27,12 @@ import { ReservationsComponent } from './pages/reservations/reservations.compone
 import { AddReservationComponent } from './pages/reservations/add-reservation/add-reservation.component';
 import { EditReservationComponent } from './pages/reservations/edit-reservation/edit-reservation.component';
 import { EditBookComponent } from './pages/books/edit-book/edit-book.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
+  {path: 'dashboard', component: DashboardComponent},
   {path: 'books', component: BooksComponent},
   {path: 'addBook', component: AddBookComponent},
   {path: 'viewBook/:id', component: ViewBookComponent},
