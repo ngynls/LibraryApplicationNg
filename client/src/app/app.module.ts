@@ -41,6 +41,7 @@ import { EditReservationComponent } from './pages/reservations/edit-reservation/
 import { EditBookComponent } from './pages/books/edit-book/edit-book.component';
 import { NavbarComponent } from './shared/ux-components/navbar/navbar.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AuthGuard } from './shared/authHelpers/auth.guard';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     ReactiveFormsModule,
     ChartsModule
   ],
-  providers: [AuthorService],
+  providers: [AuthorService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
