@@ -1,3 +1,12 @@
 <div class="content">
   <mat-card>Dashboard</mat-card>
+  <div class="chartContainer" style="display: block">
+    <mat-card>
+      <canvas baseChart
+      [data]="pieChartData"
+      [labels]="pieChartLabels"
+      [chartType]="pieChartType"
+      [colors]="pieChartColors"></canvas>
+    </mat-card>
+  </div>
 </div>
