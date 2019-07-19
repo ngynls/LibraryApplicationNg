@@ -15,6 +15,10 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  isAuthenticated(){
+    return this.auth.isAuthenticated();
+  }
+
   logout(){
     this.auth.deleteToken();
     this.router.navigateByUrl('/login');
