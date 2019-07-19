@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -14,13 +16,27 @@ export class LoginComponent implements OnInit {
     password: ''
   }
 
-  constructor(private router:Router) { }
+  constructor(private auth: AuthService, private router:Router, private snackbar:MatSnackBar) { }
 
   ngOnInit() {
   }
 
   onSubmit(form:NgForm){
-    console.log(form.value);
+    this.auth.login(form.value).subscribe(
+      res =>{
+        this.auth.setToken(res['token']);
+        this.router.navigateByUrl('/dashboard');
+        this.snackbar.open("You are now logged in!", "Close", {
+          duration: 2000,
+        });
+      },
+      err=> {
+        console.log(err.error.message);
+        this.snackbar.open(err.error.message, "Close", {
+          duration: 2000,
+        });
+      }
+    );
   }
 
 }
