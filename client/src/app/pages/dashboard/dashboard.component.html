@@ -1,5 +1,34 @@
 <div class="content">
   <mat-card>Dashboard</mat-card>
+  <div gdAreas="memberCount bookCount copiesCount" gdGap="10px" gdRows="auto">
+      <div class="count-card" gdArea="memberCount">
+          <mat-card *ngIf="nbOfMembers" fxLayout="row" fxLayoutGap="28px">
+              <i class="fas fa-users countIcon"></i>
+              <div class="mt-10" fxLayout="column" fxLayoutGap="10px">
+                  <span class="totalCount">{{nbOfMembers}}</span>
+                  <span class="comments">Members</span>
+              </div>
+          </mat-card>
+      </div>
+      <div class="count-card" gdArea="bookCount">
+          <mat-card *ngIf="nbOfBooks" fxLayout="row" fxLayoutGap="28px">
+              <i class="fas fa-book countIcon"></i>
+              <div class="mt-10" fxLayout="column" fxLayoutGap="10px">
+                  <span class="totalCount">{{nbOfBooks}}</span>
+                  <span class="comments">Books</span>
+              </div>
+          </mat-card>
+      </div>
+      <div class="count-card" gdArea="copiesCount">
+          <mat-card *ngIf="nbOfCopies" fxLayout="row" fxLayoutGap="28px">
+            <i class="fas fa-book-reader countIcon"></i>
+            <div class="mt-10" fxLayout="column" fxLayoutGap="10px">
+                <span class="totalCount">{{nbOfCopies}}</span>
+                <span class="comments">Copies</span>
+            </div>
+          </mat-card>
+      </div>
+  </div>
   <div class="chartContainer" style="display: block">
     <mat-card>
       <canvas baseChart
