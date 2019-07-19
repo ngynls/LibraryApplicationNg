@@ -17,6 +17,7 @@
         <a mat-list-item routerLink='/genres'><mat-icon class="mr-10">category</mat-icon>Genres</a>
         <a mat-list-item routerLink='/loanedBooks'><mat-icon class="mr-10">library_books</mat-icon>Loaned Books</a>
         <a mat-list-item routerLink='/reservations'><mat-icon class="mr-10">bookmarks</mat-icon>Reservations</a>
+        <a mat-list-item (click)="logout()"><i class="fas fa-sign-out-alt mr-10 logoutIcon"></i>Logout</a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
