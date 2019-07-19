@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(private auth: AuthService, private router:Router, private snackbar:MatSnackBar) { }
 
   ngOnInit() {
+    if(this.auth.isAuthenticated)
+      this.router.navigateByUrl('/dashboard');
   }
 
   onSubmit(form:NgForm){
