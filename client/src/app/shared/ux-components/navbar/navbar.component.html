@@ -6,8 +6,8 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-sidenav-container class="example-container" fullscreen>
-    <mat-sidenav #drawer mode="side" opened role="navigation" *ngIf="isAuthenticated()">
-      <mat-nav-list>
+    <mat-sidenav #drawer mode="side" opened role="navigation">
+      <mat-nav-list *ngIf="isAuthenticated()">
         <a mat-list-item routerLink='/dashboard'><mat-icon class="mr-10">dashboard</mat-icon>Dashboard</a>
         <a mat-list-item routerLink='/members'><mat-icon class="mr-10">person</mat-icon>Members</a>
         <a mat-list-item routerLink='/books'><mat-icon class="mr-10">library_books</mat-icon>Books</a>
