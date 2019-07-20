@@ -2,13 +2,15 @@
     <mat-card>Member Details</mat-card>
     <div class="mt-25" gdAreas=" content | footer" gdGap="35px" gdRows="auto" gdColumns="auto">
       <div gdArea="content">
-        <button *ngIf="currentMember?._id" mat-raised-button color="primary" [routerLink]="['/editMember/', currentMember?._id]">Edit</button>
-        <p *ngIf="currentMember?.firstName && currentMember?.lastName">Full Name: {{currentMember?.firstName}} {{currentMember?.lastName}}</p>
-        <!--<p *ngIf="currentMember?.dob">Date of birth: {{currentMember?.dob}}</p>-->
-        <p *ngIf="currentMember?.address">Address: {{currentMember?.address}}</p>
-        <p *ngIf="currentMember?.postalCode">Postal Code: {{currentMember?.postalCode}}</p>
-        <p *ngIf="currentMember?.telephone">Telephone: {{currentMember?.telephone}}</p>
-        <p *ngIf="currentMember?.email">Email: {{currentMember?.email}}</p>
+        <mat-card>
+            <p *ngIf="currentMember?.firstName && currentMember?.lastName"><b>Full Name: </b>{{currentMember?.firstName}} {{currentMember?.lastName}}</p>
+            <!--<p *ngIf="currentMember?.dob">Date of birth: {{currentMember?.dob}}</p>-->
+            <p *ngIf="currentMember?.address"><b>Address: </b>{{currentMember?.address}}</p>
+            <p *ngIf="currentMember?.postalCode"><b>Postal Code: </b>{{currentMember?.postalCode}}</p>
+            <p *ngIf="currentMember?.telephone"><b>Telephone: </b>{{currentMember?.telephone}}</p>
+            <p *ngIf="currentMember?.email"><b>Email: </b>{{currentMember?.email}}</p>
+            <button *ngIf="currentMember?._id" mat-raised-button color="primary" [routerLink]="['/editMember/', currentMember?._id]">Edit member</button>
+        </mat-card>
       </div>
       <div gdArea="footer">
           <mat-card>Loans</mat-card>
