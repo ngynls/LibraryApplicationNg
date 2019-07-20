@@ -32,7 +32,7 @@ userSchema.methods.verifyPassword= function(password){
 };
 
 userSchema.methods.generateJwt= function(){
-    return jwt.sign({_id: this._id}, jwt_secret, {expiresIn: "2m"});
+    return jwt.sign({_id: this._id}, jwt_secret, {expiresIn: "1h"});
 }
 
 module.exports=User=mongoose.model('User', userSchema);
