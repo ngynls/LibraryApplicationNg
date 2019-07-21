@@ -15,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LoanedBooksComponent implements OnInit {
 
   loanedBooks:BookOnLoan[];
-  displayedColumns: string[] = ['copyId', 'memberId', 'actions'];
+  displayedColumns: string[] = ['copyId', 'memberId', 'edit', 'delete'];
   dataSource: MatTableDataSource<BookOnLoan>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

@@ -19,7 +19,7 @@ export class ViewBookComponent implements OnInit {
   currentBook:Book;
   copies: BookCopy[];
   dataSource: MatTableDataSource<BookCopy>;
-  displayedColumns: string[] = ['copyName', 'status', 'actions'];
+  displayedColumns: string[] = ['copyName', 'status', 'edit', 'delete'];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;

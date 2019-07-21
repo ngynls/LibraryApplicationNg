@@ -15,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AuthorsComponent implements OnInit {
 
   authors: Author[];
-  displayedColumns: string[] = ['firstName', 'lastName', 'actions'];
+  displayedColumns: string[] = ['firstName', 'lastName', 'edit', 'delete'];
   dataSource: MatTableDataSource<Author>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

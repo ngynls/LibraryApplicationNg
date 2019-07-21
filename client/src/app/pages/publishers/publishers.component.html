@@ -22,15 +22,22 @@
           <td mat-cell *matCellDef="let row"> {{row.location}} </td>
         </ng-container>
 
-        <!-- Actions Column -->
-        <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+        <!-- Edit Column -->
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit </th>
             <td mat-cell *matCellDef="let element; let i = index;">
                 <button mat-raised-button color="primary" class="push-right"
-                  [routerLink]="['/editPublisher/', element._id]">Edit</button>
-                <button mat-raised-button color="warn" (click)="deletePublisher(element._id, element)">Delete</button>
+                  [routerLink]="['/editPublisher/', element._id]"><i class="fas fa-edit"></i></button>
             </td>
         </ng-container>
+
+        <!-- Delete Column -->
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Delete </th>
+          <td mat-cell *matCellDef="let element; let i = index;">
+              <button mat-raised-button color="warn" (click)="deletePublisher(element._id, element)"><i class="fas fa-trash"></i></button>
+          </td>
+      </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;">

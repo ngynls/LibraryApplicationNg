@@ -16,14 +16,21 @@
           <td mat-cell *matCellDef="let row"> {{row.genreName}} </td>
         </ng-container>
 
-        <!-- Actions Column -->
-        <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+        <!-- Edit Column -->
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit </th>
             <td mat-cell *matCellDef="let element; let i = index;">
                 <button mat-raised-button color="primary" class="push-right"
-                  [routerLink]="['/editGenre/', element._id]">Edit</button>
-                <button mat-raised-button color="warn" (click)="deleteGenre(element._id, element)">Delete</button>
+                  [routerLink]="['/editGenre/', element._id]"><i class="fas fa-edit"></i></button>
             </td>
+        </ng-container>
+
+        <!-- Delete Column -->
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Delete </th>
+          <td mat-cell *matCellDef="let element; let i = index;">
+              <button mat-raised-button color="warn" (click)="deleteGenre(element._id, element)"><i class="fas fa-trash"></i></button>
+          </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

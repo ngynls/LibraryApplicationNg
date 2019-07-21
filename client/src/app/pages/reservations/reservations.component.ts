@@ -15,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ReservationsComponent implements OnInit {
 
   reservations:Reservation[];
-  displayedColumns: string[] = ['memberId', 'copyId', 'dateRequested', 'actions'];
+  displayedColumns: string[] = ['memberId', 'copyId', 'dateRequested', 'edit', 'delete'];
   dataSource: MatTableDataSource<Reservation>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

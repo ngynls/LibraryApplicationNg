@@ -15,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class PublishersComponent implements OnInit {
 
   publishers:Publisher[];
-  displayedColumns: string[] = ['publisherName', 'location', 'actions'];
+  displayedColumns: string[] = ['publisherName', 'location', 'edit', 'delete'];
   dataSource: MatTableDataSource<Publisher>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
