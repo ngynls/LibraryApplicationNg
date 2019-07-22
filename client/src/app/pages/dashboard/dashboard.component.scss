@@ -14,3 +14,73 @@
 .totalCount{
   font-size:25px;
 }
+
+@media (min-width: 425px ) and (max-width: 517px) {
+  mat-card{
+    padding:5px;
+    padding-top:16px;
+    padding-bottom:16px;
+  }
+
+  .countIcon{
+    font-size:22px;
+    line-height:48px;
+  }
+
+}
+
+@media (min-width: 375px ) and (max-width: 424px) {
+  mat-card{
+    padding:2px;
+    padding-top:16px;
+    padding-bottom:16px;
+  }
+
+  .countIcon{
+    font-size:20px;
+    line-height:66px;
+    margin-right:18px !important;
+  }
+
+  .totalCount{
+    font-size: 20px;
+  }
+
+  .comments{
+    font-size: 14px;
+  }
+
+}
+
+@media (min-width: 320px ) and (max-width: 374px) {
+
+  mat-card{
+    padding:2px;
+    padding-top:16px;
+    padding-bottom:16px;
+  }
+
+  .ng-star-inserted{
+    padding-top:10px;
+    padding-bottom:10px;
+  }
+
+  .card-header{
+    font-size:12px;
+  }
+
+  .countIcon{
+    font-size:20px;
+    line-height:66px;
+    margin-right:18px !important;
+  }
+
+  .totalCount{
+    font-size: 15px;
+  }
+
+  .comments{
+    font-size: 10px;
+  }
+
+}
