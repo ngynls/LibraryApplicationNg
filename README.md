@@ -27,7 +27,7 @@ This repository contains my solution for a library management information system
 ## Usage
 Clone the project, then use the `npm install` command in the parent folder & in the client folder to install all the necessary dependencies to run this app.
 
-Create a config folder with a file named keys.js containing your mongodb/mlab url & JWT secret.
+In the config folder, create a file named keys.js containing your mongodb/mlab url & JWT secret.
 
 ```
 module.exports={
