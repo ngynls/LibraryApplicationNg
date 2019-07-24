@@ -53,8 +53,8 @@ router.post('/', (req,res)=>{
 //PUT: updating a book
 router.put('/:id', (req,res)=>{
     Book.findByIdAndUpdate(req.params.id, req.body)
+    .then(book=> res.json(book))
     .catch(err=> res.status(404).json({error: err.message}));
-    res.send('Book was successfully updated!');
 });
 
 //DELETE: deleting a book

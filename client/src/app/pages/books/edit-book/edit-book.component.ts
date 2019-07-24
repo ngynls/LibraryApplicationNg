@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormControl } from '@angular/forms';
 import { BookService } from '../../../shared/services/book.service';
 import { Router, ActivatedRoute  } from '@angular/router';
@@ -39,7 +40,7 @@ export class EditBookComponent implements OnInit {
   filteredGenres: Observable<any[]>;
 
   constructor(private bookService:BookService, private genreService:GenreService, private publisherService:PublisherService,
-    private router:Router, private route:ActivatedRoute, private snackbar: MatSnackBar) { }
+    private router:Router, private route:ActivatedRoute, private location:Location, private snackbar: MatSnackBar) { }
 
   ngOnInit() {
     this.bookService.getBook(this.route.snapshot.params['id']).subscribe((data:Book)=>{
@@ -85,7 +86,23 @@ export class EditBookComponent implements OnInit {
   }
 
   onSubmit(){
+    this.bookToEdit.publisher=this.publisherControl.value;
+    this.bookToEdit.genre=this.genreControl.value;
     console.log(this.bookToEdit);
+    this.bookService.editBook(this.route.snapshot.params['id'], this.bookToEdit).subscribe(
+      res=>{
+       this.location.back();
+       this.snackbar.open("Book was edited successfully", "Close", {
+         duration: 2000,
+       });
+      },
+      err=>{
+       this.location.back();
+       this.snackbar.open("Unable to edit book", "Close", {
+         duration: 2000,
+       });
+      }
+     );
   }
 
 
