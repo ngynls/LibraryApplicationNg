@@ -17,7 +17,7 @@ This repository contains my solution for a library management information system
 - [x] Create/Read/Update/Delete operations for all the models in the domain (Authors, Books, Book Copies, Loaned Books, Genre, Members, Publishers, Reservations)
 - [x] Deployed the app to Heroku (url located down below)
 - [x] Containerized for development with Docker. You can try it out in the docker branch
-- [ ] Integration with Swagger UI for API documentation
+- [x] Integration with Swagger UI for API documentation
 
 ## Screenshots
 ![Screenshot #1](https://i.imgur.com/WKcHZfr.png)
