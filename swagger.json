@@ -1,0 +1,1516 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "LibraryApplicationNg API",
+      "description": "A basic API for the server side of a library management system"
+    },
+    "host": "localhost:5000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Members",
+        "description": "API for members in the system"
+      },
+      {
+        "name": "Books",
+        "description": "API for books in the system"
+      },
+      {
+        "name": "Book Copies",
+        "description": "API for book copies in the system"
+      },
+      {
+        "name": "Authors",
+        "description": "API for authors in the system"
+      },
+      {
+        "name": "Publishers",
+        "description": "API for publishers in the system"
+      },
+      {
+        "name": "Genres",
+        "description": "API for genres in the system"
+      },
+      {
+        "name": "Loaned Books",
+        "description": "API for loaned books in the system"
+      },
+      {
+        "name": "Reservations",
+        "description": "API for reservations in the system"
+      }
+    ],
+    "schemes": [
+      "http",
+      "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/members":{
+          "get":{
+              "tags":[
+                "Members"
+              ],
+              "summary":"Retrieve all the members from the database",
+              "description": "",
+              "produces":[
+                "application/json"
+              ],
+              "responses":{
+                "200":{
+                  "description": "Successfully retrieved all members",
+                  "schema":{
+                    "type": "array",
+                    "items":{
+                      "$ref":"#/definitions/Member"
+                    }
+                  }
+                }
+              }
+          },
+          "post":{
+            "tags":[
+              "Members"
+            ],
+            "summary":"Create a new member",
+            "parameters": [
+                {
+                  "name": "member",
+                  "in": "body",
+                  "description": "Member that we want to create",
+                  "schema": {
+                    "$ref": "#/definitions/Member"
+                  }
+                }
+              ],
+              "produces": [
+                "application/json"
+              ],
+              "responses":{
+                "200":{
+                  "description": "Member has been added!"
+                }
+              }
+          }
+      },
+      "/members/{id}":{
+          "get":{
+            "tags":[
+              "Members"
+            ],
+            "summary": "Retrieve a particular member by id",
+            "description": "",
+            "produces":[
+              "application/json"
+            ],
+            "parameters":[
+              {
+                "name": "id",
+                "in": "path",
+                "description": "The _id value of the member object in mongodb",
+                "required": true,
+                "type": "string"
+              }
+            ],
+            "responses":{
+              "200":{
+                "description": "Successfully fetched member by id",
+                "schema":{
+                  "$ref": "#/definitions/Member"
+                }
+              },
+              "404":{
+                "description": "Id doesn't exist"
+              }
+            }
+          },
+          "put":{
+            "tags":[
+              "Members"
+            ],
+            "summary": "Edit an existing member",
+            "description": "",
+            "produces":[
+              "application/json"
+            ],
+            "parameters":[
+              {
+                "name": "id",
+                "in": "path",
+                "description": "The _id value of the member object in mongodb",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "in": "body",
+                "name": "body",
+                "description": "Updated member object",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/Member"
+                }
+              }
+            ],
+            "responses":{
+              "200":{
+                "description": "Successfully edited member",
+                "schema":{
+                  "$ref":"#/definitions/Member"
+                }
+              }
+            }
+          },
+          "delete":{
+            "tags":[
+              "Members"
+            ],
+            "summary": "Delete a particular member",
+            "description": "",
+            "produces": [
+              "application/json"
+            ],
+            "parameters":[
+              {
+                "name": "id",
+                "in": "path",
+                "description": "The _id value of the member object in mongodb",
+                "required": true,
+                "type": "string"
+              }
+            ],
+            "responses":{
+              "200":{
+                "description": "Successfully deleted member by id",
+                "schema":{
+                  "$ref":"#/definitions/Member"
+                }
+              }
+            }
+          }
+      },
+      "/books":{
+        "get":{
+          "tags":[
+            "Books"
+          ],
+          "summary": "Retrieve all books",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "responses":{
+            "200":{
+              "description": "Succesfully retrieved all books"
+            }
+          }
+        },
+        "post":{
+          "tags":[
+            "Books"
+          ],
+          "summary":"Create a new book",
+          "description": "",
+          "consumes":[
+            "application/json"
+          ],
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Book object to be added",
+              "required": true,
+              "schema":{
+                "$ref": "#/definitions/Book"
+              }
+            }
+          ],
+          "responses":{
+            "200": {
+              "description": "Successfully added book!"
+            }
+          }
+        }
+      },
+      "/books/{id}":{
+        "get":{
+          "tags":[
+            "Books"
+          ],
+          "summary": "Retrieve a particular book by id",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the book object in mongodb",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully retrieved book"
+            }
+          }
+        },
+        "put":{
+          "tags":[
+            "Books"
+          ],
+          "summary": "Edit a particular book object",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the book object in mongodb",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Updated book object",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Book"
+              }
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully updated book"
+            }
+          }
+        },
+        "delete":{
+          "tags":[
+            "Books"
+          ],
+          "summary": "Delete a particular book by id",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the book object in mongodb",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully deleted book"
+            }
+          }
+        }
+      },
+      "/bookCopies":{
+        "get":{
+          "tags":[
+            "Book Copies"
+          ],
+          "summary": "Retrieve all book copies",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully retrieved all books"
+            }
+          }
+        },
+        "post":{
+          "tags":[
+            "Book Copies"
+          ],
+          "summary": "Create a new book copy",
+          "description": "",
+          "consumes":[
+            "application/json"
+          ],
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Book copy object to be added",
+              "required": true,
+              "schema":{
+                "$ref": "#/definitions/Book Copy"
+              }
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully added book copy"
+            }
+          }
+        }
+      },
+      "/bookCopies/{id}":{
+        "get":{
+          "tags":[
+            "Book Copies"
+          ],
+          "summary": "Retrieve a particular book copy",
+          "description": "",
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the book copy object in mongodb",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "produces":[
+            "application/json"
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully fetched book copy"
+            }
+          }
+        },
+        "put":{
+          "tags":[
+            "Book Copies"
+          ],
+          "summary": "Edit a particular book copy object",
+          "description": "",
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the book object in mongodb",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Book Copy object to be edited",
+              "required": true,
+              "schema":{
+                "$ref": "#/definitions/Book Copy"
+              }
+            }
+          ],
+          "produces":[
+            "application/json"
+          ],
+          "responses":{
+            "200": {
+              "description": "Successfully edited book copy"
+            }
+          }
+        },
+        "delete":{
+          "tags":[
+            "Book Copies"
+          ],
+          "summary": "Delete a particular book copy",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the book copy object in mongodb",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"Successfully deleted book copy"
+            }
+          }
+        }
+      },
+      "/bookCopies/findByBook/{id}":{
+        "get":{
+          "tags":[
+            "Book Copies"
+          ],
+          "summary": "Retrieves all copies for a particular book",
+          "description": "",
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the book object in mongodb",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "produces":[
+            "application/json"
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully retrieved all book copies for a particular book"
+            }
+          }
+        }
+      },
+      "/authors":{
+        "get":{
+          "tags":[
+            "Authors"
+          ],
+          "summary": "Retrieve all authors",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully fetched all authors"
+            }
+          }
+        },
+        "post":{
+          "tags":[
+            "Authors"
+          ],
+          "summary": "Add a new author",
+          "description": "",
+          "consumes":[
+            "application/json"
+          ],
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Author object to be added",
+              "required": true,
+              "schema":{
+                "$ref": "#/definitions/Author"
+              }
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully added new author"
+            }
+          }
+        }
+      },
+      "/authors/{id}":{
+        "get":{
+          "tags":[
+            "Authors"
+          ],
+          "summary": "Retrieve a particular author",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the author object in mongodb",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"Successfully retrieved author"
+            }
+          }
+        },
+        "put":{
+          "tags":[
+            "Authors"
+          ],
+          "summary": "Edit an existing author",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the author object in mongodb",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Updated author object",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Author"
+              }
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"Successfully edited author"
+            }
+          }
+        },
+        "delete":{
+          "tags":[
+            "Authors"
+          ],
+          "summary": "Delete author from database",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the author object in mongodb",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"Successfully deleted author"
+            }
+          }
+        }
+      },
+      "/publishers":{
+        "get":{
+          "tags":[
+            "Publishers"
+          ],
+          "summary": "Retrieve all publishers",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully fetched all publishers"
+            }
+          }
+        },
+        "post":{
+          "tags":[
+            "Publishers"
+          ],
+          "summary": "Add a new publisher",
+          "description": "",
+          "consumes":[
+            "application/json"
+          ],
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Publisher object to be added",
+              "required": true,
+              "schema":{
+                "$ref": "#/definitions/Publisher"
+              }
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully added new publisher"
+            }
+          }
+        }
+      },
+      "/publishers/{id}":{
+        "get":{
+          "tags":[
+            "Publishers"
+          ],
+          "summary": "Retrieve a particular publisher",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the publisher object in mongodb",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"Successfully retrieved publisher"
+            }
+          }
+        },
+        "put":{
+          "tags":[
+            "Publishers"
+          ],
+          "summary": "Edit an existing publisher",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the publisher object in mongodb",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Updated publisher object",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Publisher"
+              }
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"Successfully edited publisher"
+            }
+          }
+        },
+        "delete":{
+          "tags":[
+            "Publishers"
+          ],
+          "summary": "Delete publisher from database",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the publisher object in mongodb",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"Successfully deleted publisher"
+            }
+          }
+        }
+      },
+      "/genres":{
+        "get":{
+          "tags":[
+            "Genres"
+          ],
+          "summary": "Get all genres",
+          "description": "Returns all genres",
+          "produces":[
+            "application/json"
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully retrieved all genres",
+              "schema":{
+                "type": "object",
+                "items":{
+                  "$ref":"#/definitions/Genre"
+                }
+              }
+            }
+          }
+        },
+        "post":{
+          "tags":[
+            "Genres"
+          ],
+          "summary": "Post a genre",
+          "description": "Adds a new genre",
+          "consumes":[
+            "application/json"
+          ],
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Genre object to be added",
+              "required": true,
+              "schema":{
+                "$ref": "#/definitions/Genre"
+              }
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Added genre"
+            }
+          }
+        }
+      },
+      "/genres/{id}":{
+        "get":{
+          "tags":[
+            "Genres"
+          ],
+          "summary": "Gets a particular genre object",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the genre object in mongodb",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully fetched genre from id",
+              "schema":{
+                "$ref": "#/definitions/Genre"
+              }
+            },
+            "400":{
+              "description": "Invalid id supplied"
+            },
+            "404":{
+              "description": "Id doesn't exist"
+            }
+          }          
+        },
+        "put":{
+          "tags":[
+            "Genres"
+          ],
+          "summary": "Edit a particular genre object",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the genre object in mongodb",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Updated genre object",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Genre"
+              }
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully edited genre by id",
+              "schema":{
+                "$ref": "#/definitions/Genre"
+              }
+            },
+            "400":{
+              "description": "Invalid id supplied"
+            },
+            "404":{
+              "description": "Id doesn't exist"
+            }
+          }          
+        },
+        "delete":{
+          "tags":[
+            "Genres"
+          ],
+          "summary": "Deletes a particular genre object",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the genre object in mongodb",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully deleted genre by id",
+              "schema":{
+                "$ref": "#/definitions/Genre"
+              }
+            },
+            "400":{
+              "description": "Invalid id supplied"
+            },
+            "404":{
+              "description": "Id doesn't exist"
+            }
+          }          
+        }
+      },
+      "/loanedBooks":{
+        "get":{
+          "tags":[
+            "Loaned Books"
+          ],
+          "summary": "Get all loaned books",
+          "description": "Returns all loaned books",
+          "produces":[
+            "application/json"
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully retrieved all loaned books"
+            }
+          }
+        },
+        "post":{
+          "tags":[
+            "Loaned Books"
+          ],
+          "summary": "Post a loaned book",
+          "description": "Adds a new loaned book",
+          "consumes":[
+            "application/json"
+          ],
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Loaned book object to be added",
+              "required": true,
+              "schema":{
+                "$ref": "#/definitions/Loaned Book"
+              }
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Added loaned book"
+            }
+          }
+        }
+      },
+      "/loanedBooks/{id}":{
+        "get":{
+          "tags":[
+            "Loaned Books"
+          ],
+          "summary": "Gets a particular loaned book object",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the loaned book object in mongodb",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully fetched loaned book from id",
+              "schema":{
+                "$ref": "#/definitions/Genre"
+              }
+            },
+            "400":{
+              "description": "Invalid id supplied"
+            },
+            "404":{
+              "description": "Id doesn't exist"
+            }
+          }          
+        },
+        "put":{
+          "tags":[
+            "Loaned Books"
+          ],
+          "summary": "Edit a particular loaned book object",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the loaned book object in mongodb",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Updated loaned book object",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Loaned Book"
+              }
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully edited loaned book by id",
+              "schema":{
+                "$ref": "#/definitions/Loaned Book"
+              }
+            },
+            "400":{
+              "description": "Invalid id supplied"
+            },
+            "404":{
+              "description": "Id doesn't exist"
+            }
+          }          
+        },
+        "delete":{
+          "tags":[
+            "Loaned Books"
+          ],
+          "summary": "Deletes a particular loaned book object",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the loaned book object in mongodb",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully deleted loaned book by id",
+              "schema":{
+                "$ref": "#/definitions/Loaned Book"
+              }
+            },
+            "400":{
+              "description": "Invalid id supplied"
+            },
+            "404":{
+              "description": "Id doesn't exist"
+            }
+          }          
+        }
+      },
+      "/loanedBooks/findByUser/{id}":{
+        "get":{
+          "tags":[
+            "Loaned Books"
+          ],
+          "summary": "Find all loaned book for a particular user",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the library member in mongodb",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully fetched all loaned books for a particular member"
+            }
+          }
+        }
+      },
+      "/reservations":{
+        "get":{
+          "tags":[
+            "Reservations"
+          ],
+          "summary": "Get all reservations",
+          "description": "Returns all reservations",
+          "produces":[
+            "application/json"
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully retrieved all reservations"
+            }
+          }
+        },
+        "post":{
+          "tags":[
+            "Reservations"
+          ],
+          "summary": "Post a reservation",
+          "description": "Adds a new reservation",
+          "consumes":[
+            "application/json"
+          ],
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Reservation object to be added",
+              "required": true,
+              "schema":{
+                "$ref": "#/definitions/Reservation"
+              }
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Added reservation"
+            }
+          }
+        }
+      },
+      "/reservations/{id}":{
+        "get":{
+          "tags":[
+            "Reservations"
+          ],
+          "summary": "Gets a particular reservation object",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the reservation object in mongodb",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully fetched reservation from id",
+              "schema":{
+                "$ref": "#/definitions/Reservation"
+              }
+            },
+            "400":{
+              "description": "Invalid id supplied"
+            },
+            "404":{
+              "description": "Id doesn't exist"
+            }
+          }          
+        },
+        "put":{
+          "tags":[
+            "Reservations"
+          ],
+          "summary": "Edit a particular reservation object",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the reservation object in mongodb",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Updated reservation object",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Reservation"
+              }
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully edited reservation by id",
+              "schema":{
+                "$ref": "#/definitions/Reservation"
+              }
+            },
+            "400":{
+              "description": "Invalid id supplied"
+            },
+            "404":{
+              "description": "Id doesn't exist"
+            }
+          }          
+        },
+        "delete":{
+          "tags":[
+            "Reservations"
+          ],
+          "summary": "Deletes a particular reservation object",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the reservation object in mongodb",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully deleted reservation by id",
+              "schema":{
+                "$ref": "#/definitions/Reservation"
+              }
+            },
+            "400":{
+              "description": "Invalid id supplied"
+            },
+            "404":{
+              "description": "Id doesn't exist"
+            }
+          }          
+        }
+      },
+      "/reservations/findByUser/{id}":{
+        "get":{
+          "tags":[
+            "Reservations"
+          ],
+          "summary": "Find all reservations for a particular user",
+          "description": "",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The _id value of the library member in mongodb",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses":{
+            "200":{
+              "description": "Successfully fetched all reservations for a particular member"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Member": {
+        "type": "object",
+        "required": [
+          "_id",
+          "firstName",
+          "lastName"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "dob": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "telephone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "loans": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Loaned Book"
+            }
+          },
+          "reservations": {
+            "type": "array",
+            "items":{
+              "$ref": "#/definitions/Reservation"
+            }
+          }
+        }
+      },
+      "Book":{
+        "type": "object",
+        "required":[
+          "_id",
+          "title",
+          "isbn",
+          "locationInLibrary"
+        ],
+        "properties":{
+          "_id":{
+            "type": "string"
+          },
+          "title":{
+            "type": "string"
+          },
+          "isbn": {
+            "type": "string"
+          },
+          "authors":{
+            "type": "array",
+            "items":{
+              "$ref":"#/definitions/Author"
+            }
+          },
+          "publishedYear":{
+            "type": "number"
+          },
+          "nbOfPages":{
+            "type": "number"
+          },
+          "language":{
+            "type": "string"
+          },
+          "edition":{
+            "type": "string"
+          },
+          "summary":{
+            "type": "string"
+          },
+          "cover": {
+            "type": "string"
+          },
+          "locationInLibrary":{
+            "type": "string"
+          },
+          "publisher":{
+            "type": "string"
+          },
+          "genre":{
+            "type":"string"
+          },
+          "copies":{
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Book Copy"
+            }
+          }
+        },
+        "xml":{
+          "name": "Book"
+        }
+      },
+      "Book Copy":{
+        "type": "object",
+        "required":[
+          "_id",
+          "copyName"
+        ],
+        "properties":{
+          "_id":{
+            "type": "string"
+          },
+          "copyName":{
+            "type": "string"
+          },
+          "bookId":{
+            "type": "string"
+          },
+          "status":{
+            "type": "string"
+          }
+        },
+        "xml":{
+          "name": "Book Copy"
+        }
+      },
+      "Author":{
+        "type": "object",
+        "required":[
+          "_id",
+          "firstName",
+          "lastName"
+        ],
+        "properties":{
+          "_id":{
+            "type": "string"
+          },
+          "firstName":{
+            "type": "string"
+          },
+          "lastName":{
+            "type": "string"
+          }
+        },
+        "xml":{
+          "name":"Author"
+        }
+      },
+      "Publisher":{
+        "type": "object",
+        "required":[
+          "_id",
+          "publisherName",
+          "location"
+        ],
+        "properties":{
+          "_id":{
+            "type": "string"
+          },
+          "publisherName":{
+            "type": "string"
+          },
+          "location":{
+            "type": "string"
+          }
+        },
+        "xml":{
+          "name": "Publisher"
+        }
+      },
+      "Genre":{
+        "type": "object",
+        "required":[
+          "_id",
+          "genreName"
+        ],
+        "properties":{
+          "_id": {
+            "type": "string"
+          },
+          "genreName":{
+            "type": "string"
+          }
+        },
+        "xml":{
+          "name":"Genre"
+        }
+      },
+      "Loaned Book":{
+        "type": "object",
+        "required": [
+          "_id"
+        ],
+        "properties":{
+          "_id":{
+            "type": "string"
+          },
+          "copyId":{
+            "type": "string"
+          },
+          "memberId":{
+            "type": "string"
+          },
+          "dateIssued":{
+            "type": "string",
+            "format": "date"
+          },
+          "dueDate":{
+            "type": "string",
+            "format": "date"
+          },
+          "returnFine":{
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "xml":{
+          "name": "Book Copies"
+        }
+      },
+      "Reservation":{
+        "type": "object",
+        "required":[
+          "_id"
+        ],
+        "properties":{
+          "_id":{
+            "type": "string"
+          },
+          "memberId":{
+            "type": "string"
+          },
+          "copyId": {
+            "type": "string"
+          },
+          "dateRequested":{
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    }
+  }

@@ -37,7 +37,7 @@ app.use('/loanedBooks', loanedBooks);
 app.use('/reservations', reservations);
 app.use('/register', register);
 app.use('/authenticate',authenticate);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const port= process.env.PORT || 5000;
 
