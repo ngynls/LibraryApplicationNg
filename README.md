@@ -16,7 +16,8 @@ This repository contains my solution for a library management information system
 - [x] Chart for the distribution of book copies by status (Available, On Loan, Reserved) using ng2-charts & Chart.js
 - [x] Create/Read/Update/Delete operations for all the models in the domain (Authors, Books, Book Copies, Loaned Books, Genre, Members, Publishers, Reservations)
 - [x] Deployed the app to Heroku (url located down below)
-- [ ] Integration with Swagger UI for API documentation
+- [x] Containerized for development with Docker. You can try it out in the docker branch
+- [x] Integration with Swagger UI for API documentation
 
 ## Screenshots
 ![Screenshot #1](https://i.imgur.com/WKcHZfr.png)
@@ -31,18 +32,22 @@ In the config folder, create a file named keys.js containing your mongodb/mlab u
 
 ```
 module.exports={
-    mongoURL: "mongodb: username:password@something.mlab.com:something/dbName",
+    mongoURL: "mongodb:username:password@ds012345.mlab.com:56789/dbName",
     JWT_SECRET: "yoursecrethere"
 };
 ```
 
 For local development, run `node server.js` to activate the server. Then run `ng serve -o` in the client folder.
 
+To run the app with Docker, use the `docker-compose build` command to build the services, then `docker-compose up` to start the containers.
+
+Note for the docker branch: 
+If you are using Docker Toolbox, then you don't have to change the apiUrl from environment.ts in the client project to 192.168.99.100, since I've already done it for you. However, if you are using Docker for Windows or Docker for Mac, then change the value to localhost.
+
 ## Demo
-To login, please use these credentials
+To login, please use these credentials.
 
 Username: admin
-
 Password: admin1234
 
 Url: https://secret-inlet-88757.herokuapp.com/
