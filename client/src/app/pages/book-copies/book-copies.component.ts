@@ -28,6 +28,9 @@ export class BookCopiesComponent implements OnInit {
       this.dataSource=new MatTableDataSource<BookCopy>(this.copies);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+    },
+    err =>{
+      console.log(err);
     });
   }
 
@@ -46,6 +49,9 @@ export class BookCopiesComponent implements OnInit {
           this.snackbar.open("Copy was deleted successfully", "Close", {
             duration: 2000,
           });
+        },
+        err=>{
+          console.log(err);
         }
       );
       const index=this.dataSource.data.indexOf(id);

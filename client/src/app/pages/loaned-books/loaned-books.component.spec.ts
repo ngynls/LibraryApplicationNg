@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoanedBooksComponent } from './loaned-books.component';
+import { MatCardModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 describe('LoanedBooksComponent', () => {
   let component: LoanedBooksComponent;
@@ -8,7 +10,14 @@ describe('LoanedBooksComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoanedBooksComponent ]
+      declarations: [ LoanedBooksComponent ],
+      providers:[
+        MatCardModule,
+        MatFormFieldModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+      ]
     })
     .compileComponents();
   }));

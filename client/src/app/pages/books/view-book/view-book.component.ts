@@ -31,12 +31,18 @@ export class ViewBookComponent implements OnInit {
     this.bookService.getBook(this.route.snapshot.params['id']).subscribe((data:Book)=>{
       this.currentBook=data;
       console.log(this.currentBook);
+    },
+    (err)=>{
+      console.log(err);
     });
     this.copyService.getCopiesForBook(this.route.snapshot.params['id']).subscribe((data:BookCopy[])=>{
       this.copies=data;
       this.dataSource=new MatTableDataSource<BookCopy>(this.copies);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+    },
+    (err)=>{
+      console.log(err);
     });
   }
 
@@ -55,6 +61,9 @@ export class ViewBookComponent implements OnInit {
           this.snackbar.open("Copy was deleted successfully", "Close", {
             duration: 2000,
           });
+        },
+        err=>{
+          console.log(err);
         }
       );
       const index=this.dataSource.data.indexOf(id);

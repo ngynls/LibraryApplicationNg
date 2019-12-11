@@ -63,6 +63,9 @@ export class EditBookCopyComponent implements OnInit {
   onSubmit(){
     this.copyService.editBookCopy(this.route.snapshot.params['id'], this.copyToEdit).subscribe((res)=>{
       console.log(res);
+    },
+    (err)=>{
+      console.log(err);
     });
     this.location.back();
     this.snackbar.open("Copy was edited successfully", "Close", {

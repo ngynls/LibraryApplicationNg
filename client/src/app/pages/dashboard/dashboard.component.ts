@@ -34,9 +34,15 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.memberService.getMembers().subscribe((data:LibraryMember[])=>{
       this.nbOfMembers=data.length;
+    },
+    err =>{
+      console.log(err);
     });
     this.bookService.getBooks().subscribe((data:Book[])=>{
       this.nbOfBooks=data.length;
+    },
+    err =>{
+      console.log(err);
     });
     this.copyService.getBookCopies().subscribe((data:BookCopy[])=>{
       this.nbOfCopies=data.length;
