@@ -7,10 +7,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import {RouterTestingModule} from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('AddBookComponent', () => {
   let component: AddBookComponent;
@@ -29,11 +29,11 @@ describe('AddBookComponent', () => {
         RouterTestingModule,
         BrowserAnimationsModule,
         ReactiveFormsModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        HttpClientTestingModule
       ],
       providers:[
-        HttpClient,
-        HttpHandler
+        HttpTestingController
       ]
     })
     .compileComponents();

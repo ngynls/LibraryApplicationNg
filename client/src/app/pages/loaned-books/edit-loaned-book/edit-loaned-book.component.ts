@@ -36,6 +36,9 @@ export class EditLoanedBookComponent implements OnInit {
   ngOnInit() {
     this.loanedBookService.getLoanedBook(this.route.snapshot.params['id']).subscribe((dataToEdit:BookOnLoan)=>{
       this.copyToEdit=dataToEdit;
+    },
+    err =>{
+      console.log(err);
     });
     this.copyService.getBookCopies().subscribe((data:BookCopy[])=>{
       this.bookCopies=data;
@@ -46,6 +49,9 @@ export class EditLoanedBookComponent implements OnInit {
         map(value => typeof value === 'string' ? value : value.copyName),
         map(copyName => copyName ? this.filterCopies(copyName) : this.bookCopies.slice())
       );
+    },
+    (err)=>{
+      console.log(err);
     });
     this.memberService.getMembers().subscribe((data:LibraryMember[])=>{
       this.members=data;
@@ -56,6 +62,9 @@ export class EditLoanedBookComponent implements OnInit {
         map(value => typeof value === 'string' ? value : value.firstName),
         map(firstName => firstName ? this.filterMembers(firstName) : this.members.slice())
       );
+    },
+    (err)=>{
+      console.log(err);
     });
   }
 
@@ -83,6 +92,9 @@ export class EditLoanedBookComponent implements OnInit {
     console.log(this.copyToEdit);
     this.loanedBookService.updateLoanedBook(this.route.snapshot.params['id'], this.copyToEdit).subscribe((res)=>{
       console.log(res);
+    },
+    (err)=>{
+      console.log(err);
     });
     this.location.back();
     this.snackbar.open("Loaned book was edited successfully", "Close", {

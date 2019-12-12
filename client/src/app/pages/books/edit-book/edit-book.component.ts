@@ -46,6 +46,9 @@ export class EditBookComponent implements OnInit {
     this.bookService.getBook(this.route.snapshot.params['id']).subscribe((data:Book)=>{
       this.bookToEdit=data;
       console.log(this.bookToEdit);
+    },
+    (err)=>{
+      console.log(err);
     });
     this.genreService.getGenres().subscribe((data:Genre[])=>{
       this.genres=data;
@@ -55,6 +58,9 @@ export class EditBookComponent implements OnInit {
         map(value => typeof value === 'string' ? value : value.genreName),
         map(genreName => genreName ? this.filterGenre(genreName) : this.genres.slice())
       );
+    },
+    (err)=>{
+      console.log(err);
     });
     this.publisherService.getPublishers().subscribe((data:Publisher[])=>{
       this.publishers=data;
@@ -64,6 +70,9 @@ export class EditBookComponent implements OnInit {
         map(value => typeof value === 'string' ? value : value.publisherName),
         map(publisherName => publisherName ? this.filterPublisher(publisherName) : this.publishers.slice())
       );
+    },
+    (err)=>{
+      console.log(err);
     });
   }
 

@@ -37,6 +37,7 @@ export class AddMemberComponent implements OnInit {
        });
       },
       err=>{
+       console.log(err);
        this.snackbar.open("Unable to add member", "Close", {
          duration: 2000,
        });

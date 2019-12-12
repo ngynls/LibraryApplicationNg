@@ -28,6 +28,9 @@ export class EditAuthorComponent implements OnInit {
     this.authorService.getAuthor(id).subscribe((author:Author)=>{
       console.log(author);
       this.authorToEdit=author;
+    },
+    err =>{
+      console.log(err);
     });
   }
 
@@ -35,6 +38,9 @@ export class EditAuthorComponent implements OnInit {
     this.authorService.editAuthor(this.route.snapshot.params['id'], form.value).subscribe((res)=>{
       //TODO: fix httperrorresponse (json parsing at index 0. possibly _id related)
       console.log(res);
+    },
+    err =>{
+      console.log(err);
     });
     this.router.navigateByUrl('/authors');
     this.snackbar.open("Author was edited successfully", "Close", {

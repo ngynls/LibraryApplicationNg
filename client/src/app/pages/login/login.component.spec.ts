@@ -10,6 +10,7 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {RouterTestingModule} from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -26,11 +27,11 @@ describe('LoginComponent', () => {
         FormsModule,
         MatSnackBarModule,
         RouterTestingModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        HttpClientTestingModule
       ],
       providers:[
-        HttpClient,
-        HttpHandler
+        HttpTestingController
       ]
     })
     .compileComponents();

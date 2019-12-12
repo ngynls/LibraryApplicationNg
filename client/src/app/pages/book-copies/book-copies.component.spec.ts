@@ -3,9 +3,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BookCopiesComponent } from './book-copies.component';
 import { MatCardModule, MatTableModule, MatPaginatorModule, MatSortModule, MatSnackBarModule, MatInputModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('BookCopiesComponent', () => {
   let component: BookCopiesComponent;
@@ -23,11 +23,11 @@ describe('BookCopiesComponent', () => {
         RouterTestingModule,
         MatSnackBarModule,
         MatInputModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        HttpClientTestingModule
       ],
       providers:[
-        HttpClient,
-        HttpHandler
+        HttpTestingController
       ]
     })
     .compileComponents();

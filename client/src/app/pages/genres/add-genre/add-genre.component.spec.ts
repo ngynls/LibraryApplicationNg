@@ -7,9 +7,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import {RouterTestingModule} from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('AddGenreComponent', () => {
   let component: AddGenreComponent;
@@ -26,11 +26,11 @@ describe('AddGenreComponent', () => {
         FormsModule,
         MatSnackBarModule,
         RouterTestingModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        HttpClientTestingModule
       ],
       providers:[
-        HttpClient,
-        HttpHandler
+        HttpTestingController
       ]
     })
     .compileComponents();

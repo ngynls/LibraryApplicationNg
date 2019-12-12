@@ -6,7 +6,7 @@ import { MemberService } from 'src/app/shared/services/member.service';
 import { BookCopyService } from 'src/app/shared/services/book-copy.service';
 import { BookService } from 'src/app/shared/services/book.service';
 import { ChartsModule } from 'ng2-charts';
-import { HttpHandler, HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -17,14 +17,14 @@ describe('DashboardComponent', () => {
       declarations: [ DashboardComponent ],
       imports:[
         MatCardModule,
-        ChartsModule
+        ChartsModule,
+        HttpClientTestingModule
       ],
       providers:[
         BookCopyService,
         MemberService,
         BookService,
-        HttpClient,
-        HttpHandler
+        HttpTestingController
       ]
     })
     .compileComponents();

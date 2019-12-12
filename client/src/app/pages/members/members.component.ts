@@ -29,6 +29,9 @@ export class MembersComponent implements OnInit {
       this.dataSource=new MatTableDataSource<LibraryMember>(this.members);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+    },
+    (err)=>{
+      console.log(err);
     });
   }
 
@@ -51,6 +54,9 @@ export class MembersComponent implements OnInit {
           this.snackbar.open("Member was deleted successfully", "Close", {
             duration: 2000,
           });
+        },
+        err=>{
+          console.log(err);
         }
       );
       const index=this.dataSource.data.indexOf(id);

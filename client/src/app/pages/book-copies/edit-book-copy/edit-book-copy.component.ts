@@ -39,6 +39,9 @@ export class EditBookCopyComponent implements OnInit {
       if(this.route.snapshot.queryParams['bookId']){
         this.copyToEdit.bookId=this.route.snapshot.queryParams['bookId'];
       }
+    },
+    (err)=>{
+      console.log(err);
     });
     this.bookService.getBooks().subscribe((data:Book[])=>{
       this.books=data;
@@ -48,6 +51,9 @@ export class EditBookCopyComponent implements OnInit {
         map(value => typeof value === 'string' ? value : value.title),
         map(title => title ? this.filterBook(title) : this.books.slice())
       );
+    },
+    (err)=>{
+      console.log(err);
     });
   }
 

@@ -1,6 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ViewMemberComponent } from './view-member.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MatSnackBarModule, MatInputModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('ViewMemberComponent', () => {
   let component: ViewMemberComponent;
@@ -8,7 +18,23 @@ describe('ViewMemberComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewMemberComponent ]
+      declarations: [ ViewMemberComponent ],
+      imports:[
+        MatCardModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        RouterTestingModule,
+        MatSnackBarModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+        HttpClientTestingModule
+      ],
+      providers:[
+        HttpTestingController
+      ]
     })
     .compileComponents();
   }));

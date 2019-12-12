@@ -52,6 +52,9 @@ export class DashboardComponent implements OnInit {
       this.pieChartData.push(this.loanedCopies);
       this.reservedCopies=data.filter(copy => copy.status === 'Reserved').length;
       this.pieChartData.push(this.reservedCopies);
+    },
+    err=>{
+      console.log(err);
     });
   }
 

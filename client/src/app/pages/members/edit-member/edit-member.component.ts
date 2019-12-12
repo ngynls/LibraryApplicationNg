@@ -21,12 +21,18 @@ export class EditMemberComponent implements OnInit {
     this.memberService.getMember(this.route.snapshot.params['id']).subscribe((data:LibraryMember)=>{
       this.memberToEdit=data;
       console.log(this.memberToEdit);
+    },
+    (err)=>{
+      console.log(err);
     });
   }
 
   onSubmit(form:NgForm){
     this.memberService.updateMember(this.route.snapshot.params['id'], form.value).subscribe((res)=>{
       console.log(res);
+    },
+    (err)=>{
+      console.log(err);
     });
     this.location.back();
     this.snackbar.open("Member was edited successfully", "Close", {

@@ -26,12 +26,18 @@ export class ViewMemberComponent implements OnInit {
   ngOnInit() {
     this.memberService.getMember(this.route.snapshot.params['id']).subscribe((data:LibraryMember)=>{
       this.currentMember=data;
+    },
+    err =>{
+      console.log(err);
     });
     this.loanedBookService.getLoanedBooksForUser(this.route.snapshot.params['id']).subscribe((data:BookOnLoan[])=>{
       this.loans=data;
       console.log(this.loans);
       this.dataSource=new MatTableDataSource<BookOnLoan>(this.loans);
       this.dataSource.paginator = this.paginator;
+    },
+    (err)=>{
+      console.log(err);
     });
   }
 

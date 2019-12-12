@@ -1,13 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
 import { MemberService } from './member.service';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('MemberService', () => {
   beforeEach(() => TestBed.configureTestingModule({
+    imports:[
+      HttpClientTestingModule
+    ],
     providers:[
-      HttpClient,
-      HttpHandler
+      HttpTestingController
     ]
   }));
 

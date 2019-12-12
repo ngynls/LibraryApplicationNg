@@ -41,6 +41,9 @@ export class AddLoanedBookComponent implements OnInit {
         map(value => typeof value === 'string' ? value : value.copyName),
         map(copyName => copyName ? this.filterCopies(copyName) : this.bookCopies.slice())
       );
+    },
+    (err)=>{
+      console.log(err);
     });
     this.memberService.getMembers().subscribe((data:LibraryMember[])=>{
       this.members=data;
@@ -51,6 +54,9 @@ export class AddLoanedBookComponent implements OnInit {
         map(value => typeof value === 'string' ? value : value.firstName),
         map(firstName => firstName ? this.filterMembers(firstName) : this.members.slice())
       );
+    },
+    (err)=>{
+      console.log(err);
     });
   }
 

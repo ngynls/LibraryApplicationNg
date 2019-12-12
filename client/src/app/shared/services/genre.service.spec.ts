@@ -1,13 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
 import { GenreService } from './genre.service';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('GenreService', () => {
   beforeEach(() => TestBed.configureTestingModule({
+    imports:[
+      HttpClientTestingModule
+    ],
     providers:[
-      HttpClient,
-      HttpHandler
+      HttpTestingController
     ]
   }));
 

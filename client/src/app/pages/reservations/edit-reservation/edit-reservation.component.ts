@@ -47,6 +47,9 @@ export class EditReservationComponent implements OnInit {
         map(value => typeof value === 'string' ? value : value.copyName),
         map(copyName => copyName ? this.filterCopies(copyName) : this.bookCopies.slice())
       );
+    },
+    (err)=>{
+      console.log(err);
     });
     this.memberService.getMembers().subscribe((data:LibraryMember[])=>{
       this.members=data;
@@ -57,6 +60,9 @@ export class EditReservationComponent implements OnInit {
         map(value => typeof value === 'string' ? value : value.firstName),
         map(firstName => firstName ? this.filterMembers(firstName) : this.members.slice())
       );
+    },
+    (err)=>{
+      console.log(err);
     });
   }
 
@@ -83,6 +89,9 @@ export class EditReservationComponent implements OnInit {
     this.reservationToEdit.memberId=this.memberIdControl.value;
     this.reservationService.updateReservation(this.route.snapshot.params['id'], this.reservationToEdit).subscribe((res)=>{
       console.log(res);
+    },
+    err=>{
+      console.log(err);
     });
     this.location.back();
     this.snackbar.open("Reservation was edited successfully", "Close", {

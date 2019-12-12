@@ -29,6 +29,9 @@ export class LoanedBooksComponent implements OnInit {
       this.dataSource=new MatTableDataSource<BookOnLoan>(this.loanedBooks);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+    },
+    (err)=>{
+      console.log(err);
     })
   }
 
