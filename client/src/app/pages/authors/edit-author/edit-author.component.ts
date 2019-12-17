@@ -1,22 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Author } from '../../../shared/models/author.model';
 import { AuthorService } from '../../../shared/services/author.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-author',
   templateUrl: './edit-author.component.html',
   styleUrls: ['./edit-author.component.scss']
 })
-export class EditAuthorComponent implements OnInit {
+export class EditAuthorComponent implements OnInit, OnDestroy {
 
   authorToEdit:Author={
     _id: '',
     firstName: '',
     lastName: ''
   }
+  ngUnsubscribe = new Subject<void>();
 
   constructor(private authorService:AuthorService, private router:Router, private route:ActivatedRoute, private snackbar: MatSnackBar) { }
 
@@ -25,7 +28,7 @@ export class EditAuthorComponent implements OnInit {
   }
 
   getAuthorDetails(id){
-    this.authorService.getAuthor(id).subscribe((author:Author)=>{
+    this.authorService.getAuthor(id).pipe(takeUntil(this.ngUnsubscribe)).subscribe((author:Author)=>{
       console.log(author);
       this.authorToEdit=author;
     },
@@ -35,7 +38,7 @@ export class EditAuthorComponent implements OnInit {
   }
 
   onSubmit(form:NgForm){
-    this.authorService.editAuthor(this.route.snapshot.params['id'], form.value).subscribe((res)=>{
+    this.authorService.editAuthor(this.route.snapshot.params['id'], form.value).pipe(takeUntil(this.ngUnsubscribe)).subscribe((res)=>{
       //TODO: fix httperrorresponse (json parsing at index 0. possibly _id related)
       console.log(res);
     },
@@ -46,6 +49,11 @@ export class EditAuthorComponent implements OnInit {
     this.snackbar.open("Author was edited successfully", "Close", {
       duration: 2000,
     });
+  }
+
+  ngOnDestroy(){
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }
