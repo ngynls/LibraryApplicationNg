@@ -65,7 +65,7 @@ router.post('/', (req,res)=>{
 router.put('/:id', (req,res)=>{
     Reservation.findByIdAndUpdate(req.params.id, req.body)
     .catch(err=> res.status(404).json({error: err.message}));
-    res.send('Reservation was successfully updated!');
+    res.status(200).json({msg: 'Reservation was successfully updated!'});
 });
 
 // DELETE: A particular reservation
