@@ -29,7 +29,6 @@ export class EditAuthorComponent implements OnInit, OnDestroy {
 
   getAuthorDetails(id){
     this.authorService.getAuthor(id).pipe(takeUntil(this.ngUnsubscribe)).subscribe((author:Author)=>{
-      console.log(author);
       this.authorToEdit=author;
     },
     err =>{
@@ -39,15 +38,15 @@ export class EditAuthorComponent implements OnInit, OnDestroy {
 
   onSubmit(form:NgForm){
     this.authorService.editAuthor(this.route.snapshot.params['id'], form.value).pipe(takeUntil(this.ngUnsubscribe)).subscribe((res)=>{
-      //TODO: fix httperrorresponse (json parsing at index 0. possibly _id related)
-      console.log(res);
+      this.router.navigateByUrl('/authors');
+      this.snackbar.open("Author was edited successfully", "Close", {
+        duration: 2000,
+      });
     },
     err =>{
-      console.log(err);
-    });
-    this.router.navigateByUrl('/authors');
-    this.snackbar.open("Author was edited successfully", "Close", {
-      duration: 2000,
+      this.snackbar.open("An error has occured. Unable to edit author", "Close", {
+        duration: 2000,
+      });
     });
   }
 

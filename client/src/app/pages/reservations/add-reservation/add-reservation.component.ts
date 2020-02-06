@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { BookCopy } from 'src/app/shared/models/book-copy.model';
@@ -9,13 +9,15 @@ import { MemberService } from 'src/app/shared/services/member.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReservationService } from 'src/app/shared/services/reservation.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-reservation',
   templateUrl: './add-reservation.component.html',
   styleUrls: ['./add-reservation.component.scss']
 })
-export class AddReservationComponent implements OnInit {
+export class AddReservationComponent implements OnInit, OnDestroy {
 
   reservationToAdd={
     copyId:'',
@@ -27,12 +29,13 @@ export class AddReservationComponent implements OnInit {
   filteredMembers: Observable<any[]>;
   copyIdControl=new FormControl();
   memberIdControl=new FormControl();
+  ngUnsubscribe = new Subject<void>();
 
   constructor(private reservationService:ReservationService, private copyService:BookCopyService, private memberService:MemberService,
     private router:Router, private snackbar:MatSnackBar ) { }
 
   ngOnInit() {
-    this.copyService.getBookCopies().subscribe((data:BookCopy[])=>{
+    this.copyService.getBookCopies().pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:BookCopy[])=>{
       this.bookCopies=data;
       console.log(this.bookCopies);
       this.filteredCopies = this.copyIdControl.valueChanges
@@ -45,7 +48,7 @@ export class AddReservationComponent implements OnInit {
     (err)=>{
       console.log(err);
     });
-    this.memberService.getMembers().subscribe((data:LibraryMember[])=>{
+    this.memberService.getMembers().pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:LibraryMember[])=>{
       this.members=data;
       console.log(this.members);
       this.filteredMembers = this.memberIdControl.valueChanges
@@ -81,8 +84,7 @@ export class AddReservationComponent implements OnInit {
   onSubmit(){
     this.reservationToAdd.copyId=this.copyIdControl.value;
     this.reservationToAdd.memberId=this.memberIdControl.value;
-    //console.log(this.reservationToAdd);
-    this.reservationService.addReservation(this.reservationToAdd).subscribe(
+    this.reservationService.addReservation(this.reservationToAdd).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
       res=>{
        this.router.navigateByUrl('/reservations');
        this.snackbar.open("Book was reserved successfully", "Close", {
@@ -93,11 +95,15 @@ export class AddReservationComponent implements OnInit {
         memberId:'' }
       },
       err=>{
-       console.log(err);
        this.snackbar.open("Unable to reserve book", "Close", {
          duration: 2000,
        });
       }
      );
+  }
+
+  ngOnDestroy(){
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
-import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { startWith, map, takeUntil } from 'rxjs/operators';
 import { BookCopy } from 'src/app/shared/models/book-copy.model';
 import { LibraryMember } from 'src/app/shared/models/library-member.model';
 import { FormControl } from '@angular/forms';
@@ -17,7 +17,7 @@ import { BookOnLoan } from 'src/app/shared/models/book-on-loan.model';
   templateUrl: './edit-loaned-book.component.html',
   styleUrls: ['./edit-loaned-book.component.scss']
 })
-export class EditLoanedBookComponent implements OnInit {
+export class EditLoanedBookComponent implements OnInit, OnDestroy {
 
   copyToEdit={
     copyId: '',
@@ -29,18 +29,19 @@ export class EditLoanedBookComponent implements OnInit {
   filteredMembers: Observable<any[]>;
   copyIdControl=new FormControl();
   memberIdControl=new FormControl();
+  ngUnsubscribe = new Subject<void>();
 
   constructor(private loanedBookService:LoanedBookService, private copyService:BookCopyService, private memberService:MemberService,
     private router:Router, private route:ActivatedRoute, private location:Location, private snackbar:MatSnackBar ) { }
 
   ngOnInit() {
-    this.loanedBookService.getLoanedBook(this.route.snapshot.params['id']).subscribe((dataToEdit:BookOnLoan)=>{
+    this.loanedBookService.getLoanedBook(this.route.snapshot.params['id']).pipe(takeUntil(this.ngUnsubscribe)).subscribe((dataToEdit:BookOnLoan)=>{
       this.copyToEdit=dataToEdit;
     },
     err =>{
       console.log(err);
     });
-    this.copyService.getBookCopies().subscribe((data:BookCopy[])=>{
+    this.copyService.getBookCopies().pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:BookCopy[])=>{
       this.bookCopies=data;
       console.log(this.bookCopies);
       this.filteredCopies = this.copyIdControl.valueChanges
@@ -53,7 +54,7 @@ export class EditLoanedBookComponent implements OnInit {
     (err)=>{
       console.log(err);
     });
-    this.memberService.getMembers().subscribe((data:LibraryMember[])=>{
+    this.memberService.getMembers().pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:LibraryMember[])=>{
       this.members=data;
       console.log(this.members);
       this.filteredMembers = this.memberIdControl.valueChanges
@@ -90,16 +91,20 @@ export class EditLoanedBookComponent implements OnInit {
     this.copyToEdit.copyId=this.copyIdControl.value;
     this.copyToEdit.memberId=this.memberIdControl.value;
     console.log(this.copyToEdit);
-    this.loanedBookService.updateLoanedBook(this.route.snapshot.params['id'], this.copyToEdit).subscribe((res)=>{
-      console.log(res);
+    this.loanedBookService.updateLoanedBook(this.route.snapshot.params['id'], this.copyToEdit).pipe(takeUntil(this.ngUnsubscribe)).subscribe((res)=>{
+      this.location.back();
+      this.snackbar.open("Loaned book was edited successfully", "Close", {
+        duration: 2000,
+      });
     },
     (err)=>{
       console.log(err);
     });
-    this.location.back();
-    this.snackbar.open("Loaned book was edited successfully", "Close", {
-      duration: 2000,
-    });
+  }
+
+  ngOnDestroy(){
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

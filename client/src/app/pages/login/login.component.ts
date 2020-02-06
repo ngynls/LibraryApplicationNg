@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   adminCredentials={
     username: '',
     password: ''
-  }
+  };
+  subscription:Subscription;
 
   constructor(private auth: AuthService, private router:Router, private snackbar:MatSnackBar) { }
 
@@ -24,7 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(form:NgForm){
-    this.auth.login(form.value).subscribe(
+    this.subscription=this.auth.login(form.value).subscribe(
       res =>{
         this.auth.setToken(res['token']);
         this.router.navigateByUrl('/dashboard');
@@ -33,12 +35,15 @@ export class LoginComponent implements OnInit {
         });
       },
       err=> {
-        console.log(err.error.message);
         this.snackbar.open(err.error.message, "Close", {
           duration: 2000,
         });
       }
     );
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
 }

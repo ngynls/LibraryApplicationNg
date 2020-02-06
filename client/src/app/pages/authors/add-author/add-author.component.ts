@@ -32,7 +32,7 @@ export class AddAuthorComponent implements OnInit, OnDestroy {
       });
      },
      err=>{
-      this.snackbar.open("Unable to add author", "Close", {
+      this.snackbar.open("An error has occured. Unable to add author", "Close", {
         duration: 2000,
       });
      }

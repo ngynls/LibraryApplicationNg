@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { BookOnLoan } from '../../shared/models/book-on-loan.model'
 import { LoanedBookService } from 'src/app/shared/services/loaned-book.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -6,17 +6,20 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-loaned-books',
   templateUrl: './loaned-books.component.html',
   styleUrls: ['./loaned-books.component.scss']
 })
-export class LoanedBooksComponent implements OnInit {
+export class LoanedBooksComponent implements OnInit, OnDestroy {
 
   loanedBooks:BookOnLoan[];
   displayedColumns: string[] = ['copyId', 'memberId', 'edit', 'delete'];
   dataSource: MatTableDataSource<BookOnLoan>;
+  ngUnsubscribe = new Subject<void>();
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -24,7 +27,7 @@ export class LoanedBooksComponent implements OnInit {
   constructor(private loanedBookService:LoanedBookService, private router:Router, private snackbar:MatSnackBar) { }
 
   ngOnInit() {
-    this.loanedBookService.getLoanedBooks().subscribe((data:BookOnLoan[])=>{
+    this.loanedBookService.getLoanedBooks().pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:BookOnLoan[])=>{
       this.loanedBooks=data;
       this.dataSource=new MatTableDataSource<BookOnLoan>(this.loanedBooks);
       this.dataSource.sort = this.sort;
@@ -47,19 +50,29 @@ export class LoanedBooksComponent implements OnInit {
     this.router.navigateByUrl('/addLoanedBook');
   }
 
-  deleteLoanedBook(id, loanedBook){
+  deleteLoanedBook(id){
     if(window.confirm(`Are you sure you want to delete this loaned book?`)){
-      this.loanedBookService.deleteLoanedBook(id).subscribe(
+      this.loanedBookService.deleteLoanedBook(id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
         res=>{
+          const index=this.dataSource.data.indexOf(id);
+          this.dataSource.data.splice(index,1);
+          this.dataSource._updateChangeSubscription();
           this.snackbar.open("Loaned book was deleted successfully", "Close", {
+            duration: 2000,
+          });
+        },
+        err=>{
+          this.snackbar.open("An error has occured. Unable to delete loaned book", "Close", {
             duration: 2000,
           });
         }
       );
-      const index=this.dataSource.data.indexOf(id);
-      this.dataSource.data.splice(index,1);
-      this.dataSource._updateChangeSubscription();
     }
+  }
+
+  ngOnDestroy(){
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

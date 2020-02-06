@@ -51,17 +51,19 @@ export class ReservationsComponent implements OnInit {
     if(window.confirm(`Are you sure you want to delete this reservation?`)){
       this.reservationService.deleteReservation(id).subscribe(
         res=>{
-          this.snackbar.open("Reservatuib was deleted successfully", "Close", {
+          const index=this.dataSource.data.indexOf(id);
+          this.dataSource.data.splice(index,1);
+          this.dataSource._updateChangeSubscription();
+          this.snackbar.open("Reservation was deleted successfully", "Close", {
             duration: 2000,
           });
         },
         err=>{
-          console.log(err);
+          this.snackbar.open("An error has occured. Unable to delete reservation.", "Close", {
+            duration: 2000,
+          });
         }
       );
-      const index=this.dataSource.data.indexOf(id);
-      this.dataSource.data.splice(index,1);
-      this.dataSource._updateChangeSubscription();
     }
   }
 

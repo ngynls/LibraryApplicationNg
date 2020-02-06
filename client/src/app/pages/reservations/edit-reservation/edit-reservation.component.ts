@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
-import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { startWith, map, takeUntil } from 'rxjs/operators';
 import { BookCopy } from 'src/app/shared/models/book-copy.model';
 import { LibraryMember } from 'src/app/shared/models/library-member.model';
 import { FormControl } from '@angular/forms';
@@ -17,7 +17,7 @@ import { ReservationService } from 'src/app/shared/services/reservation.service'
   templateUrl: './edit-reservation.component.html',
   styleUrls: ['./edit-reservation.component.scss']
 })
-export class EditReservationComponent implements OnInit {
+export class EditReservationComponent implements OnInit, OnDestroy {
 
   reservationToEdit={
     copyId: '',
@@ -29,12 +29,13 @@ export class EditReservationComponent implements OnInit {
   filteredMembers: Observable<any[]>;
   copyIdControl=new FormControl();
   memberIdControl=new FormControl();
+  ngUnsubscribe = new Subject<void>();
 
   constructor(private reservationService:ReservationService, private copyService:BookCopyService, private memberService:MemberService,
   private router:Router, private route:ActivatedRoute, private snackbar:MatSnackBar, private location:Location) { }
 
   ngOnInit() {
-    this.reservationService.getReservation(this.route.snapshot.params['id']).subscribe((data:Reservation)=>{
+    this.reservationService.getReservation(this.route.snapshot.params['id']).pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:Reservation)=>{
       this.reservationToEdit=data;
       console.log(this.reservationToEdit);
     });
@@ -51,7 +52,7 @@ export class EditReservationComponent implements OnInit {
     (err)=>{
       console.log(err);
     });
-    this.memberService.getMembers().subscribe((data:LibraryMember[])=>{
+    this.memberService.getMembers().pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:LibraryMember[])=>{
       this.members=data;
       console.log(this.members);
       this.filteredMembers = this.memberIdControl.valueChanges
@@ -87,16 +88,23 @@ export class EditReservationComponent implements OnInit {
   onSubmit(){
     this.reservationToEdit.copyId=this.copyIdControl.value;
     this.reservationToEdit.memberId=this.memberIdControl.value;
-    this.reservationService.updateReservation(this.route.snapshot.params['id'], this.reservationToEdit).subscribe((res)=>{
+    this.reservationService.updateReservation(this.route.snapshot.params['id'], this.reservationToEdit).pipe(takeUntil(this.ngUnsubscribe)).subscribe((res)=>{
       console.log(res);
+      this.location.back();
+      this.snackbar.open("Reservation was edited successfully", "Close", {
+        duration: 2000,
+      });
     },
     err=>{
-      console.log(err);
+      this.snackbar.open("An error has occured. Unable to edit reservation", "Close", {
+        duration: 2000,
+      });
     });
-    this.location.back();
-    this.snackbar.open("Reservation was edited successfully", "Close", {
-      duration: 2000,
-    });
+  }
+
+  ngOnDestroy(){
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

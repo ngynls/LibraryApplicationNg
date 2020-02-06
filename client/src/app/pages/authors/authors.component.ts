@@ -56,19 +56,21 @@ export class AuthorsComponent implements OnInit, OnDestroy {
 
   deleteAuthor(id, author){
     if(window.confirm(`Are you sure you want to delete this author? [${author.firstName} ${author.lastName}]`)){
-      this.authorService.deleteAuthor(id).subscribe(
+      this.authorService.deleteAuthor(id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
         res=>{
+          const index=this.dataSource.data.indexOf(id);
+          this.dataSource.data.splice(index,1);
+          this.dataSource._updateChangeSubscription();
           this.snackbar.open("Author was deleted successfully", "Close", {
             duration: 2000,
           });
         },
         err=>{
-          console.log(err);
+          this.snackbar.open("An error has occured. Unable to delete author", "Close", {
+            duration: 2000,
+          });
         }
       );
-      const index=this.dataSource.data.indexOf(id);
-      this.dataSource.data.splice(index,1);
-      this.dataSource._updateChangeSubscription();
     }
   }
 
