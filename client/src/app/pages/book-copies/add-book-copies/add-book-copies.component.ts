@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormControl } from '@angular/forms';
 import { BookCopyService } from 'src/app/shared/services/book-copy.service';
@@ -8,13 +8,15 @@ import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Book } from 'src/app/shared/models/book.model';
 import { BookService } from 'src/app/shared/services/book.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-book-copies',
   templateUrl: './add-book-copies.component.html',
   styleUrls: ['./add-book-copies.component.scss']
 })
-export class AddBookCopiesComponent implements OnInit {
+export class AddBookCopiesComponent implements OnInit, OnDestroy {
 
   copyToAdd={
     copyName: '',
@@ -24,12 +26,13 @@ export class AddBookCopiesComponent implements OnInit {
   bookControl=new FormControl();
   books:Book[];
   filteredBooks:Observable<any[]>;
+  ngUnsubscribe = new Subject<void>();
 
   constructor(private copyService: BookCopyService, private bookService:BookService, private snackbar:MatSnackBar,
     private route:ActivatedRoute, private location: Location) { }
 
   ngOnInit() {
-    this.bookService.getBooks().subscribe((data:Book[])=>{
+    this.bookService.getBooks().pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:Book[])=>{
       this.books=data;
       this.filteredBooks = this.bookControl.valueChanges
       .pipe(
@@ -44,8 +47,8 @@ export class AddBookCopiesComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.copyToAdd);
-    this.copyService.addBookCopy(this.copyToAdd).subscribe(
+    this.copyToAdd.bookId=this.bookControl.value;
+    this.copyService.addBookCopy(this.copyToAdd).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
       res=>{
        this.snackbar.open("Copy was added successfully", "Close", {
          duration: 2000,
@@ -67,6 +70,11 @@ export class AddBookCopiesComponent implements OnInit {
 
   displayBookId(book?: Book): string | undefined {
     return book ? book._id : undefined;
+  }
+
+  ngOnDestroy(){
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

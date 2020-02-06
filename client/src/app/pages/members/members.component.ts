@@ -29,6 +29,9 @@ export class MembersComponent implements OnInit {
       this.dataSource=new MatTableDataSource<LibraryMember>(this.members);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+    },
+    (err)=>{
+      console.log(err);
     });
   }
 
@@ -48,14 +51,19 @@ export class MembersComponent implements OnInit {
     if(window.confirm(`Are you sure you want to delete this member? [${member.firstName} ${member.lastName}]`)){
       this.memberService.deleteMember(id).subscribe(
         res=>{
+          const index=this.dataSource.data.indexOf(id);
+          this.dataSource.data.splice(index,1);
+          this.dataSource._updateChangeSubscription();
           this.snackbar.open("Member was deleted successfully", "Close", {
+            duration: 2000,
+          });
+        },
+        err=>{
+          this.snackbar.open("An error has occured. Unable to delete member.", "Close", {
             duration: 2000,
           });
         }
       );
-      const index=this.dataSource.data.indexOf(id);
-      this.dataSource.data.splice(index,1);
-      this.dataSource._updateChangeSubscription();
     }
   }
 

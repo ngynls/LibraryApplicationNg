@@ -37,7 +37,7 @@ router.post('/', (req,res)=>{
 router.put('/:id', (req,res)=>{
     Publisher.findByIdAndUpdate(req.params.id, req.body)
     .catch(err=> res.status(404).json({error: err.message}));
-    res.send('Publisher was successfully updated!');
+    res.status(200).json({msg: 'Publisher was successfully updated!'});
 });
 
 // DELETE: A particular publisher

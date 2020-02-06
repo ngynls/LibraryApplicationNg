@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BookService } from '../../../shared/services/book.service';
 import { Router } from '@angular/router';
@@ -11,13 +11,15 @@ import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Author } from 'src/app/shared/models/author.model';
 import { AuthorService } from 'src/app/shared/services/author.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-book',
   templateUrl: './add-book.component.html',
   styleUrls: ['./add-book.component.scss']
 })
-export class AddBookComponent implements OnInit {
+export class AddBookComponent implements OnInit, OnDestroy {
 
   bookToAdd={
     title: '',
@@ -44,13 +46,14 @@ export class AddBookComponent implements OnInit {
   filteredGenres: Observable<any[]>;
   authors: Author[];
   filteredAuthors: Observable<any[]>;
+  ngUnsubscribe = new Subject<void>();
 
   constructor(private bookService:BookService, private genreService:GenreService, private publisherService:PublisherService, private authorService:AuthorService,
    private router:Router, private snackbar: MatSnackBar) { }
 
   ngOnInit() {
     //get all the authors, genres & publishers data for autocomplete fields
-    this.authorService.getAuthors().subscribe((data:Author[])=>{
+    this.authorService.getAuthors().pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:Author[])=>{
       this.authors=data;
       console.log(this.authors);
       this.filteredAuthors = this.authorControl.valueChanges
@@ -60,7 +63,7 @@ export class AddBookComponent implements OnInit {
         map(firstName => firstName ? this.filterAuthor(firstName) : this.authors.slice())
       );
     })
-    this.genreService.getGenres().subscribe((data:Genre[])=>{
+    this.genreService.getGenres().pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:Genre[])=>{
       this.genres=data;
       console.log(this.genres);
       this.filteredGenres = this.genreControl.valueChanges
@@ -70,7 +73,7 @@ export class AddBookComponent implements OnInit {
         map(genreName => genreName ? this.filterGenre(genreName) : this.genres.slice())
       );
     });
-    this.publisherService.getPublishers().subscribe((data:Publisher[])=>{
+    this.publisherService.getPublishers().pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:Publisher[])=>{
       this.publishers=data;
       console.log(this.publishers);
       this.filteredPublishers = this.publisherControl.valueChanges
@@ -123,7 +126,7 @@ export class AddBookComponent implements OnInit {
     this.bookToAdd.publisher=this.publisherControl.value;
     this.bookToAdd.genre=this.genreControl.value;
     console.log(this.bookToAdd);
-    this.bookService.addBook(this.bookToAdd).subscribe(
+    this.bookService.addBook(this.bookToAdd).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
       res=>{
        this.router.navigateByUrl('/books');
        this.snackbar.open("Book was added successfully", "Close", {
@@ -150,6 +153,11 @@ export class AddBookComponent implements OnInit {
        });
       }
      );
+  }
+
+  ngOnDestroy(){
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

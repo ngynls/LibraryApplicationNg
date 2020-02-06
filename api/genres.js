@@ -36,7 +36,7 @@ router.post('/', (req,res)=>{
 router.put('/:id', (req,res)=>{
     Genre.findByIdAndUpdate(req.params.id, req.body)
     .catch(err=> res.status(404).json({error: err.message}));
-    res.send('Genre was successfully updated!');
+    res.status(200).json({msg:'Genre was successfully updated!'});
 });
 
 // DELETE: A particular genre

@@ -44,7 +44,7 @@ router.post('/', (req,res)=>{
 router.put('/:id', (req,res)=>{
     Member.findByIdAndUpdate(req.params.id, req.body)
     .catch(err=> res.status(404).json({error: err.message}));
-    res.send('Member was successfully updated!');
+    res.status(200).json({msg:'Member was successfully updated!'});
 });
 
 // DELETE: A particular member

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { startWith, map, takeUntil } from 'rxjs/operators';
 import { BookCopy } from 'src/app/shared/models/book-copy.model';
 import { LibraryMember } from 'src/app/shared/models/library-member.model';
 import { FormControl } from '@angular/forms';
@@ -15,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './add-loaned-book.component.html',
   styleUrls: ['./add-loaned-book.component.scss']
 })
-export class AddLoanedBookComponent implements OnInit {
+export class AddLoanedBookComponent implements OnInit, OnDestroy {
 
   copyToAdd={
     copyId:'',
@@ -27,12 +27,13 @@ export class AddLoanedBookComponent implements OnInit {
   filteredMembers: Observable<any[]>;
   copyIdControl=new FormControl();
   memberIdControl=new FormControl();
+  ngUnsubscribe = new Subject<void>();
 
   constructor(private loanedBookService:LoanedBookService, private copyService:BookCopyService, private memberService:MemberService,
     private router:Router, private snackbar:MatSnackBar ) { }
 
   ngOnInit() {
-    this.copyService.getBookCopies().subscribe((data:BookCopy[])=>{
+    this.copyService.getBookCopies().pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:BookCopy[])=>{
       this.bookCopies=data;
       console.log(this.bookCopies);
       this.filteredCopies = this.copyIdControl.valueChanges
@@ -41,8 +42,11 @@ export class AddLoanedBookComponent implements OnInit {
         map(value => typeof value === 'string' ? value : value.copyName),
         map(copyName => copyName ? this.filterCopies(copyName) : this.bookCopies.slice())
       );
+    },
+    (err)=>{
+      console.log(err);
     });
-    this.memberService.getMembers().subscribe((data:LibraryMember[])=>{
+    this.memberService.getMembers().pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:LibraryMember[])=>{
       this.members=data;
       console.log(this.members);
       this.filteredMembers = this.memberIdControl.valueChanges
@@ -51,6 +55,9 @@ export class AddLoanedBookComponent implements OnInit {
         map(value => typeof value === 'string' ? value : value.firstName),
         map(firstName => firstName ? this.filterMembers(firstName) : this.members.slice())
       );
+    },
+    (err)=>{
+      console.log(err);
     });
   }
 
@@ -76,7 +83,7 @@ export class AddLoanedBookComponent implements OnInit {
     this.copyToAdd.copyId=this.copyIdControl.value;
     this.copyToAdd.memberId=this.memberIdControl.value;
     console.log(this.copyToAdd);
-    this.loanedBookService.addLoanedBook(this.copyToAdd).subscribe(
+    this.loanedBookService.addLoanedBook(this.copyToAdd).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
       res=>{
        this.router.navigateByUrl('/books');
        this.snackbar.open("Book copy was loaned successfully", "Close", {
@@ -93,6 +100,11 @@ export class AddLoanedBookComponent implements OnInit {
        });
       }
      );
+  }
+
+  ngOnDestroy(){
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

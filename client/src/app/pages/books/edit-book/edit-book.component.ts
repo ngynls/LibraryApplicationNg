@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormControl } from '@angular/forms';
 import { BookService } from '../../../shared/services/book.service';
@@ -9,15 +9,16 @@ import { PublisherService } from 'src/app/shared/services/publisher.service';
 import { Genre } from 'src/app/shared/models/genre.model';
 import { GenreService } from 'src/app/shared/services/genre.service';
 import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
+import { startWith, map, takeUntil } from 'rxjs/operators';
 import { Book } from 'src/app/shared/models/book.model';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-edit-book',
   templateUrl: './edit-book.component.html',
   styleUrls: ['./edit-book.component.scss']
 })
-export class EditBookComponent implements OnInit {
+export class EditBookComponent implements OnInit, OnDestroy {
 
   bookToEdit={
     title: '',
@@ -38,16 +39,20 @@ export class EditBookComponent implements OnInit {
   filteredPublishers: Observable<any[]>;
   genres: Genre[];
   filteredGenres: Observable<any[]>;
+  ngUnsubscribe = new Subject<void>();
 
   constructor(private bookService:BookService, private genreService:GenreService, private publisherService:PublisherService,
     private router:Router, private route:ActivatedRoute, private location:Location, private snackbar: MatSnackBar) { }
 
   ngOnInit() {
-    this.bookService.getBook(this.route.snapshot.params['id']).subscribe((data:Book)=>{
+    this.bookService.getBook(this.route.snapshot.params['id']).pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:Book)=>{
       this.bookToEdit=data;
       console.log(this.bookToEdit);
+    },
+    (err)=>{
+      console.log(err);
     });
-    this.genreService.getGenres().subscribe((data:Genre[])=>{
+    this.genreService.getGenres().pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:Genre[])=>{
       this.genres=data;
       this.filteredGenres = this.genreControl.valueChanges
       .pipe(
@@ -55,8 +60,11 @@ export class EditBookComponent implements OnInit {
         map(value => typeof value === 'string' ? value : value.genreName),
         map(genreName => genreName ? this.filterGenre(genreName) : this.genres.slice())
       );
+    },
+    (err)=>{
+      console.log(err);
     });
-    this.publisherService.getPublishers().subscribe((data:Publisher[])=>{
+    this.publisherService.getPublishers().pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:Publisher[])=>{
       this.publishers=data;
       this.filteredPublishers = this.publisherControl.valueChanges
       .pipe(
@@ -64,6 +72,9 @@ export class EditBookComponent implements OnInit {
         map(value => typeof value === 'string' ? value : value.publisherName),
         map(publisherName => publisherName ? this.filterPublisher(publisherName) : this.publishers.slice())
       );
+    },
+    (err)=>{
+      console.log(err);
     });
   }
 
@@ -89,7 +100,7 @@ export class EditBookComponent implements OnInit {
     this.bookToEdit.publisher=this.publisherControl.value;
     this.bookToEdit.genre=this.genreControl.value;
     console.log(this.bookToEdit);
-    this.bookService.editBook(this.route.snapshot.params['id'], this.bookToEdit).subscribe(
+    this.bookService.editBook(this.route.snapshot.params['id'], this.bookToEdit).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
       res=>{
        this.location.back();
        this.snackbar.open("Book was edited successfully", "Close", {
@@ -103,6 +114,11 @@ export class EditBookComponent implements OnInit {
        });
       }
      );
+  }
+
+  ngOnDestroy(){
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 

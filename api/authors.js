@@ -39,7 +39,7 @@ router.post('/', (req,res)=>{
 router.put('/:id', (req,res)=>{
     Author.findByIdAndUpdate(req.params.id, req.body)
     .catch(err=> res.status(404).json({error: err.message}));
-    res.send('Author was successfully updated!');
+    res.status(200).json({msg:'Author was successfully updated!'});
 });
 
 //DELETE: deleting an author
