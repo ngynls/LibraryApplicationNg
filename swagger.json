@@ -6,7 +6,7 @@
       "description": "A basic API for the server side of a library management system"
     },
     "host": "localhost:5000",
-    "basePath": "/",
+    "basePath": "/api/",
     "tags": [
       {
         "name": "Members",
