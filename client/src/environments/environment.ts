@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  //apiUrl: 'http://192.168.99.100:5000', //If you are using "Docker Toolbox" on Windows
-  apiUrl: 'http://localhost:5000' // If you are using "Docker for Windows" or Docker on Linux host or when you are just developing locally
+  //apiUrl: 'http://192.168.99.100:5000/api', //If you are using "Docker Toolbox" on Windows
+  apiUrl: 'http://localhost:5000/api' // If you are using "Docker for Windows" or Docker on Linux host or when you are just developing locally
 };
 
 /*

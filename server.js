@@ -27,16 +27,16 @@ mongoose.connect(db, {useNewUrlParser: true, useFindAndModify: false, useCreateI
   .then(()=> console.log('Connected!'))
   .catch(err => console.log(err));
 
-app.use('/authors', authors);
-app.use('/publishers', publishers);
-app.use('/genres', genres);
-app.use('/books', books);
-app.use('/bookCopies', bookCopies);
-app.use('/members', members);
-app.use('/loanedBooks', loanedBooks);
-app.use('/reservations', reservations);
-app.use('/register', register);
-app.use('/authenticate',authenticate);
+app.use('/api/authors', authors);
+app.use('/api/publishers', publishers);
+app.use('/api/genres', genres);
+app.use('/api/books', books);
+app.use('/api/bookCopies', bookCopies);
+app.use('/api/members', members);
+app.use('/api/loanedBooks', loanedBooks);
+app.use('/api/reservations', reservations);
+app.use('/api/register', register);
+app.use('/api/authenticate',authenticate);
 app.use('/api/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const port= process.env.PORT || 5000;
