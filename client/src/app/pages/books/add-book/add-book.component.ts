@@ -13,6 +13,8 @@ import { Author } from 'src/app/shared/models/author.model';
 import { AuthorService } from 'src/app/shared/services/author.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-add-book',
@@ -36,7 +38,7 @@ export class AddBookComponent implements OnInit, OnDestroy {
     genre: '',
     copies: []
   }
-  authorToAdd='';
+
   genreControl = new FormControl();
   publisherControl = new FormControl();
   authorControl= new FormControl();
@@ -46,6 +48,11 @@ export class AddBookComponent implements OnInit, OnDestroy {
   filteredGenres: Observable<any[]>;
   authors: Author[];
   filteredAuthors: Observable<any[]>;
+  authorsToAdd:Author[];
+  addOnBlur: boolean = true;
+  selectable: boolean = true;
+  removable:boolean = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
   ngUnsubscribe = new Subject<void>();
 
   constructor(private bookService:BookService, private genreService:GenreService, private publisherService:PublisherService, private authorService:AuthorService,
@@ -55,7 +62,6 @@ export class AddBookComponent implements OnInit, OnDestroy {
     //get all the authors, genres & publishers data for autocomplete fields
     this.authorService.getAuthors().pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:Author[])=>{
       this.authors=data;
-      console.log(this.authors);
       this.filteredAuthors = this.authorControl.valueChanges
       .pipe(
         startWith(''),
@@ -65,7 +71,6 @@ export class AddBookComponent implements OnInit, OnDestroy {
     })
     this.genreService.getGenres().pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:Genre[])=>{
       this.genres=data;
-      console.log(this.genres);
       this.filteredGenres = this.genreControl.valueChanges
       .pipe(
         startWith(''),
@@ -75,7 +80,6 @@ export class AddBookComponent implements OnInit, OnDestroy {
     });
     this.publisherService.getPublishers().pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:Publisher[])=>{
       this.publishers=data;
-      console.log(this.publishers);
       this.filteredPublishers = this.publisherControl.valueChanges
       .pipe(
         startWith(''),
@@ -112,8 +116,8 @@ export class AddBookComponent implements OnInit, OnDestroy {
     return publisher ? publisher._id : undefined;
   }
 
-  addAuthor(){
-    this.bookToAdd.authors.push(this.authorControl.value);
+  selectedAuthor(event: MatAutocompleteSelectedEvent): void{
+    this.bookToAdd.authors.push(event.option.value);
   }
 
   deleteAuthor(id:string){
@@ -122,10 +126,8 @@ export class AddBookComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(){
-    this.addAuthor();
     this.bookToAdd.publisher=this.publisherControl.value;
     this.bookToAdd.genre=this.genreControl.value;
-    console.log(this.bookToAdd);
     this.bookService.addBook(this.bookToAdd).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
       res=>{
        this.router.navigateByUrl('/books');
