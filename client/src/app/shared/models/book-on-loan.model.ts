@@ -4,5 +4,4 @@ export class BookOnLoan {
   memberId: string;
   dateIssued: Date;
   dueDate: Date;
-  returnFine: number;
 }

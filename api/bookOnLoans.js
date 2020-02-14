@@ -48,8 +48,7 @@ router.post('/', (req,res)=>{
         copyId: req.body.copyId,
         memberId: req.body.memberId,
         dateIssued: currentDate,
-        dueDate: bookDue,
-        returnFine: 0
+        dueDate: bookDue
     });
     newLoanedBook.save()
     .then(loanedBook=> res.json(loanedBook))
