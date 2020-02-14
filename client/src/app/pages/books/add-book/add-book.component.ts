@@ -37,21 +37,20 @@ export class AddBookComponent implements OnInit, OnDestroy {
     publisher: '',
     genre: '',
     copies: []
-  }
+  };
 
   genreControl = new FormControl();
   publisherControl = new FormControl();
   authorControl= new FormControl();
   publishers: Publisher[];
-  filteredPublishers: Observable<any[]>;
+  filteredPublishers: Observable<Publisher[]>;
   genres: Genre[];
-  filteredGenres: Observable<any[]>;
+  filteredGenres: Observable<Genre[]>;
   authors: Author[];
-  filteredAuthors: Observable<any[]>;
-  authorsToAdd:Author[];
+  filteredAuthors: Observable<Author[]>;
   addOnBlur: boolean = true;
   selectable: boolean = true;
-  removable:boolean = true;
+  removable: boolean = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   ngUnsubscribe = new Subject<void>();
 
