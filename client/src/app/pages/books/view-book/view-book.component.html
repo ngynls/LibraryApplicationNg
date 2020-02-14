@@ -10,6 +10,7 @@
       <p class="titleStyle" *ngIf="currentBook?.title">{{currentBook?.title}}</p>
       <p *ngIf="currentBook?.authors"><b>Authors: </b>
         <span *ngFor="let author of currentBook?.authors">
+          <br>
           <span>{{author.firstName}} {{author.lastName}}</span>
         </span>
       </p>
