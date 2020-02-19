@@ -41,7 +41,7 @@ router.get('/findByUser/:id',(req,res)=>{
 });
 
 // POST: A new loaned book
-router.post('/', (req,res)=>{
+router.post('/', async(req,res)=>{
     const currentDate=new Date(Date.now());
     const bookDue=new Date(Date.now()+12096e5);
     const newLoanedBook=new BookOnLoan({
@@ -54,34 +54,36 @@ router.post('/', (req,res)=>{
     .then(loanedBook=> res.json(loanedBook))
     .catch(err => res.json({error: err.message}));
     //add to member's loans array & update bookcopy with the status on loan
-    Member.findByIdAndUpdate(req.body.memberId, {
+    await Member.findOneAndUpdate({_id:req.body.memberId}, {
         $push:{
             loans: newLoanedBook._id
         }
     }).catch(err=> console.log(err.message));
-    BookCopy.findByIdAndUpdate(req.body.copyId, {$set:{status: 'On loan'}})
+    await BookCopy.findOneAndUpdate({_id:req.body.copyId}, {$set:{status: 'On loan'}})
         .catch(err=> console.log(err.message));
 });
 
 // PUT: Update a loaned book
-router.put('/:id', (req,res)=>{
-    BookOnLoan.findByIdAndUpdate(req.params.id, req.body)
+router.put('/:id', async(req,res)=>{
+    await BookOnLoan.findOneAndUpdate({_id:req.params.id}, req.body)
     .catch(err=> res.status(404).json({error: err.message}));
     res.status(200).json({msg:'Loaned book was successfully updated!'});
 });
 
 // DELETE: A particular loaned book
-router.delete('/:id', (req,res)=>{
-    BookOnLoan.findByIdAndDelete(req.params.id)
+router.delete('/:id', async(req,res)=>{
+    const loanedBookToDelete=await BookOnLoan.findOne({_id:req.params.id})
+    .catch(err=>res.status(404).json({error:err.message}));
+    await BookOnLoan.findOneAndRemove({_id:req.params.id})
     .catch(err=> res.status(404).json({error:err.message}));
     res.status(200).json({message: 'Loaned book is successfully deleted from db'});
     //remove from the book from member's loans array & change status of copy to available
-    Member.findByIdAndUpdate(req.body.memberId, {
+    await Member.findOneAndUpdate({_id:loanedBookToDelete.memberId}, {
         $pull:{
             loans: req.params.id
         }
     }).catch(err=> console.log(err.message));
-    BookCopy.findByIdAndUpdate(req.body.copyId, {$set:{status: 'Available'}}).catch(err=> console.log(err.message));
+    await BookCopy.findOneAndUpdate({_id:loanedBookToDelete.copyId}, {$set:{status: 'Available'}}).catch(err=> console.log(err.message));
 });
 
 module.exports=router;
