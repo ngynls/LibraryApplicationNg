@@ -41,7 +41,7 @@ router.get('/findByUser/:id', (req,res)=>{
 });
 
 // POST: A new reservation
-router.post('/', (req,res)=>{
+router.post('/', async(req,res)=>{
     const currentDate=new Date(Date.now());
     const newReservation=new Reservation({
         memberId: req.body.memberId,
@@ -51,35 +51,35 @@ router.post('/', (req,res)=>{
     newReservation.save()
     .then(reservation=> res.json(reservation))
     .catch(err => res.json({error: err.message}));
-    //add to member's reservations array & update book copy to reserved
-    Member.findByIdAndUpdate(req.body.memberId, {
+    await Member.findOneAndUpdate({_id:req.body.memberId}, {
         $push:{
             reservations: newReservation._id
         }
     }).catch(err=> console.log(err.message));
-    BookCopy.findByIdAndUpdate(req.body.copyId, {$set:{status: 'Reserved'}})
+    await BookCopy.findOneAndUpdate({_id:req.body.copyId}, {$set:{status: 'Reserved'}})
         .catch(err=> console.log(err.message));
 });
 
 // PUT: Update a reservation
-router.put('/:id', (req,res)=>{
-    Reservation.findByIdAndUpdate(req.params.id, req.body)
+router.put('/:id', async(req,res)=>{
+    await Reservation.findOneAndUpdate({_id:req.params.id}, req.body)
     .catch(err=> res.status(404).json({error: err.message}));
     res.status(200).json({msg: 'Reservation was successfully updated!'});
 });
 
 // DELETE: A particular reservation
-router.delete('/:id', (req,res)=>{
-    Reservation.findByIdAndDelete(req.params.id)
+router.delete('/:id', async (req,res)=>{
+    const reservationToDelete=await Reservation.findOne({_id:req.params.id})
+    .catch(err=>res.status(404).json({error:err.message}));
+    await Reservation.findOneAndRemove({_id:req.params.id})
     .catch(err=> res.status(404).json({error:err.message}));
     res.status(200).json({message: 'Reservation is successfully deleted from db'});
-    // remove from the book from member's reservations array & update the book copy status to available
-    Member.findByIdAndUpdate(req.body.memberId, {
+    await Member.findOneAndUpdate({_id:reservationToDelete.memberId}, {
         $pull:{
             reservations: req.params.id
         }
     }).catch(err=> console.log(err.message));
-    BookCopy.findByIdAndUpdate(req.body.copyId, {$set:{status: 'Available'}}).catch(err=> console.log(err.message));
+    await BookCopy.findOneAndUpdate({_id:reservationToDelete.copyId}, {$set:{status: 'Available'}}).catch(err=> console.log(err.message));
 });
 
 module.exports=router;

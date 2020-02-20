@@ -13,6 +13,30 @@
                   <input matInput class="form-control"
                   required type="text" name="isbn" placeholder="Enter the book's ISBN" #isbn="ngModel" [(ngModel)]="bookToEdit.isbn">
                 </mat-form-field>
+                <mat-form-field>
+                  <mat-chip-list #editBookChipList aria-label="Edit Author Chip Section">
+                    <mat-chip
+                    *ngFor="let author of bookToEdit.authors"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="deleteAuthor(author?.id)"
+                    >
+                      {{author?.firstName}} {{author?.lastName}}
+                      <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                  </mat-chip-list>
+                  <input type="text" placeholder="Authors" aria-label="Authors" matInput
+                  [formControl]="authorControl"
+                  [matAutocomplete]="auto0"
+                  [matChipInputFor]="editBookChipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  >
+                  <mat-autocomplete #auto0="matAutocomplete" [displayWith]="displayAuthorId" (optionSelected)="selectedAuthor($event)">
+                    <mat-option *ngFor="let authors of filteredAuthors | async" [value]="authors">
+                      {{authors.firstName}} {{authors.lastName}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
                 <mat-form-field class="mb-5">
                   <input matInput class="form-control"
                   required type="text" name="publishedYear" placeholder="Enter the published year" #publishedYear="ngModel" [(ngModel)]="bookToEdit.publishedYear">

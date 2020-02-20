@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Book } from 'src/app/shared/models/book.model';
 import { BookService } from '../../../shared/services/book.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { BookCopy } from 'src/app/shared/models/book-copy.model';
 import { BookCopyService } from 'src/app/shared/services/book-copy.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -27,13 +27,12 @@ export class ViewBookComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private bookService: BookService, private copyService:BookCopyService, private router:Router,private route:ActivatedRoute,
+  constructor(private bookService: BookService, private copyService:BookCopyService, private route:ActivatedRoute,
     private snackbar: MatSnackBar) { }
 
   ngOnInit() {
     this.bookService.getBook(this.route.snapshot.params['id']).pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:Book)=>{
       this.currentBook=data;
-      console.log(this.currentBook);
     },
     (err)=>{
       console.log(err);

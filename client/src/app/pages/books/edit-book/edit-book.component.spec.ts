@@ -9,7 +9,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatAutocompleteModule } from '@angular/material';
+import { MatAutocompleteModule, MatChipsModule, MatIconModule } from '@angular/material';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('EditBookComponent', () => {
@@ -30,7 +30,9 @@ describe('EditBookComponent', () => {
         BrowserAnimationsModule,
         ReactiveFormsModule,
         MatAutocompleteModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        MatChipsModule,
+        MatIconModule
       ],
       providers:[
         HttpTestingController
