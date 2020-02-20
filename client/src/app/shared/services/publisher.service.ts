@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,22 +15,22 @@ export class PublisherService {
   constructor(private http: HttpClient) { }
 
   getPublishers(){
-    return this.http.get(environment.apiUrl + '/publishers/');
+    return this.http.get('/api/publishers/');
   }
 
   getPublisher(id:string){
-    return this.http.get(environment.apiUrl + '/publishers/' + id);
+    return this.http.get('/api/publishers/' + id);
   }
 
   addPublisher(publisher){
-    return this.http.post(environment.apiUrl + '/publishers/', publisher, this.httpOptions);
+    return this.http.post('/api/publishers/', publisher, this.httpOptions);
   }
 
   updatePublisher(id:string, publisher){
-    return this.http.put(environment.apiUrl + '/publishers/'+ id, publisher , this.httpOptions);
+    return this.http.put('/api/publishers/'+ id, publisher , this.httpOptions);
   }
 
   deletePublisher(id:string){
-    return this.http.delete(environment.apiUrl + '/publishers/' + id);
+    return this.http.delete('/api/publishers/' + id);
   }
 }

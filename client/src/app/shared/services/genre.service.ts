@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,23 +15,23 @@ export class GenreService {
   constructor(private http: HttpClient) { }
 
   getGenres(){
-    return this.http.get(environment.apiUrl + '/genres/');
+    return this.http.get('/api/genres/');
   }
 
   getGenre(id:string){
-    return this.http.get(environment.apiUrl + '/genres/' + id);
+    return this.http.get('/api/genres/' + id);
   }
 
   addGenre(genre){
-    return this.http.post(environment.apiUrl + '/genres/', genre, this.httpOptions);
+    return this.http.post('/api/genres/', genre, this.httpOptions);
   }
 
   updateGenre(id:string, genre){
-    return this.http.put(environment.apiUrl + '/genres/'+ id, genre , this.httpOptions);
+    return this.http.put('/api/genres/'+ id, genre , this.httpOptions);
   }
 
   deleteGenre(id:string){
-    return this.http.delete(environment.apiUrl + '/genres/' + id);
+    return this.http.delete('/api/genres/' + id);
   }
 
 }

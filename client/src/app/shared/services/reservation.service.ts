@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,27 +15,27 @@ export class ReservationService {
   constructor(private http:HttpClient) { }
 
   getReservations(){
-    return this.http.get(environment.apiUrl + '/reservations/');
+    return this.http.get('/api/reservations/');
   }
 
   getReservationsForUser(id:string){
-    return this.http.get(environment.apiUrl + '/reservations/findByUser/' + id);
+    return this.http.get('/api/reservations/findByUser/' + id);
   }
 
   getReservation(id:string){
-    return this.http.get(environment.apiUrl + '/reservations/' + id);
+    return this.http.get('/api/reservations/' + id);
   }
 
   addReservation(reservation){
-    return this.http.post(environment.apiUrl + '/reservations/', reservation, this.httpOptions);
+    return this.http.post('/api/reservations/', reservation, this.httpOptions);
   }
 
   updateReservation(id:string, reservation){
-    return this.http.put(environment.apiUrl + '/reservations/'+ id, reservation , this.httpOptions);
+    return this.http.put('/api/reservations/'+ id, reservation , this.httpOptions);
   }
 
   deleteReservation(id:string){
-    return this.http.delete(environment.apiUrl + '/reservations/' + id);
+    return this.http.delete('/api/reservations/' + id);
   }
 
 }

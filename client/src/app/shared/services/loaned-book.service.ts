@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,27 +14,27 @@ export class LoanedBookService {
   constructor(private http: HttpClient) { }
 
   getLoanedBooks(){
-    return this.http.get(environment.apiUrl + '/loanedBooks/');
+    return this.http.get('/api/loanedBooks/');
   }
 
   getLoanedBook(id:string){
-    return this.http.get(environment.apiUrl + '/loanedBooks/' + id);
+    return this.http.get('/api/loanedBooks/' + id);
   }
 
   getLoanedBooksForUser(id:string){
-    return this.http.get(environment.apiUrl + '/loanedBooks/findByUser/' + id);
+    return this.http.get('/api/loanedBooks/findByUser/' + id);
   }
 
   addLoanedBook(loanedBook){
-    return this.http.post(environment.apiUrl + '/loanedBooks/', loanedBook, this.httpOptions);
+    return this.http.post('/api/loanedBooks/', loanedBook, this.httpOptions);
   }
 
   updateLoanedBook(id:string, loanedBook){
-    return this.http.put(environment.apiUrl + '/loanedBooks/'+ id, loanedBook , this.httpOptions);
+    return this.http.put('/api/loanedBooks/'+ id, loanedBook , this.httpOptions);
   }
 
   deleteLoanedBook(id:string){
-    return this.http.delete(environment.apiUrl + '/loanedBooks/' + id);
+    return this.http.delete('/api/loanedBooks/' + id);
   }
 
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,26 +15,26 @@ export class BookCopyService {
   constructor(private http:HttpClient) { }
 
   getBookCopies(){
-    return this.http.get(environment.apiUrl + '/bookCopies/');
+    return this.http.get('/api/bookCopies/');
   }
 
   getCopiesForBook(id:string){
-    return this.http.get(environment.apiUrl + '/bookCopies/findByBook/' + id);
+    return this.http.get('/api/bookCopies/findByBook/' + id);
   }
 
   getBookCopy(id:string){
-    return this.http.get(environment.apiUrl + '/bookCopies/' + id);
+    return this.http.get('/api/bookCopies/' + id);
   }
 
   addBookCopy(copy){
-    return this.http.post(environment.apiUrl + '/bookCopies/', copy, this.httpOptions);
+    return this.http.post('/api/bookCopies/', copy, this.httpOptions);
   }
 
   editBookCopy(id:string, copy){
-    return this.http.put(environment.apiUrl + '/bookCopies/' + id, copy, this.httpOptions);
+    return this.http.put('/api/bookCopies/' + id, copy, this.httpOptions);
   }
 
   deleteBookCopy(id:string){
-    return this.http.delete(environment.apiUrl + '/bookCopies/' + id);
+    return this.http.delete('/api/bookCopies/' + id);
   }
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,23 +15,23 @@ export class AuthorService {
   constructor(private http: HttpClient) { }
 
   getAuthors(){
-    return this.http.get(environment.apiUrl + '/authors/');
+    return this.http.get('/api/authors/');
   }
 
   getAuthor(id:string){
-    return this.http.get(environment.apiUrl + '/authors/' + id);
+    return this.http.get('/api/authors/' + id);
   }
 
   addAuthor(author){
-    return this.http.post(environment.apiUrl + '/authors/', author, this.httpOptions);
+    return this.http.post('/api/authors/', author, this.httpOptions);
   }
 
   editAuthor(id:string, author){
-    return this.http.put(environment.apiUrl + '/authors/' + id, author, this.httpOptions);
+    return this.http.put('/api/authors/' + id, author, this.httpOptions);
   }
 
   deleteAuthor(id:string){
-    return this.http.delete(environment.apiUrl + '/authors/' + id);
+    return this.http.delete('/api/authors/' + id);
   }
 
 }
