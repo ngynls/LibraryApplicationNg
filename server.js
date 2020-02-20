@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 app.use(passport.initialize());
 
-const db=require('./config/keys').mongoURL;
+const db=process.env.mongoURL;
 const authors=require('./api/authors');
 const publishers=require('./api/publishers');
 const genres=require('./api/genres');
