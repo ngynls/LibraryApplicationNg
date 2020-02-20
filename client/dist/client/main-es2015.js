@@ -4175,8 +4175,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
@@ -4191,7 +4189,7 @@ let AuthService = class AuthService {
         };
     }
     login(userCredentials) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/authenticate/', userCredentials, this.noAuthHeader);
+        return this.http.post('/api/authenticate/', userCredentials, this.noAuthHeader);
     }
     getToken() {
         return localStorage.getItem('token');
@@ -4245,8 +4243,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
@@ -4260,19 +4256,19 @@ let AuthorService = class AuthorService {
         };
     }
     getAuthors() {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/authors/');
+        return this.http.get('/api/authors/');
     }
     getAuthor(id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/authors/' + id);
+        return this.http.get('/api/authors/' + id);
     }
     addAuthor(author) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/authors/', author, this.httpOptions);
+        return this.http.post('/api/authors/', author, this.httpOptions);
     }
     editAuthor(id, author) {
-        return this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/authors/' + id, author, this.httpOptions);
+        return this.http.put('/api/authors/' + id, author, this.httpOptions);
     }
     deleteAuthor(id) {
-        return this.http.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/authors/' + id);
+        return this.http.delete('/api/authors/' + id);
     }
 };
 AuthorService.ctorParameters = () => [
@@ -4301,8 +4297,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
@@ -4316,22 +4310,22 @@ let BookCopyService = class BookCopyService {
         };
     }
     getBookCopies() {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/bookCopies/');
+        return this.http.get('/api/bookCopies/');
     }
     getCopiesForBook(id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/bookCopies/findByBook/' + id);
+        return this.http.get('/api/bookCopies/findByBook/' + id);
     }
     getBookCopy(id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/bookCopies/' + id);
+        return this.http.get('/api/bookCopies/' + id);
     }
     addBookCopy(copy) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/bookCopies/', copy, this.httpOptions);
+        return this.http.post('/api/bookCopies/', copy, this.httpOptions);
     }
     editBookCopy(id, copy) {
-        return this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/bookCopies/' + id, copy, this.httpOptions);
+        return this.http.put('/api/bookCopies/' + id, copy, this.httpOptions);
     }
     deleteBookCopy(id) {
-        return this.http.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/bookCopies/' + id);
+        return this.http.delete('/api/bookCopies/' + id);
     }
 };
 BookCopyService.ctorParameters = () => [
@@ -4360,8 +4354,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
@@ -4375,19 +4367,19 @@ let BookService = class BookService {
         };
     }
     getBooks() {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/books/');
+        return this.http.get('/api/books/');
     }
     getBook(id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/books/' + id);
+        return this.http.get('/api/books/' + id);
     }
     addBook(book) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/books/', book, this.httpOptions);
+        return this.http.post('/api/books/', book, this.httpOptions);
     }
     editBook(id, book) {
-        return this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/books/' + id, book, this.httpOptions);
+        return this.http.put('/api/books/' + id, book, this.httpOptions);
     }
     deleteBook(id) {
-        return this.http.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/books/' + id);
+        return this.http.delete('/api/books/' + id);
     }
 };
 BookService.ctorParameters = () => [
@@ -4416,8 +4408,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
@@ -4431,19 +4421,19 @@ let GenreService = class GenreService {
         };
     }
     getGenres() {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/genres/');
+        return this.http.get('/api/genres/');
     }
     getGenre(id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/genres/' + id);
+        return this.http.get('/api/genres/' + id);
     }
     addGenre(genre) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/genres/', genre, this.httpOptions);
+        return this.http.post('/api/genres/', genre, this.httpOptions);
     }
     updateGenre(id, genre) {
-        return this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/genres/' + id, genre, this.httpOptions);
+        return this.http.put('/api/genres/' + id, genre, this.httpOptions);
     }
     deleteGenre(id) {
-        return this.http.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/genres/' + id);
+        return this.http.delete('/api/genres/' + id);
     }
 };
 GenreService.ctorParameters = () => [
@@ -4472,8 +4462,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
@@ -4487,22 +4475,22 @@ let LoanedBookService = class LoanedBookService {
         };
     }
     getLoanedBooks() {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/loanedBooks/');
+        return this.http.get('/api/loanedBooks/');
     }
     getLoanedBook(id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/loanedBooks/' + id);
+        return this.http.get('/api/loanedBooks/' + id);
     }
     getLoanedBooksForUser(id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/loanedBooks/findByUser/' + id);
+        return this.http.get('/api/loanedBooks/findByUser/' + id);
     }
     addLoanedBook(loanedBook) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/loanedBooks/', loanedBook, this.httpOptions);
+        return this.http.post('/api/loanedBooks/', loanedBook, this.httpOptions);
     }
     updateLoanedBook(id, loanedBook) {
-        return this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/loanedBooks/' + id, loanedBook, this.httpOptions);
+        return this.http.put('/api/loanedBooks/' + id, loanedBook, this.httpOptions);
     }
     deleteLoanedBook(id) {
-        return this.http.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/loanedBooks/' + id);
+        return this.http.delete('/api/loanedBooks/' + id);
     }
 };
 LoanedBookService.ctorParameters = () => [
@@ -4531,8 +4519,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
@@ -4546,19 +4532,19 @@ let MemberService = class MemberService {
         };
     }
     getMembers() {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/members/');
+        return this.http.get('/api/members/');
     }
     getMember(id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/members/' + id);
+        return this.http.get('/api/members/' + id);
     }
     addMember(member) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/members/', member, this.httpOptions);
+        return this.http.post('/api/members/', member, this.httpOptions);
     }
     updateMember(id, member) {
-        return this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/members/' + id, member, this.httpOptions);
+        return this.http.put('/api/members/' + id, member, this.httpOptions);
     }
     deleteMember(id) {
-        return this.http.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/members/' + id);
+        return this.http.delete('/api/members/' + id);
     }
 };
 MemberService.ctorParameters = () => [
@@ -4587,8 +4573,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
@@ -4602,19 +4586,19 @@ let PublisherService = class PublisherService {
         };
     }
     getPublishers() {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/publishers/');
+        return this.http.get('/api/publishers/');
     }
     getPublisher(id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/publishers/' + id);
+        return this.http.get('/api/publishers/' + id);
     }
     addPublisher(publisher) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/publishers/', publisher, this.httpOptions);
+        return this.http.post('/api/publishers/', publisher, this.httpOptions);
     }
     updatePublisher(id, publisher) {
-        return this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/publishers/' + id, publisher, this.httpOptions);
+        return this.http.put('/api/publishers/' + id, publisher, this.httpOptions);
     }
     deletePublisher(id) {
-        return this.http.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/publishers/' + id);
+        return this.http.delete('/api/publishers/' + id);
     }
 };
 PublisherService.ctorParameters = () => [
@@ -4643,8 +4627,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
@@ -4658,22 +4640,22 @@ let ReservationService = class ReservationService {
         };
     }
     getReservations() {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/reservations/');
+        return this.http.get('/api/reservations/');
     }
     getReservationsForUser(id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/reservations/findByUser/' + id);
+        return this.http.get('/api/reservations/findByUser/' + id);
     }
     getReservation(id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/reservations/' + id);
+        return this.http.get('/api/reservations/' + id);
     }
     addReservation(reservation) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/reservations/', reservation, this.httpOptions);
+        return this.http.post('/api/reservations/', reservation, this.httpOptions);
     }
     updateReservation(id, reservation) {
-        return this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/reservations/' + id, reservation, this.httpOptions);
+        return this.http.put('/api/reservations/' + id, reservation, this.httpOptions);
     }
     deleteReservation(id) {
-        return this.http.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/reservations/' + id);
+        return this.http.delete('/api/reservations/' + id);
     }
 };
 ReservationService.ctorParameters = () => [

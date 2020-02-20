@@ -4262,8 +4262,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
@@ -4278,7 +4276,7 @@ var AuthService = /** @class */ (function () {
         };
     }
     AuthService.prototype.login = function (userCredentials) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/authenticate/', userCredentials, this.noAuthHeader);
+        return this.http.post('/api/authenticate/', userCredentials, this.noAuthHeader);
     };
     AuthService.prototype.getToken = function () {
         return localStorage.getItem('token');
@@ -4333,8 +4331,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
@@ -4348,19 +4344,19 @@ var AuthorService = /** @class */ (function () {
         };
     }
     AuthorService.prototype.getAuthors = function () {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/authors/');
+        return this.http.get('/api/authors/');
     };
     AuthorService.prototype.getAuthor = function (id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/authors/' + id);
+        return this.http.get('/api/authors/' + id);
     };
     AuthorService.prototype.addAuthor = function (author) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/authors/', author, this.httpOptions);
+        return this.http.post('/api/authors/', author, this.httpOptions);
     };
     AuthorService.prototype.editAuthor = function (id, author) {
-        return this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/authors/' + id, author, this.httpOptions);
+        return this.http.put('/api/authors/' + id, author, this.httpOptions);
     };
     AuthorService.prototype.deleteAuthor = function (id) {
-        return this.http.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/authors/' + id);
+        return this.http.delete('/api/authors/' + id);
     };
     AuthorService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -4390,8 +4386,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
@@ -4405,22 +4399,22 @@ var BookCopyService = /** @class */ (function () {
         };
     }
     BookCopyService.prototype.getBookCopies = function () {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/bookCopies/');
+        return this.http.get('/api/bookCopies/');
     };
     BookCopyService.prototype.getCopiesForBook = function (id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/bookCopies/findByBook/' + id);
+        return this.http.get('/api/bookCopies/findByBook/' + id);
     };
     BookCopyService.prototype.getBookCopy = function (id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/bookCopies/' + id);
+        return this.http.get('/api/bookCopies/' + id);
     };
     BookCopyService.prototype.addBookCopy = function (copy) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/bookCopies/', copy, this.httpOptions);
+        return this.http.post('/api/bookCopies/', copy, this.httpOptions);
     };
     BookCopyService.prototype.editBookCopy = function (id, copy) {
-        return this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/bookCopies/' + id, copy, this.httpOptions);
+        return this.http.put('/api/bookCopies/' + id, copy, this.httpOptions);
     };
     BookCopyService.prototype.deleteBookCopy = function (id) {
-        return this.http.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/bookCopies/' + id);
+        return this.http.delete('/api/bookCopies/' + id);
     };
     BookCopyService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -4450,8 +4444,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
@@ -4465,19 +4457,19 @@ var BookService = /** @class */ (function () {
         };
     }
     BookService.prototype.getBooks = function () {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/books/');
+        return this.http.get('/api/books/');
     };
     BookService.prototype.getBook = function (id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/books/' + id);
+        return this.http.get('/api/books/' + id);
     };
     BookService.prototype.addBook = function (book) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/books/', book, this.httpOptions);
+        return this.http.post('/api/books/', book, this.httpOptions);
     };
     BookService.prototype.editBook = function (id, book) {
-        return this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/books/' + id, book, this.httpOptions);
+        return this.http.put('/api/books/' + id, book, this.httpOptions);
     };
     BookService.prototype.deleteBook = function (id) {
-        return this.http.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/books/' + id);
+        return this.http.delete('/api/books/' + id);
     };
     BookService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -4507,8 +4499,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
@@ -4522,19 +4512,19 @@ var GenreService = /** @class */ (function () {
         };
     }
     GenreService.prototype.getGenres = function () {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/genres/');
+        return this.http.get('/api/genres/');
     };
     GenreService.prototype.getGenre = function (id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/genres/' + id);
+        return this.http.get('/api/genres/' + id);
     };
     GenreService.prototype.addGenre = function (genre) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/genres/', genre, this.httpOptions);
+        return this.http.post('/api/genres/', genre, this.httpOptions);
     };
     GenreService.prototype.updateGenre = function (id, genre) {
-        return this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/genres/' + id, genre, this.httpOptions);
+        return this.http.put('/api/genres/' + id, genre, this.httpOptions);
     };
     GenreService.prototype.deleteGenre = function (id) {
-        return this.http.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/genres/' + id);
+        return this.http.delete('/api/genres/' + id);
     };
     GenreService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -4564,8 +4554,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
@@ -4579,22 +4567,22 @@ var LoanedBookService = /** @class */ (function () {
         };
     }
     LoanedBookService.prototype.getLoanedBooks = function () {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/loanedBooks/');
+        return this.http.get('/api/loanedBooks/');
     };
     LoanedBookService.prototype.getLoanedBook = function (id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/loanedBooks/' + id);
+        return this.http.get('/api/loanedBooks/' + id);
     };
     LoanedBookService.prototype.getLoanedBooksForUser = function (id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/loanedBooks/findByUser/' + id);
+        return this.http.get('/api/loanedBooks/findByUser/' + id);
     };
     LoanedBookService.prototype.addLoanedBook = function (loanedBook) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/loanedBooks/', loanedBook, this.httpOptions);
+        return this.http.post('/api/loanedBooks/', loanedBook, this.httpOptions);
     };
     LoanedBookService.prototype.updateLoanedBook = function (id, loanedBook) {
-        return this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/loanedBooks/' + id, loanedBook, this.httpOptions);
+        return this.http.put('/api/loanedBooks/' + id, loanedBook, this.httpOptions);
     };
     LoanedBookService.prototype.deleteLoanedBook = function (id) {
-        return this.http.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/loanedBooks/' + id);
+        return this.http.delete('/api/loanedBooks/' + id);
     };
     LoanedBookService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -4624,8 +4612,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
@@ -4639,19 +4625,19 @@ var MemberService = /** @class */ (function () {
         };
     }
     MemberService.prototype.getMembers = function () {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/members/');
+        return this.http.get('/api/members/');
     };
     MemberService.prototype.getMember = function (id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/members/' + id);
+        return this.http.get('/api/members/' + id);
     };
     MemberService.prototype.addMember = function (member) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/members/', member, this.httpOptions);
+        return this.http.post('/api/members/', member, this.httpOptions);
     };
     MemberService.prototype.updateMember = function (id, member) {
-        return this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/members/' + id, member, this.httpOptions);
+        return this.http.put('/api/members/' + id, member, this.httpOptions);
     };
     MemberService.prototype.deleteMember = function (id) {
-        return this.http.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/members/' + id);
+        return this.http.delete('/api/members/' + id);
     };
     MemberService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -4681,8 +4667,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
@@ -4696,19 +4680,19 @@ var PublisherService = /** @class */ (function () {
         };
     }
     PublisherService.prototype.getPublishers = function () {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/publishers/');
+        return this.http.get('/api/publishers/');
     };
     PublisherService.prototype.getPublisher = function (id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/publishers/' + id);
+        return this.http.get('/api/publishers/' + id);
     };
     PublisherService.prototype.addPublisher = function (publisher) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/publishers/', publisher, this.httpOptions);
+        return this.http.post('/api/publishers/', publisher, this.httpOptions);
     };
     PublisherService.prototype.updatePublisher = function (id, publisher) {
-        return this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/publishers/' + id, publisher, this.httpOptions);
+        return this.http.put('/api/publishers/' + id, publisher, this.httpOptions);
     };
     PublisherService.prototype.deletePublisher = function (id) {
-        return this.http.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/publishers/' + id);
+        return this.http.delete('/api/publishers/' + id);
     };
     PublisherService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -4738,8 +4722,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
@@ -4753,22 +4735,22 @@ var ReservationService = /** @class */ (function () {
         };
     }
     ReservationService.prototype.getReservations = function () {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/reservations/');
+        return this.http.get('/api/reservations/');
     };
     ReservationService.prototype.getReservationsForUser = function (id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/reservations/findByUser/' + id);
+        return this.http.get('/api/reservations/findByUser/' + id);
     };
     ReservationService.prototype.getReservation = function (id) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/reservations/' + id);
+        return this.http.get('/api/reservations/' + id);
     };
     ReservationService.prototype.addReservation = function (reservation) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/reservations/', reservation, this.httpOptions);
+        return this.http.post('/api/reservations/', reservation, this.httpOptions);
     };
     ReservationService.prototype.updateReservation = function (id, reservation) {
-        return this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/reservations/' + id, reservation, this.httpOptions);
+        return this.http.put('/api/reservations/' + id, reservation, this.httpOptions);
     };
     ReservationService.prototype.deleteReservation = function (id) {
-        return this.http.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/reservations/' + id);
+        return this.http.delete('/api/reservations/' + id);
     };
     ReservationService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
