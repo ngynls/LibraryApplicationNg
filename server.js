@@ -28,6 +28,7 @@ mongoose.connect(db, {useNewUrlParser: true, useFindAndModify: false, useCreateI
   .then(()=> console.log('Connected!'))
   .catch(err => console.log(err));
 
+app.use(express.static(__dirname + "/client/dist/client/"));
 app.use('/api/authors', authors);
 app.use('/api/publishers', publishers);
 app.use('/api/genres', genres);
