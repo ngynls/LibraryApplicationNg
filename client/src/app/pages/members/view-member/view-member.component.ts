@@ -18,7 +18,7 @@ export class ViewMemberComponent implements OnInit, OnDestroy {
   currentMember:LibraryMember;
   loans:BookOnLoan[];
   dataSource: MatTableDataSource<BookOnLoan>;
-  displayedColumns: string[] = ['copyId', 'dateIssued', 'dueDate'];
+  displayedColumns: string[] = ['copyId', 'dateIssued', 'dueDate', 'status'];
   ngUnsubscribe = new Subject<void>();
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -34,13 +34,22 @@ export class ViewMemberComponent implements OnInit, OnDestroy {
     });
     this.loanedBookService.getLoanedBooksForUser(this.route.snapshot.params['id']).pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:BookOnLoan[])=>{
       this.loans=data;
-      console.log(this.loans);
       this.dataSource=new MatTableDataSource<BookOnLoan>(this.loans);
       this.dataSource.paginator = this.paginator;
     },
     (err)=>{
       console.log(err);
     });
+  }
+
+  getStatus(dueDate:Date): string{
+    const currentDate=new Date();
+    if(currentDate > dueDate){
+      return "Late";
+    }
+    else{
+      return "On Time";
+    }
   }
 
   ngOnDestroy(){
