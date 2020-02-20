@@ -1,5 +1,6 @@
 require('./config/passportConfig');
 const express=require('express');
+const path= require('path');
 const mongoose=require('mongoose');
 const cors=require('cors');
 const passport=require('passport');
@@ -37,8 +38,11 @@ app.use('/api/loanedBooks', loanedBooks);
 app.use('/api/reservations', reservations);
 app.use('/api/register', register);
 app.use('/api/authenticate',authenticate);
-app.use('/api/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+//app.use('/api/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.get('/*', (req,res)=>{
+  res.sendFile(path.join(__dirname + '/client/dist/client/index.html'));
+});
 
-const port= process.env.PORT || 5000;
+const port= process.env.PORT || 8080;
 
 app.listen(port, ()=> console.log(`Server started at port ${port}`));
