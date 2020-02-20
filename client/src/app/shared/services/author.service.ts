@@ -16,7 +16,7 @@ export class AuthorService {
   constructor(private http: HttpClient) { }
 
   getAuthors(){
-    return this.http.get(environment.apiUrl + '/authors');
+    return this.http.get(environment.apiUrl + '/authors/');
   }
 
   getAuthor(id:string){
@@ -24,7 +24,7 @@ export class AuthorService {
   }
 
   addAuthor(author){
-    return this.http.post(environment.apiUrl + '/authors', author, this.httpOptions);
+    return this.http.post(environment.apiUrl + '/authors/', author, this.httpOptions);
   }
 
   editAuthor(id:string, author){

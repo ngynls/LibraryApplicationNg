@@ -16,7 +16,7 @@ export class MemberService {
   constructor(private http:HttpClient) { }
 
   getMembers(){
-    return this.http.get(environment.apiUrl + '/members');
+    return this.http.get(environment.apiUrl + '/members/');
   }
 
   getMember(id:string){
@@ -24,7 +24,7 @@ export class MemberService {
   }
 
   addMember(member){
-    return this.http.post(environment.apiUrl + '/members', member, this.httpOptions);
+    return this.http.post(environment.apiUrl + '/members/', member, this.httpOptions);
   }
 
   updateMember(id:string, member){

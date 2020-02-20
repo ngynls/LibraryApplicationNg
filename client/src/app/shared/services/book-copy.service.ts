@@ -16,7 +16,7 @@ export class BookCopyService {
   constructor(private http:HttpClient) { }
 
   getBookCopies(){
-    return this.http.get(environment.apiUrl + '/bookCopies');
+    return this.http.get(environment.apiUrl + '/bookCopies/');
   }
 
   getCopiesForBook(id:string){
@@ -28,7 +28,7 @@ export class BookCopyService {
   }
 
   addBookCopy(copy){
-    return this.http.post(environment.apiUrl + '/bookCopies', copy, this.httpOptions);
+    return this.http.post(environment.apiUrl + '/bookCopies/', copy, this.httpOptions);
   }
 
   editBookCopy(id:string, copy){

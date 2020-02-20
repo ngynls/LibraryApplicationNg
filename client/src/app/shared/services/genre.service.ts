@@ -16,7 +16,7 @@ export class GenreService {
   constructor(private http: HttpClient) { }
 
   getGenres(){
-    return this.http.get(environment.apiUrl + '/genres');
+    return this.http.get(environment.apiUrl + '/genres/');
   }
 
   getGenre(id:string){
@@ -24,7 +24,7 @@ export class GenreService {
   }
 
   addGenre(genre){
-    return this.http.post(environment.apiUrl + '/genres', genre, this.httpOptions);
+    return this.http.post(environment.apiUrl + '/genres/', genre, this.httpOptions);
   }
 
   updateGenre(id:string, genre){

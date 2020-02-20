@@ -16,7 +16,7 @@ export class ReservationService {
   constructor(private http:HttpClient) { }
 
   getReservations(){
-    return this.http.get(environment.apiUrl + '/reservations');
+    return this.http.get(environment.apiUrl + '/reservations/');
   }
 
   getReservationsForUser(id:string){
@@ -28,7 +28,7 @@ export class ReservationService {
   }
 
   addReservation(reservation){
-    return this.http.post(environment.apiUrl + '/reservations', reservation, this.httpOptions);
+    return this.http.post(environment.apiUrl + '/reservations/', reservation, this.httpOptions);
   }
 
   updateReservation(id:string, reservation){

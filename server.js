@@ -38,7 +38,7 @@ app.use('/api/loanedBooks', loanedBooks);
 app.use('/api/reservations', reservations);
 app.use('/api/register', register);
 app.use('/api/authenticate',authenticate);
-//app.use('/api/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.get('/*', (req,res)=>{
   res.sendFile(path.join(__dirname + '/client/dist/client/index.html'));
 });

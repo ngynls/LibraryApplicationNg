@@ -16,7 +16,7 @@ export class PublisherService {
   constructor(private http: HttpClient) { }
 
   getPublishers(){
-    return this.http.get(environment.apiUrl + '/publishers');
+    return this.http.get(environment.apiUrl + '/publishers/');
   }
 
   getPublisher(id:string){
@@ -24,7 +24,7 @@ export class PublisherService {
   }
 
   addPublisher(publisher){
-    return this.http.post(environment.apiUrl + '/publishers', publisher, this.httpOptions);
+    return this.http.post(environment.apiUrl + '/publishers/', publisher, this.httpOptions);
   }
 
   updatePublisher(id:string, publisher){

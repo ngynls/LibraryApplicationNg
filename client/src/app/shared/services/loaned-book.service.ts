@@ -15,7 +15,7 @@ export class LoanedBookService {
   constructor(private http: HttpClient) { }
 
   getLoanedBooks(){
-    return this.http.get(environment.apiUrl + '/loanedBooks');
+    return this.http.get(environment.apiUrl + '/loanedBooks/');
   }
 
   getLoanedBook(id:string){
@@ -27,7 +27,7 @@ export class LoanedBookService {
   }
 
   addLoanedBook(loanedBook){
-    return this.http.post(environment.apiUrl + '/loanedBooks', loanedBook, this.httpOptions);
+    return this.http.post(environment.apiUrl + '/loanedBooks/', loanedBook, this.httpOptions);
   }
 
   updateLoanedBook(id:string, loanedBook){

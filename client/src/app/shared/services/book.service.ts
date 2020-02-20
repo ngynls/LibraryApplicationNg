@@ -16,7 +16,7 @@ export class BookService {
   constructor(private http: HttpClient) { }
 
   getBooks(){
-    return this.http.get(environment.apiUrl + '/books');
+    return this.http.get(environment.apiUrl + '/books/');
   }
 
   getBook(id:string){
@@ -24,7 +24,7 @@ export class BookService {
   }
 
   addBook(book){
-    return this.http.post(environment.apiUrl + '/books', book, this.httpOptions);
+    return this.http.post(environment.apiUrl + '/books/', book, this.httpOptions);
   }
 
   editBook(id:string, book){

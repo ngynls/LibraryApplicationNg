@@ -5,7 +5,7 @@
       "title": "LibraryApplicationNg API",
       "description": "A basic API for the server side of a library management system"
     },
-    "host": "localhost:5000",
+    "host": "secret-inlet-88757.herokuapp.com/",
     "basePath": "/api/",
     "tags": [
       {
